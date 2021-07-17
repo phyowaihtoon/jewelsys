@@ -1,0 +1,36 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="menuGroup">
+      <h2 data-cy="menuGroupDetailsHeading"><span jhiTranslate="jewelsysApp.menuGroup.detail.title">Menu Group</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ menuGroup.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="jewelsysApp.menuGroup.name">Name</span></dt>
+        <dd>
+          <span>{{ menuGroup.name }}</span>
+        </dd>
+        <dt><span jhiTranslate="jewelsysApp.menuGroup.sequenceNo">Sequence No</span></dt>
+        <dd>
+          <span>{{ menuGroup.sequenceNo }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/menu-group', menuGroup.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

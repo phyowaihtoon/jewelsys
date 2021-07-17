@@ -1,0 +1,133 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-gems-price-rate-heading"
+        data-cy="GemsPriceRateCreateUpdateHeading"
+        jhiTranslate="jewelsysApp.gemsPriceRate.home.createOrEditLabel"
+      >
+        Create or edit a Gems Price Rate
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="jewelsysApp.gemsPriceRate.effectiveDate" for="field_effectiveDate"
+            >Effective Date</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_effectiveDate"
+              data-cy="effectiveDate"
+              type="datetime-local"
+              class="form-control"
+              name="effectiveDate"
+              formControlName="effectiveDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          <div
+            *ngIf="
+              editForm.get('effectiveDate')!.invalid && (editForm.get('effectiveDate')!.dirty || editForm.get('effectiveDate')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('effectiveDate')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('effectiveDate')?.errors?.ZonedDateTimelocal"
+              jhiTranslate="entity.validation.ZonedDateTimelocal"
+            >
+              This field should be a date and time.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="jewelsysApp.gemsPriceRate.rateSrNo" for="field_rateSrNo">Rate Sr No</label>
+          <input type="number" class="form-control" name="rateSrNo" id="field_rateSrNo" data-cy="rateSrNo" formControlName="rateSrNo" />
+          <div *ngIf="editForm.get('rateSrNo')!.invalid && (editForm.get('rateSrNo')!.dirty || editForm.get('rateSrNo')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('rateSrNo')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('rateSrNo')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="jewelsysApp.gemsPriceRate.rateType" for="field_rateType">Rate Type</label>
+          <input type="text" class="form-control" name="rateType" id="field_rateType" data-cy="rateType" formControlName="rateType" />
+          <div *ngIf="editForm.get('rateType')!.invalid && (editForm.get('rateType')!.dirty || editForm.get('rateType')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('rateType')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="jewelsysApp.gemsPriceRate.priceRate" for="field_priceRate">Price Rate</label>
+          <input type="number" class="form-control" name="priceRate" id="field_priceRate" data-cy="priceRate" formControlName="priceRate" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="jewelsysApp.gemsPriceRate.delFlg" for="field_delFlg">Del Flg</label>
+          <input type="text" class="form-control" name="delFlg" id="field_delFlg" data-cy="delFlg" formControlName="delFlg" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="jewelsysApp.gemsPriceRate.gemsItem" for="field_gemsItem">Gems Item</label>
+          <select class="form-control" id="field_gemsItem" data-cy="gemsItem" name="gemsItem" formControlName="gemsItem">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="gemsItemOption.id === editForm.get('gemsItem')!.value?.id ? editForm.get('gemsItem')!.value : gemsItemOption"
+              *ngFor="let gemsItemOption of gemsItemsSharedCollection; trackBy: trackGemsItemById"
+            >
+              {{ gemsItemOption.name }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

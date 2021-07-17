@@ -1,0 +1,32 @@
+entity GoldType {
+  code	String  required unique,
+  name	String required,
+  delFlg	String
+}
+
+entity GoldItemGroup {
+  code	String required unique,
+  name	String required,
+  delFlg	String
+}
+
+entity GoldItem {
+  code	String  required unique,
+  name	String required,
+  delFlg	String
+}
+
+
+relationship ManyToOne {
+	GoldItemGroup{GoldType(name)} to GoldType,
+    GoldItem{GoldItemGroup(name)} to GoldItemGroup
+}
+
+paginate * with pagination
+
+service all with serviceImpl
+
+dto * with mapstruct
+
+
+

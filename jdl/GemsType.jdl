@@ -1,0 +1,14 @@
+entity GemsType {
+  code String required unique,
+  name String required,
+  delFlg String
+  }
+
+paginate GemsType with pagination
+
+service GemsType with serviceImpl
+
+dto GemsType with mapstruct
+
+
+

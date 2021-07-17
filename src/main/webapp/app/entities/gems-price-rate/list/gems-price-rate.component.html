@@ -1,0 +1,122 @@
+<div>
+  <h2 id="page-heading" data-cy="GemsPriceRateHeading">
+    <span jhiTranslate="jewelsysApp.gemsPriceRate.home.title">Gems Price Rates</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="jewelsysApp.gemsPriceRate.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-gems-price-rate"
+        [routerLink]="['/gems-price-rate/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="jewelsysApp.gemsPriceRate.home.createLabel"> Create a new Gems Price Rate </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="gemsPriceRates?.length === 0">
+    <span jhiTranslate="jewelsysApp.gemsPriceRate.home.notFound">No gemsPriceRates found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="gemsPriceRates && gemsPriceRates.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="effectiveDate">
+            <span jhiTranslate="jewelsysApp.gemsPriceRate.effectiveDate">Effective Date</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="rateSrNo">
+            <span jhiTranslate="jewelsysApp.gemsPriceRate.rateSrNo">Rate Sr No</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="rateType">
+            <span jhiTranslate="jewelsysApp.gemsPriceRate.rateType">Rate Type</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="priceRate">
+            <span jhiTranslate="jewelsysApp.gemsPriceRate.priceRate">Price Rate</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="delFlg">
+            <span jhiTranslate="jewelsysApp.gemsPriceRate.delFlg">Del Flg</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="gemsItem.name">
+            <span jhiTranslate="jewelsysApp.gemsPriceRate.gemsItem">Gems Item</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let gemsPriceRate of gemsPriceRates; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/gems-price-rate', gemsPriceRate.id, 'view']">{{ gemsPriceRate.id }}</a>
+          </td>
+          <td>{{ gemsPriceRate.effectiveDate | formatMediumDatetime }}</td>
+          <td>{{ gemsPriceRate.rateSrNo }}</td>
+          <td>{{ gemsPriceRate.rateType }}</td>
+          <td>{{ gemsPriceRate.priceRate }}</td>
+          <td>{{ gemsPriceRate.delFlg }}</td>
+          <td>
+            <div *ngIf="gemsPriceRate.gemsItem">
+              <a [routerLink]="['/gems-item', gemsPriceRate.gemsItem?.id, 'view']">{{ gemsPriceRate.gemsItem?.name }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/gems-price-rate', gemsPriceRate.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/gems-price-rate', gemsPriceRate.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(gemsPriceRate)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="gemsPriceRates && gemsPriceRates.length > 0">
+    <div class="row justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="row justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

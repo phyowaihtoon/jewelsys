@@ -1,0 +1,29 @@
+{
+  "jewelsysApp": {
+    "goldPriceRate": {
+      "home": {
+        "title": "Gold Price Rates",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Gold Price Rate",
+        "createOrEditLabel": "Create or edit a Gold Price Rate",
+        "notFound": "No Gold Price Rates found"
+      },
+      "created": "A new Gold Price Rate is created with identifier {{ param }}",
+      "updated": "A Gold Price Rate is updated with identifier {{ param }}",
+      "deleted": "A Gold Price Rate is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Gold Price Rate {{ id }}?"
+      },
+      "detail": {
+        "title": "Gold Price Rate"
+      },
+      "id": "ID",
+      "effectiveDate": "Effective Date",
+      "rateSrNo": "Rate Sr No",
+      "rateType": "Rate Type",
+      "priceRate": "Price Rate",
+      "delFlg": "Del Flg",
+      "goldType": "Gold Type"
+    }
+  }
+}

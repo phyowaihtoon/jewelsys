@@ -1,0 +1,35 @@
+@skipClient
+@skipServer
+entity MenuGroup {
+	name String
+	sequenceNo Integer
+}
+
+entity Menu {
+	menuCode String required unique,
+	menuName String required,
+	routerLink String,
+	status MenuStatus required
+}
+
+enum MenuStatus {
+    ACTIVE,INACTIVE
+}
+
+
+relationship ManyToOne {
+	Menu{MenuGroup(name)} to MenuGroup   
+}
+
+
+
+paginate Menu with pagination
+
+service Menu with serviceClass
+
+service Menu with serviceImpl
+
+dto Menu with mapstruct
+
+
+

@@ -48,6 +48,15 @@ public class CacheConfiguration {
             createCache(cm, com.devgroup.jewelsys.domain.User.class.getName());
             createCache(cm, com.devgroup.jewelsys.domain.Authority.class.getName());
             createCache(cm, com.devgroup.jewelsys.domain.User.class.getName() + ".authorities");
+            createCache(cm, com.devgroup.jewelsys.domain.MenuGroup.class.getName());
+            createCache(cm, com.devgroup.jewelsys.domain.Menu.class.getName());
+            createCache(cm, com.devgroup.jewelsys.domain.RoleMenuMap.class.getName());
+            createCache(cm, com.devgroup.jewelsys.domain.DataCategory.class.getName());
+            createCache(cm, com.devgroup.jewelsys.domain.GoldType.class.getName());
+            createCache(cm, com.devgroup.jewelsys.domain.GoldItemGroup.class.getName());
+            createCache(cm, com.devgroup.jewelsys.domain.GoldItem.class.getName());
+            createCache(cm, com.devgroup.jewelsys.domain.GoldPriceRate.class.getName());
+            createCache(cm, com.devgroup.jewelsys.domain.GemsType.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

@@ -1,0 +1,34 @@
+@skipClient
+@skipServer
+entity Menu {
+	menuCode String required unique,
+	menuName String required,
+	routerLink String,
+	status MenuStatus required
+}
+
+
+enum MenuStatus {
+    ACTIVE,INACTIVE
+}
+
+entity RoleMenuMap {
+	roleId String
+}
+
+
+relationship ManyToOne {
+	RoleMenuMap{Menu(menuName)} to Menu   
+}
+
+
+paginate RoleMenuMap with pagination
+
+service RoleMenuMap with serviceClass
+
+service RoleMenuMap with serviceImpl 
+
+dto RoleMenuMap with mapstruct
+
+
+

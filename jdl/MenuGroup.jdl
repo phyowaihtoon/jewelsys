@@ -1,0 +1,13 @@
+entity MenuGroup {
+	name String required,
+	sequenceNo Integer
+}
+
+paginate * with pagination
+
+service * with serviceImpl
+
+dto * with mapstruct
+
+
+

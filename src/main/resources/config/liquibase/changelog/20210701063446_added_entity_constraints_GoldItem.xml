@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+    <!--
+        Added the constraints for entity GoldItem.
+    -->
+    <changeSet id="20210701063446-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="gold_item_group_id"
+                                 baseTableName="gold_item"
+                                 constraintName="fk_gold_item__gold_item_group_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="gold_item_group"/>
+
+    </changeSet>
+</databaseChangeLog>

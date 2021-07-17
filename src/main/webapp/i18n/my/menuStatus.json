@@ -1,0 +1,9 @@
+{
+  "jewelsysApp": {
+    "MenuStatus": {
+      "null": "",
+      "ACTIVE": "ACTIVE",
+      "INACTIVE": "INACTIVE"
+    }
+  }
+}

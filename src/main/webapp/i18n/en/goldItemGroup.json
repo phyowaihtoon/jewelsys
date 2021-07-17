@@ -1,0 +1,27 @@
+{
+  "jewelsysApp": {
+    "goldItemGroup": {
+      "home": {
+        "title": "Gold Item Groups",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Gold Item Group",
+        "createOrEditLabel": "Create or edit a Gold Item Group",
+        "notFound": "No Gold Item Groups found"
+      },
+      "created": "A new Gold Item Group is created with identifier {{ param }}",
+      "updated": "A Gold Item Group is updated with identifier {{ param }}",
+      "deleted": "A Gold Item Group is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Gold Item Group {{ id }}?"
+      },
+      "detail": {
+        "title": "Gold Item Group"
+      },
+      "id": "ID",
+      "code": "Code",
+      "name": "Name",
+      "delFlg": "Del Flg",
+      "goldType": "Gold Type"
+    }
+  }
+}

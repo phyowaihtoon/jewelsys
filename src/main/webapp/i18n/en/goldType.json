@@ -1,0 +1,26 @@
+{
+  "jewelsysApp": {
+    "goldType": {
+      "home": {
+        "title": "Gold Types",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Gold Type",
+        "createOrEditLabel": "Create or edit a Gold Type",
+        "notFound": "No Gold Types found"
+      },
+      "created": "A new Gold Type is created with identifier {{ param }}",
+      "updated": "A Gold Type is updated with identifier {{ param }}",
+      "deleted": "A Gold Type is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Gold Type {{ id }}?"
+      },
+      "detail": {
+        "title": "Gold Type"
+      },
+      "id": "ID",
+      "code": "Code",
+      "name": "Name",
+      "delFlg": "Del Flg"
+    }
+  }
+}

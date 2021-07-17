@@ -1,0 +1,38 @@
+{
+  "name": "Menu",
+  "fields": [
+    {
+      "fieldName": "menuCode",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique"]
+    },
+    {
+      "fieldName": "menuName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "routerLink",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "MenuStatus",
+      "fieldValues": "ACTIVE,INACTIVE",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "relationships": [],
+  "entityTableName": "menu",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210622153512",
+  "skipClient": true,
+  "skipServer": true
+}

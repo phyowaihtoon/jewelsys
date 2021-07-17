@@ -1,0 +1,50 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="menu">
+      <h2 data-cy="menuDetailsHeading"><span jhiTranslate="jewelsysApp.menu.detail.title">Menu</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ menu.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="jewelsysApp.menu.menuCode">Menu Code</span></dt>
+        <dd>
+          <span>{{ menu.menuCode }}</span>
+        </dd>
+        <dt><span jhiTranslate="jewelsysApp.menu.menuName">Menu Name</span></dt>
+        <dd>
+          <span>{{ menu.menuName }}</span>
+        </dd>
+        <dt><span jhiTranslate="jewelsysApp.menu.routerLink">Router Link</span></dt>
+        <dd>
+          <span>{{ menu.routerLink }}</span>
+        </dd>
+        <dt><span jhiTranslate="jewelsysApp.menu.status">Status</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'jewelsysApp.MenuStatus.' + menu.status }}">{{ menu.status }}</span>
+        </dd>
+        <dt><span jhiTranslate="jewelsysApp.menu.menuGroup">Menu Group</span></dt>
+        <dd>
+          <div *ngIf="menu.menuGroup">
+            <a [routerLink]="['/menu-group', menu.menuGroup?.id, 'view']">{{ menu.menuGroup?.name }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/menu', menu.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

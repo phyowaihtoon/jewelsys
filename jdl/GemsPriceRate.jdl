@@ -1,0 +1,29 @@
+@skipClient
+@skipServer
+entity GemsItem {
+  code	String  required unique,
+  name	String required,
+  delFlg	String
+}
+
+entity GemsPriceRate {
+	effectiveDate Instant required,
+	rateSrNo Integer required,
+	rateType String required,
+	priceRate Double,
+	delFlg String
+}
+
+
+relationship ManyToOne {
+	GemsPriceRate{GemsItem(name)} to GemsItem   
+}
+
+paginate GemsPriceRate with pagination
+
+service GemsPriceRate with serviceImpl except GemsItem
+
+dto GemsPriceRate with mapstruct
+
+
+

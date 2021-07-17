@@ -1,0 +1,32 @@
+{
+  "name": "GemsType",
+  "fields": [
+    {
+      "fieldName": "code",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique"]
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "delFlg",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [],
+  "entityTableName": "gems_type",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210701080059",
+  "skipClient": true,
+  "skipServer": true
+}

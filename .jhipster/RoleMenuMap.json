@@ -1,0 +1,28 @@
+{
+  "name": "RoleMenuMap",
+  "fields": [
+    {
+      "fieldName": "roleId",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "menu",
+      "otherEntityRelationshipName": "roleMenuMap",
+      "relationshipName": "menu",
+      "otherEntityField": "menuName"
+    }
+  ],
+  "entityTableName": "role_menu_map",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210622154046"
+}

@@ -1,0 +1,27 @@
+{
+  "jewelsysApp": {
+    "gemsItem": {
+      "home": {
+        "title": "Gems Items",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Gems Item",
+        "createOrEditLabel": "Create or edit a Gems Item",
+        "notFound": "No Gems Items found"
+      },
+      "created": "A new Gems Item is created with identifier {{ param }}",
+      "updated": "A Gems Item is updated with identifier {{ param }}",
+      "deleted": "A Gems Item is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Gems Item {{ id }}?"
+      },
+      "detail": {
+        "title": "Gems Item"
+      },
+      "id": "ID",
+      "code": "Code",
+      "name": "Name",
+      "delFlg": "Del Flg",
+      "gemsType": "Gems Type"
+    }
+  }
+}

@@ -1,0 +1,46 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="goldItem">
+      <h2 data-cy="goldItemDetailsHeading"><span jhiTranslate="jewelsysApp.goldItem.detail.title">Gold Item</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ goldItem.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="jewelsysApp.goldItem.code">Code</span></dt>
+        <dd>
+          <span>{{ goldItem.code }}</span>
+        </dd>
+        <dt><span jhiTranslate="jewelsysApp.goldItem.name">Name</span></dt>
+        <dd>
+          <span>{{ goldItem.name }}</span>
+        </dd>
+        <dt><span jhiTranslate="jewelsysApp.goldItem.delFlg">Del Flg</span></dt>
+        <dd>
+          <span>{{ goldItem.delFlg }}</span>
+        </dd>
+        <dt><span jhiTranslate="jewelsysApp.goldItem.goldItemGroup">Gold Item Group</span></dt>
+        <dd>
+          <div *ngIf="goldItem.goldItemGroup">
+            <a [routerLink]="['/gold-item-group', goldItem.goldItemGroup?.id, 'view']">{{ goldItem.goldItemGroup?.name }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/gold-item', goldItem.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

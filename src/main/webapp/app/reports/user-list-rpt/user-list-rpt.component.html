@@ -1,0 +1,22 @@
+<div class="row justify-content-center">
+  <div class="col-10">
+    <form name="editForm" role="form" novalidate (ngSubmit)="generate()" [formGroup]="editForm">
+      <h2>User List Report</h2>
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+      </div>
+
+      <div>
+        <button
+          type="submit"
+          id="generate-report"
+          data-cy="reportGenerateButton"
+          [disabled]="editForm.invalid || isGenerating"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Generate</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

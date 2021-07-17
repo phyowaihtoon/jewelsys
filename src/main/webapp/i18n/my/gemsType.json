@@ -1,0 +1,26 @@
+{
+  "jewelsysApp": {
+    "gemsType": {
+      "home": {
+        "title": "Gems Types",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Gems Type အသစ်ထည့်မည်",
+        "createOrEditLabel": "Gems Type အသစ်ထည့်ခြင်း (သို့) ပြုပြင်ခြင်း",
+        "notFound": "No Gems Types found"
+      },
+      "created": "{{ param }} အိုင်ဒီဖြင့် Gems Type အသစ်တစ်ခုအား ထည့်ပြီးပါပြီ။",
+      "updated": "{{ param }} အိုင်ဒီဖြင့် Gems Type တစ်ခုအား ပြုပြင်ပြီးပါပြီ။",
+      "deleted": "{{ param }} အိုင်ဒီဖြင့် Gems Type တစ်ခုအား ဖျက်ပြီးပါပြီ။",
+      "delete": {
+        "question": "Gems Type {{ id }} အား ဖျက်ပါမည်။ သေချာပါသလား?"
+      },
+      "detail": {
+        "title": "Gems Type"
+      },
+      "id": "ID",
+      "code": "Code",
+      "name": "Name",
+      "delFlg": "Del Flg"
+    }
+  }
+}

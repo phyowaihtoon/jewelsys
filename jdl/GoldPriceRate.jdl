@@ -1,0 +1,31 @@
+@skipClient
+@skipServer
+entity GoldType {
+  code	String  required unique,
+  name	String required,
+  delFlg	String
+}
+
+entity GoldPriceRate {
+	effectiveDate Instant required,
+	rateSrNo Integer required,
+	rateType String required,
+	priceRate Double,
+	delFlg String
+}
+
+
+relationship ManyToOne {
+	GoldPriceRate{GoldType(name)} to GoldType   
+}
+
+
+
+paginate GoldPriceRate with pagination
+
+service GoldPriceRate with serviceImpl except GoldType
+
+dto GoldPriceRate with mapstruct
+
+
+

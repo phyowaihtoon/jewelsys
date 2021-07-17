@@ -1,0 +1,122 @@
+<div>
+  <h2 id="page-heading" data-cy="GoldPriceRateHeading">
+    <span jhiTranslate="jewelsysApp.goldPriceRate.home.title">Gold Price Rates</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="jewelsysApp.goldPriceRate.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-gold-price-rate"
+        [routerLink]="['/gold-price-rate/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="jewelsysApp.goldPriceRate.home.createLabel"> Create a new Gold Price Rate </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="goldPriceRates?.length === 0">
+    <span jhiTranslate="jewelsysApp.goldPriceRate.home.notFound">No goldPriceRates found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="goldPriceRates && goldPriceRates.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="effectiveDate">
+            <span jhiTranslate="jewelsysApp.goldPriceRate.effectiveDate">Effective Date</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="rateSrNo">
+            <span jhiTranslate="jewelsysApp.goldPriceRate.rateSrNo">Rate Sr No</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="rateType">
+            <span jhiTranslate="jewelsysApp.goldPriceRate.rateType">Rate Type</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="priceRate">
+            <span jhiTranslate="jewelsysApp.goldPriceRate.priceRate">Price Rate</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="delFlg">
+            <span jhiTranslate="jewelsysApp.goldPriceRate.delFlg">Del Flg</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="goldType.name">
+            <span jhiTranslate="jewelsysApp.goldPriceRate.goldType">Gold Type</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let goldPriceRate of goldPriceRates; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/gold-price-rate', goldPriceRate.id, 'view']">{{ goldPriceRate.id }}</a>
+          </td>
+          <td>{{ goldPriceRate.effectiveDate | formatMediumDatetime }}</td>
+          <td>{{ goldPriceRate.rateSrNo }}</td>
+          <td>{{ goldPriceRate.rateType }}</td>
+          <td>{{ goldPriceRate.priceRate }}</td>
+          <td>{{ goldPriceRate.delFlg }}</td>
+          <td>
+            <div *ngIf="goldPriceRate.goldType">
+              <a [routerLink]="['/gold-type', goldPriceRate.goldType?.id, 'view']">{{ goldPriceRate.goldType?.name }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/gold-price-rate', goldPriceRate.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/gold-price-rate', goldPriceRate.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(goldPriceRate)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="goldPriceRates && goldPriceRates.length > 0">
+    <div class="row justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="row justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

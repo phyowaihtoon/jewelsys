@@ -1,0 +1,26 @@
+@skipClient
+@skipServer
+entity GemsType {
+  code String required unique,
+  name String required,
+  delFlg String
+  }
+  
+entity GemsItem {
+  code String required unique,
+  name String required,
+  delFlg String
+  }
+  
+relationship ManyToOne {
+	GemsItem{GemsType(name)} to GemsType
+}
+
+paginate GemsItem with pagination
+
+service GemsItem with serviceImpl
+
+dto GemsItem with mapstruct
+
+
+

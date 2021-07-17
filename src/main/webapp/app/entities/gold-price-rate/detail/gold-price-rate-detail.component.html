@@ -1,0 +1,54 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="goldPriceRate">
+      <h2 data-cy="goldPriceRateDetailsHeading"><span jhiTranslate="jewelsysApp.goldPriceRate.detail.title">Gold Price Rate</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ goldPriceRate.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="jewelsysApp.goldPriceRate.effectiveDate">Effective Date</span></dt>
+        <dd>
+          <span>{{ goldPriceRate.effectiveDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="jewelsysApp.goldPriceRate.rateSrNo">Rate Sr No</span></dt>
+        <dd>
+          <span>{{ goldPriceRate.rateSrNo }}</span>
+        </dd>
+        <dt><span jhiTranslate="jewelsysApp.goldPriceRate.rateType">Rate Type</span></dt>
+        <dd>
+          <span>{{ goldPriceRate.rateType }}</span>
+        </dd>
+        <dt><span jhiTranslate="jewelsysApp.goldPriceRate.priceRate">Price Rate</span></dt>
+        <dd>
+          <span>{{ goldPriceRate.priceRate }}</span>
+        </dd>
+        <dt><span jhiTranslate="jewelsysApp.goldPriceRate.delFlg">Del Flg</span></dt>
+        <dd>
+          <span>{{ goldPriceRate.delFlg }}</span>
+        </dd>
+        <dt><span jhiTranslate="jewelsysApp.goldPriceRate.goldType">Gold Type</span></dt>
+        <dd>
+          <div *ngIf="goldPriceRate.goldType">
+            <a [routerLink]="['/gold-type', goldPriceRate.goldType?.id, 'view']">{{ goldPriceRate.goldType?.name }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/gold-price-rate', goldPriceRate.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

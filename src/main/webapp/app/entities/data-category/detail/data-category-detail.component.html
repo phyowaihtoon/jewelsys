@@ -1,0 +1,44 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="dataCategory">
+      <h2 data-cy="dataCategoryDetailsHeading"><span jhiTranslate="jewelsysApp.dataCategory.detail.title">Data Category</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ dataCategory.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="jewelsysApp.dataCategory.categoryType">Category Type</span></dt>
+        <dd>
+          <span>{{ dataCategory.categoryType }}</span>
+        </dd>
+        <dt><span jhiTranslate="jewelsysApp.dataCategory.categoryCode">Category Code</span></dt>
+        <dd>
+          <span>{{ dataCategory.categoryCode }}</span>
+        </dd>
+        <dt><span jhiTranslate="jewelsysApp.dataCategory.value">Value</span></dt>
+        <dd>
+          <span>{{ dataCategory.value }}</span>
+        </dd>
+        <dt><span jhiTranslate="jewelsysApp.dataCategory.categoryDesc">Category Desc</span></dt>
+        <dd>
+          <span>{{ dataCategory.categoryDesc }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/data-category', dataCategory.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

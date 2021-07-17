@@ -1,0 +1,32 @@
+{
+  "name": "DataCategory",
+  "fields": [
+    {
+      "fieldName": "categoryType",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "categoryCode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "value",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "categoryDesc",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [],
+  "entityTableName": "data_category",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210701061632"
+}

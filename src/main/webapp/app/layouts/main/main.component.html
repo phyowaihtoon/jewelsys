@@ -1,13 +1,113 @@
-<jhi-page-ribbon></jhi-page-ribbon>
+<mat-sidenav-container [ngSwitch]="isAuthenticated()">
+  <mat-sidenav opened="false" mode="side" #snav>
+    <mat-nav-list dense>
+      <mat-accordion *ngSwitchCase="true" multi="false">
+        <mat-expansion-panel *ngFor="let menuGroup of loginService.menuAccess">
+          <mat-expansion-panel-header>
+            {{ menuGroup.menuGroupName }}
+          </mat-expansion-panel-header>
+          <mat-nav-list>
+            <a
+              mat-list-item
+              *ngFor="let subMenu of menuGroup.menuList"
+              [routerLink]="[subMenu.routerLink]"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }"
+            >
+              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+              <span>{{ subMenu.menuName }}</span>
+            </a>
+          </mat-nav-list>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </mat-nav-list>
+  </mat-sidenav>
 
-<div>
-  <router-outlet name="navbar"></router-outlet>
-</div>
+  <mat-sidenav-content>
+    <mat-toolbar color="accent">
+      <mat-toolbar-row>
+        <button mat-icon-button>
+          <mat-icon (click)="snavToggle(snav)">menu</mat-icon>
+        </button>
 
-<div class="container-fluid">
-  <div class="card jh-card">
-    <router-outlet></router-outlet>
-  </div>
+        <span>
+          <a class="app-title-link">{{ appTitle }}</a>
+        </span>
 
-  <jhi-footer></jhi-footer>
-</div>
+        <div class="header-spacing"></div>
+
+        <span>
+          <a [matMenuTriggerFor]="langMenu">
+            <span class="toolbar-content">
+              <fa-icon icon="flag"></fa-icon>
+              <span jhiTranslate="global.menu.language"
+                >Language
+                <mat-icon>arrow_drop_down</mat-icon>
+              </span>
+            </span>
+          </a>
+
+          <mat-menu #langMenu="matMenu">
+            <mat-list-item *ngFor="let language of languages">
+              <a mat-button [jhiActiveMenu]="language" href="javascript:void(0);" (click)="changeLanguage(language)">{{
+                language | findLanguageFromKey
+              }}</a>
+            </mat-list-item>
+          </mat-menu>
+        </span>
+
+        <span style="width: 10px"></span>
+
+        <span>
+          <a [matMenuTriggerFor]="accountMenu">
+            <span class="toolbar-content">
+              <fa-icon icon="user"></fa-icon>
+              <span jhiTranslate="global.menu.account.main"> Account </span>
+            </span>
+          </a>
+
+          <mat-menu #accountMenu="matMenu">
+            <span *ngSwitchCase="true" mat-menu-item>
+              <a mat-button routerLink="account/settings" routerLinkActive="active">
+                <fa-icon icon="wrench" [fixedWidth]="true"></fa-icon>
+                <span jhiTranslate="global.menu.account.settings">Settings</span>
+              </a>
+            </span>
+            <span *ngSwitchCase="true" mat-menu-item>
+              <a mat-button routerLink="account/password" routerLinkActive="active">
+                <fa-icon icon="lock" [fixedWidth]="true"></fa-icon>
+                <span jhiTranslate="global.menu.account.password">Password</span>
+              </a>
+            </span>
+            <span *ngSwitchCase="true" mat-menu-item>
+              <a mat-button (click)="logout()" id="login">
+                <fa-icon icon="sign-out-alt" [fixedWidth]="true"></fa-icon>
+                <span jhiTranslate="global.menu.account.logout">Sign out</span>
+              </a>
+            </span>
+            <span *ngSwitchCase="false" mat-menu-item>
+              <a mat-button (click)="login()" id="login">
+                <fa-icon icon="sign-in-alt" [fixedWidth]="true"></fa-icon>
+                <span jhiTranslate="global.menu.account.login">Sign in</span>
+              </a>
+            </span>
+            <span *ngSwitchCase="false" mat-menu-item>
+              <a mat-button routerLink="account/register" routerLinkActive="active">
+                <fa-icon icon="user-plus" [fixedWidth]="true"></fa-icon>
+                <span jhiTranslate="global.menu.account.register">Register</span>
+              </a>
+            </span>
+          </mat-menu>
+        </span>
+
+        <span style="margin-right: 2%"></span>
+      </mat-toolbar-row>
+    </mat-toolbar>
+
+    <div class="container-fluid">
+      <div class="card jh-card">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

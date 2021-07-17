@@ -1,0 +1,27 @@
+{
+  "jewelsysApp": {
+    "dataCategory": {
+      "home": {
+        "title": "Data Categories",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Data Category",
+        "createOrEditLabel": "Create or edit a Data Category",
+        "notFound": "No Data Categories found"
+      },
+      "created": "A new Data Category is created with identifier {{ param }}",
+      "updated": "A Data Category is updated with identifier {{ param }}",
+      "deleted": "A Data Category is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Data Category {{ id }}?"
+      },
+      "detail": {
+        "title": "Data Category"
+      },
+      "id": "ID",
+      "categoryType": "Category Type",
+      "categoryCode": "Category Code",
+      "value": "Value",
+      "categoryDesc": "Category Desc"
+    }
+  }
+}

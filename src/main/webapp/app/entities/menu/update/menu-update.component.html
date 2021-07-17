@@ -1,0 +1,101 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-menu-heading" data-cy="MenuCreateUpdateHeading" jhiTranslate="jewelsysApp.menu.home.createOrEditLabel">
+        Create or edit a Menu
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="jewelsysApp.menu.menuCode" for="field_menuCode">Menu Code</label>
+          <input type="text" class="form-control" name="menuCode" id="field_menuCode" data-cy="menuCode" formControlName="menuCode" />
+          <div *ngIf="editForm.get('menuCode')!.invalid && (editForm.get('menuCode')!.dirty || editForm.get('menuCode')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('menuCode')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="jewelsysApp.menu.menuName" for="field_menuName">Menu Name</label>
+          <input type="text" class="form-control" name="menuName" id="field_menuName" data-cy="menuName" formControlName="menuName" />
+          <div *ngIf="editForm.get('menuName')!.invalid && (editForm.get('menuName')!.dirty || editForm.get('menuName')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('menuName')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="jewelsysApp.menu.routerLink" for="field_routerLink">Router Link</label>
+          <input
+            type="text"
+            class="form-control"
+            name="routerLink"
+            id="field_routerLink"
+            data-cy="routerLink"
+            formControlName="routerLink"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="jewelsysApp.menu.status" for="field_status">Status</label>
+          <select class="form-control" name="status" formControlName="status" id="field_status" data-cy="status">
+            <option [ngValue]="null">{{ 'jewelsysApp.MenuStatus.null' | translate }}</option>
+            <option value="ACTIVE">{{ 'jewelsysApp.MenuStatus.ACTIVE' | translate }}</option>
+            <option value="INACTIVE">{{ 'jewelsysApp.MenuStatus.INACTIVE' | translate }}</option>
+          </select>
+          <div *ngIf="editForm.get('status')!.invalid && (editForm.get('status')!.dirty || editForm.get('status')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('status')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="jewelsysApp.menu.menuGroup" for="field_menuGroup">Menu Group</label>
+          <select class="form-control" id="field_menuGroup" data-cy="menuGroup" name="menuGroup" formControlName="menuGroup">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="menuGroupOption.id === editForm.get('menuGroup')!.value?.id ? editForm.get('menuGroup')!.value : menuGroupOption"
+              *ngFor="let menuGroupOption of menuGroupsSharedCollection; trackBy: trackMenuGroupById"
+            >
+              {{ menuGroupOption.name }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

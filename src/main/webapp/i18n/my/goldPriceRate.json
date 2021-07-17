@@ -1,0 +1,29 @@
+{
+  "jewelsysApp": {
+    "goldPriceRate": {
+      "home": {
+        "title": "Gold Price Rates",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Gold Price Rate အသစ်ထည့်မည်",
+        "createOrEditLabel": "Gold Price Rate အသစ်ထည့်ခြင်း (သို့) ပြုပြင်ခြင်း",
+        "notFound": "No Gold Price Rates found"
+      },
+      "created": "{{ param }} အိုင်ဒီဖြင့် Gold Price Rate အသစ်တစ်ခုအား ထည့်ပြီးပါပြီ။",
+      "updated": "{{ param }} အိုင်ဒီဖြင့် Gold Price Rate တစ်ခုအား ပြုပြင်ပြီးပါပြီ။",
+      "deleted": "{{ param }} အိုင်ဒီဖြင့် Gold Price Rate တစ်ခုအား ဖျက်ပြီးပါပြီ။",
+      "delete": {
+        "question": "Gold Price Rate {{ id }} အား ဖျက်ပါမည်။ သေချာပါသလား?"
+      },
+      "detail": {
+        "title": "Gold Price Rate"
+      },
+      "id": "ID",
+      "effectiveDate": "Effective Date",
+      "rateSrNo": "Rate Sr No",
+      "rateType": "Rate Type",
+      "priceRate": "Price Rate",
+      "delFlg": "Del Flg",
+      "goldType": "Gold Type"
+    }
+  }
+}

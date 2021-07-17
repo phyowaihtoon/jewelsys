@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+    <!--
+        Added the constraints for entity GemsPriceRate.
+    -->
+    <changeSet id="20210701090758-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="gems_item_id"
+                                 baseTableName="gems_price_rate"
+                                 constraintName="fk_gems_price_rate__gems_item_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="gems_item"/>
+
+    </changeSet>
+</databaseChangeLog>

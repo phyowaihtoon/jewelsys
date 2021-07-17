@@ -41,6 +41,20 @@
     "jwtSecretKey": "ZWEyZmM2ZWE0ZWEzYjBiM2U2ZTFmZTViOWNlZGUzZjc5ZGUyZWFiNmI3OGJhMTY1YWIzMDAzN2ZiYjBhMzZhZTEyMzY5ZTJkZTYwYTRhM2MwYzAzZjFjZTFlNDk3OTE1YzFkNWQ0ODU3NjhkOThmY2U1NmU3OTI4ZDhhZWI4ODI=",
     "clientPackageManager": "npm",
     "clientThemeVariant": "",
-    "languages": ["en", "my"]
+    "languages": ["en", "my"],
+    "entities": [
+      "MenuGroup",
+      "Menu",
+      "RoleMenuMap",
+      "DataCategory",
+      "GoldType",
+      "GoldItemGroup",
+      "GoldItem",
+      "GoldPriceRate",
+      "GemsType",
+      "GemsItem",
+      "GemsPriceRate"
+    ],
+    "lastLiquibaseTimestamp": 1625130478000
   }
 }

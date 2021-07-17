@@ -1,0 +1,27 @@
+{
+  "jewelsysApp": {
+    "goldItemGroup": {
+      "home": {
+        "title": "Gold Item Groups",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Gold Item Group အသစ်ထည့်မည်",
+        "createOrEditLabel": "Gold Item Group အသစ်ထည့်ခြင်း (သို့) ပြုပြင်ခြင်း",
+        "notFound": "No Gold Item Groups found"
+      },
+      "created": "{{ param }} အိုင်ဒီဖြင့် Gold Item Group အသစ်တစ်ခုအား ထည့်ပြီးပါပြီ။",
+      "updated": "{{ param }} အိုင်ဒီဖြင့် Gold Item Group တစ်ခုအား ပြုပြင်ပြီးပါပြီ။",
+      "deleted": "{{ param }} အိုင်ဒီဖြင့် Gold Item Group တစ်ခုအား ဖျက်ပြီးပါပြီ။",
+      "delete": {
+        "question": "Gold Item Group {{ id }} အား ဖျက်ပါမည်။ သေချာပါသလား?"
+      },
+      "detail": {
+        "title": "Gold Item Group"
+      },
+      "id": "ID",
+      "code": "Code",
+      "name": "Name",
+      "delFlg": "Del Flg",
+      "goldType": "Gold Type"
+    }
+  }
+}

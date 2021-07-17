@@ -1,0 +1,15 @@
+entity DataCategory {
+  categoryType String,
+  categoryCode String,
+  value String,
+  categoryDesc String,
+}
+
+paginate DataCategory with pagination
+
+service DataCategory with serviceImpl
+
+dto * with mapstruct
+
+
+
