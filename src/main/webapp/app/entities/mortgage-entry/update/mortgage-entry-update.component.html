@@ -1,0 +1,242 @@
+<div class="row justify-content-center">
+  <div class="col-12">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-mortgage-entry-heading"
+        data-cy="MortgageEntryCreateUpdateHeading"
+        jhiTranslate="jewelsysApp.mortgageEntry.home.createOrEditLabel"
+      >
+        Create or edit a Mortgage Entry
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row">
+          <div class="col-6">
+            <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+              <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+              <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+            </div>
+          </div>
+          <div class="col-6"></div>
+        </div>
+
+        <div class="row">
+          <div class="col-6">
+            <div class="form-group">
+              <label class="form-control-label" jhiTranslate="jewelsysApp.mortgageEntry.name" for="field_name">Name</label>
+              <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
+              <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
+                <small
+                  class="form-text text-danger"
+                  *ngIf="editForm.get('name')?.errors?.required"
+                  jhiTranslate="entity.validation.required"
+                >
+                  This field is required.
+                </small>
+              </div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="form-group">
+              <label class="form-control-label" jhiTranslate="jewelsysApp.mortgageEntry.startDate" for="field_startDate">Start Date</label>
+              <div class="d-flex">
+                <input
+                  id="field_startDate"
+                  data-cy="startDate"
+                  type="datetime-local"
+                  class="form-control"
+                  name="startDate"
+                  formControlName="startDate"
+                  placeholder="YYYY-MM-DD HH:mm"
+                />
+              </div>
+              <div *ngIf="editForm.get('startDate')!.invalid && (editForm.get('startDate')!.dirty || editForm.get('startDate')!.touched)">
+                <small
+                  class="form-text text-danger"
+                  *ngIf="editForm.get('startDate')?.errors?.required"
+                  jhiTranslate="entity.validation.required"
+                >
+                  This field is required.
+                </small>
+                <small
+                  class="form-text text-danger"
+                  [hidden]="!editForm.get('startDate')?.errors?.ZonedDateTimelocal"
+                  jhiTranslate="entity.validation.ZonedDateTimelocal"
+                >
+                  This field should be a date and time.
+                </small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-6">
+            <div class="form-group">
+              <label class="form-control-label" jhiTranslate="jewelsysApp.mortgageEntry.address" for="field_address">Address</label>
+              <input type="text" class="form-control" name="address" id="field_address" data-cy="address" formControlName="address" />
+              <div *ngIf="editForm.get('address')!.invalid && (editForm.get('address')!.dirty || editForm.get('address')!.touched)">
+                <small
+                  class="form-text text-danger"
+                  *ngIf="editForm.get('address')?.errors?.required"
+                  jhiTranslate="entity.validation.required"
+                >
+                  This field is required.
+                </small>
+              </div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="form-group">
+              <label class="form-control-label" jhiTranslate="jewelsysApp.mortgageEntry.principalAmount" for="field_principalAmount"
+                >Principal Amount</label
+              >
+              <input
+                class="form-control"
+                name="principalAmount"
+                id="field_principalAmount"
+                data-cy="principalAmount"
+                formControlName="principalAmount"
+              />
+              <div
+                *ngIf="
+                  editForm.get('principalAmount')!.invalid &&
+                  (editForm.get('principalAmount')!.dirty || editForm.get('principalAmount')!.touched)
+                "
+              >
+                <small
+                  class="form-text text-danger"
+                  *ngIf="editForm.get('principalAmount')?.errors?.required"
+                  jhiTranslate="entity.validation.required"
+                >
+                  This field is required.
+                </small>
+                <small
+                  class="form-text text-danger"
+                  [hidden]="!editForm.get('principalAmount')?.errors?.number"
+                  jhiTranslate="entity.validation.number"
+                >
+                  This field should be a number.
+                </small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-6">
+            <div class="form-group">
+              <label class="form-control-label" jhiTranslate="jewelsysApp.mortgageEntry.phone" for="field_phone">Phone</label>
+              <input type="text" class="form-control" name="phone" id="field_phone" data-cy="phone" formControlName="phone" />
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="form-group">
+              <label class="form-control-label" jhiTranslate="jewelsysApp.mortgageEntry.interestRate" for="field_interestRate"
+                >Interest Rate</label
+              >
+              <input
+                class="form-control"
+                name="interestRate"
+                id="field_interestRate"
+                data-cy="interestRate"
+                formControlName="interestRate"
+              />
+              <div
+                *ngIf="
+                  editForm.get('interestRate')!.invalid && (editForm.get('interestRate')!.dirty || editForm.get('interestRate')!.touched)
+                "
+              >
+                <small
+                  class="form-text text-danger"
+                  *ngIf="editForm.get('interestRate')?.errors?.required"
+                  jhiTranslate="entity.validation.required"
+                >
+                  This field is required.
+                </small>
+                <small
+                  class="form-text text-danger"
+                  [hidden]="!editForm.get('interestRate')?.errors?.number"
+                  jhiTranslate="entity.validation.number"
+                >
+                  This field should be a number.
+                </small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-6">
+            <div class="form-group">
+              <label class="form-control-label" jhiTranslate="jewelsysApp.mortgageEntry.itemName" for="field_itemName">Item Name</label>
+              <input type="text" class="form-control" name="itemName" id="field_itemName" data-cy="itemName" formControlName="itemName" />
+              <div *ngIf="editForm.get('itemName')!.invalid && (editForm.get('itemName')!.dirty || editForm.get('itemName')!.touched)">
+                <small
+                  class="form-text text-danger"
+                  *ngIf="editForm.get('itemName')?.errors?.required"
+                  jhiTranslate="entity.validation.required"
+                >
+                  This field is required.
+                </small>
+              </div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="form-group">
+              <label class="form-control-label" jhiTranslate="jewelsysApp.mortgageEntry.term" for="field_term">Term</label>
+              <input class="form-control" name="term" id="field_term" data-cy="term" formControlName="term" />
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-6">
+            <div class="form-group">
+              <label class="form-control-label" jhiTranslate="jewelsysApp.mortgageEntry.weight">Weight</label>
+              <div class="row">
+                <div class="col-2">
+                  <input class="form-control" name="wInKyat" id="field_wInKyat" data-cy="wInKyat" formControlName="wInKyat" />
+                </div>
+                <div class="col-1">
+                  <label class="form-control-label" jhiTranslate="jewelsysApp.mortgageEntry.wInKyat" for="field_wInPae">Kyat</label>
+                </div>
+                <div class="col-2">
+                  <input class="form-control" name="wInPae" id="field_wInPae" data-cy="wInPae" formControlName="wInPae" />
+                </div>
+                <div class="col-1">
+                  <label class="form-control-label" jhiTranslate="jewelsysApp.mortgageEntry.wInPae" for="field_wInPae">Pae</label>
+                </div>
+                <div class="col-2">
+                  <input class="form-control" name="wInYway" id="field_wInYway" data-cy="wInYway" formControlName="wInYway" />
+                </div>
+                <div class="col-1">
+                  <label class="form-control-label" jhiTranslate="jewelsysApp.mortgageEntry.wInYway" for="field_wInYway">Yway</label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-6"></div>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

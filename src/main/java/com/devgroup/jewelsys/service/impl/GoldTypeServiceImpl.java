@@ -5,6 +5,8 @@ import com.devgroup.jewelsys.repository.GoldTypeRepository;
 import com.devgroup.jewelsys.service.GoldTypeService;
 import com.devgroup.jewelsys.service.dto.GoldTypeDTO;
 import com.devgroup.jewelsys.service.mapper.GoldTypeMapper;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -73,5 +75,16 @@ public class GoldTypeServiceImpl implements GoldTypeService {
     public void delete(Long id) {
         log.debug("Request to delete GoldType : {}", id);
         goldTypeRepository.deleteById(id);
+    }
+
+    @Override
+    public List<GoldTypeDTO> loadAll() {
+        List<GoldTypeDTO> dtoList = new ArrayList<GoldTypeDTO>();
+        List<GoldType> goldTypeList = goldTypeRepository.findAll();
+        for (GoldType data : goldTypeList) {
+            GoldTypeDTO dto = goldTypeMapper.toDto(data);
+            dtoList.add(dto);
+        }
+        return dtoList;
     }
 }

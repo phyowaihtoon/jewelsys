@@ -1,0 +1,36 @@
+{
+  "jewelsysApp": {
+    "mortgageEntry": {
+      "home": {
+        "title": "Mortgage Entries",
+        "refreshListLabel": "Refresh",
+        "createLabel": "Add New",
+        "createOrEditLabel": "Mortgage Entry",
+        "notFound": "No Mortgage Entries found"
+      },
+      "created": "A new Mortgage Entry is created with identifier {{ param }}",
+      "updated": "A Mortgage Entry is updated with identifier {{ param }}",
+      "deleted": "A Mortgage Entry is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Mortgage Entry {{ id }}?"
+      },
+      "detail": {
+        "title": "Mortgage Entry"
+      },
+      "id": "ID",
+      "name": "Name",
+      "address": "Address",
+      "phone": "Phone",
+      "itemName": "Item Name",
+      "weight": "Weight",
+      "wInKyat": "Kyat",
+      "wInPae": "Pae",
+      "wInYway": "Yway",
+      "principalAmount": "Principal Amount",
+      "interestRate": "Interest Rate",
+      "term": "Term",
+      "startDate": "Start Date",
+      "delFlg": "Del Flg"
+    }
+  }
+}

@@ -1,0 +1,72 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="mortgageEntry">
+      <h2 data-cy="mortgageEntryDetailsHeading"><span jhiTranslate="jewelsysApp.mortgageEntry.detail.title">Mortgage Entry</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ mortgageEntry.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="jewelsysApp.mortgageEntry.name">Name</span></dt>
+        <dd>
+          <span>{{ mortgageEntry.name }}</span>
+        </dd>
+        <dt><span jhiTranslate="jewelsysApp.mortgageEntry.address">Address</span></dt>
+        <dd>
+          <span>{{ mortgageEntry.address }}</span>
+        </dd>
+        <dt><span jhiTranslate="jewelsysApp.mortgageEntry.phone">Phone</span></dt>
+        <dd>
+          <span>{{ mortgageEntry.phone }}</span>
+        </dd>
+        <dt><span jhiTranslate="jewelsysApp.mortgageEntry.itemName">Item Name</span></dt>
+        <dd>
+          <span>{{ mortgageEntry.itemName }}</span>
+        </dd>
+        <dt><span jhiTranslate="jewelsysApp.mortgageEntry.wInKyat">W In Kyat</span></dt>
+        <dd>
+          <span>{{ mortgageEntry.wInKyat }}</span>
+        </dd>
+        <dt><span jhiTranslate="jewelsysApp.mortgageEntry.wInPae">W In Pae</span></dt>
+        <dd>
+          <span>{{ mortgageEntry.wInPae }}</span>
+        </dd>
+        <dt><span jhiTranslate="jewelsysApp.mortgageEntry.wInYway">W In Yway</span></dt>
+        <dd>
+          <span>{{ mortgageEntry.wInYway }}</span>
+        </dd>
+        <dt><span jhiTranslate="jewelsysApp.mortgageEntry.principalAmount">Principal Amount</span></dt>
+        <dd>
+          <span>{{ mortgageEntry.principalAmount }}</span>
+        </dd>
+        <dt><span jhiTranslate="jewelsysApp.mortgageEntry.interestRate">Interest Rate</span></dt>
+        <dd>
+          <span>{{ mortgageEntry.interestRate }}</span>
+        </dd>
+        <dt><span jhiTranslate="jewelsysApp.mortgageEntry.term">Term</span></dt>
+        <dd>
+          <span>{{ mortgageEntry.term }}</span>
+        </dd>
+        <dt><span jhiTranslate="jewelsysApp.mortgageEntry.startDate">Start Date</span></dt>
+        <dd>
+          <span>{{ mortgageEntry.startDate | formatMediumDatetime }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/mortgage-entry', mortgageEntry.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

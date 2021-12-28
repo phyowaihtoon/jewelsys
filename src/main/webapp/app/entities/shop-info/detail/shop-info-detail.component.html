@@ -1,0 +1,56 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="shopInfo">
+      <h2 data-cy="shopInfoDetailsHeading"><span jhiTranslate="jewelsysApp.shopInfo.detail.title">Shop Info</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ shopInfo.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="jewelsysApp.shopInfo.shopCode">Shop Code</span></dt>
+        <dd>
+          <span>{{ shopInfo.shopCode }}</span>
+        </dd>
+        <dt><span jhiTranslate="jewelsysApp.shopInfo.nameEng">Name Eng</span></dt>
+        <dd>
+          <span>{{ shopInfo.nameEng }}</span>
+        </dd>
+        <dt><span jhiTranslate="jewelsysApp.shopInfo.nameMyan">Name Myan</span></dt>
+        <dd>
+          <span>{{ shopInfo.nameMyan }}</span>
+        </dd>
+        <dt><span jhiTranslate="jewelsysApp.shopInfo.addrEng">Addr Eng</span></dt>
+        <dd>
+          <span>{{ shopInfo.addrEng }}</span>
+        </dd>
+        <dt><span jhiTranslate="jewelsysApp.shopInfo.addrMyan">Addr Myan</span></dt>
+        <dd>
+          <span>{{ shopInfo.addrMyan }}</span>
+        </dd>
+        <dt><span jhiTranslate="jewelsysApp.shopInfo.phone">Phone</span></dt>
+        <dd>
+          <span>{{ shopInfo.phone }}</span>
+        </dd>
+        <dt><span jhiTranslate="jewelsysApp.shopInfo.delFlg">Del Flg</span></dt>
+        <dd>
+          <span>{{ shopInfo.delFlg }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/shop-info', shopInfo.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

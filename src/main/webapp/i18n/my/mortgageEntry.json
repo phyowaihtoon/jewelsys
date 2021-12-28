@@ -1,0 +1,36 @@
+{
+  "jewelsysApp": {
+    "mortgageEntry": {
+      "home": {
+        "title": "အပေါင်စာရင်း",
+        "refreshListLabel": "Refresh",
+        "createLabel": "အသစ်ထည့်မည်",
+        "createOrEditLabel": "အပေါင်စာရင်းသွင်းခြင်း",
+        "notFound": "No Mortgage Entries found"
+      },
+      "created": "{{ param }} အိုင်ဒီဖြင့် Mortgage Entry အသစ်တစ်ခုအား ထည့်ပြီးပါပြီ။",
+      "updated": "{{ param }} အိုင်ဒီဖြင့် Mortgage Entry တစ်ခုအား ပြုပြင်ပြီးပါပြီ။",
+      "deleted": "{{ param }} အိုင်ဒီဖြင့် Mortgage Entry တစ်ခုအား ဖျက်ပြီးပါပြီ။",
+      "delete": {
+        "question": "Mortgage Entry {{ id }} အား ဖျက်ပါမည်။ သေချာပါသလား?"
+      },
+      "detail": {
+        "title": "Mortgage Entry"
+      },
+      "id": "ID",
+      "name": "အမည်",
+      "address": "လိပ်စာ",
+      "phone": "ဖုန်း",
+      "itemName": "ပစ္စည်းအမည်",
+      "weight": "အလေးချိန်",
+      "wInKyat": "ကျပ်",
+      "wInPae": "ပဲ",
+      "wInYway": "ရွေး",
+      "principalAmount": "ငွေရင်း",
+      "interestRate": "အတိုးနှုန်း",
+      "term": "အပေါင်သက်တမ်း",
+      "startDate": "အပေါင်ထားသည့်နေ့စွဲ",
+      "delFlg": "Del Flg"
+    }
+  }
+}

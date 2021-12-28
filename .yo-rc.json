@@ -53,8 +53,11 @@
       "GoldPriceRate",
       "GemsType",
       "GemsItem",
-      "GemsPriceRate"
+      "GemsPriceRate",
+      "ShopInfo",
+      "CounterInfo",
+      "MortgageEntry"
     ],
-    "lastLiquibaseTimestamp": 1625130478000
+    "lastLiquibaseTimestamp": 1640578827000
   }
 }

@@ -1,16 +1,12 @@
 package com.devgroup.jewelsys.config;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import tech.jhipster.config.JHipsterConstants;
 
 @Configuration
-@EnableJpaRepositories("com.devgroup.jewelsys.repository")
 @EnableJpaAuditing(auditorAwareRef = "springSecurityAuditorAware")
+@EnableJpaRepositories("com.devgroup.jewelsys.repository")
 @EnableTransactionManagement
 public class DatabaseConfiguration {}

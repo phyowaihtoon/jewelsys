@@ -1,0 +1,27 @@
+{
+  "jewelsysApp": {
+    "counterInfo": {
+      "home": {
+        "title": "Counter Infos",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Counter Info",
+        "createOrEditLabel": "Create or edit a Counter Info",
+        "notFound": "No Counter Infos found"
+      },
+      "created": "A new Counter Info is created with identifier {{ param }}",
+      "updated": "A Counter Info is updated with identifier {{ param }}",
+      "deleted": "A Counter Info is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Counter Info {{ id }}?"
+      },
+      "detail": {
+        "title": "Counter Info"
+      },
+      "id": "ID",
+      "counterNo": "Counter No",
+      "counterName": "Counter Name",
+      "delFlg": "Del Flg",
+      "shopInfo": "Shop Info"
+    }
+  }
+}

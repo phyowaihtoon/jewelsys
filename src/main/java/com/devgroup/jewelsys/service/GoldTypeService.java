@@ -1,6 +1,7 @@
 package com.devgroup.jewelsys.service;
 
 import com.devgroup.jewelsys.service.dto.GoldTypeDTO;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -32,6 +33,8 @@ public interface GoldTypeService {
      * @return the list of entities.
      */
     Page<GoldTypeDTO> findAll(Pageable pageable);
+
+    List<GoldTypeDTO> loadAll();
 
     /**
      * Get the "id" goldType.

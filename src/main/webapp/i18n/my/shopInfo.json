@@ -1,0 +1,30 @@
+{
+  "jewelsysApp": {
+    "shopInfo": {
+      "home": {
+        "title": "Shop Infos",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Shop Info အသစ်ထည့်မည်",
+        "createOrEditLabel": "Shop Info အသစ်ထည့်ခြင်း (သို့) ပြုပြင်ခြင်း",
+        "notFound": "No Shop Infos found"
+      },
+      "created": "{{ param }} အိုင်ဒီဖြင့် Shop Info အသစ်တစ်ခုအား ထည့်ပြီးပါပြီ။",
+      "updated": "{{ param }} အိုင်ဒီဖြင့် Shop Info တစ်ခုအား ပြုပြင်ပြီးပါပြီ။",
+      "deleted": "{{ param }} အိုင်ဒီဖြင့် Shop Info တစ်ခုအား ဖျက်ပြီးပါပြီ။",
+      "delete": {
+        "question": "Shop Info {{ id }} အား ဖျက်ပါမည်။ သေချာပါသလား?"
+      },
+      "detail": {
+        "title": "Shop Info"
+      },
+      "id": "ID",
+      "shopCode": "Shop Code",
+      "nameEng": "Name Eng",
+      "nameMyan": "Name Myan",
+      "addrEng": "Addr Eng",
+      "addrMyan": "Addr Myan",
+      "phone": "Phone",
+      "delFlg": "Del Flg"
+    }
+  }
+}

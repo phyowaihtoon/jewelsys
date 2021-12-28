@@ -1,0 +1,20 @@
+entity ShopInfo {
+  shopCode String required unique,
+  nameEng String required,
+  nameMyan String,
+  addrEng String,
+  addrMyan String,
+  phone String,
+  delFlg String
+  }
+
+paginate ShopInfo with pagination
+
+service ShopInfo with serviceImpl
+
+service ShopInfo with serviceClass
+
+dto ShopInfo with mapstruct
+
+
+

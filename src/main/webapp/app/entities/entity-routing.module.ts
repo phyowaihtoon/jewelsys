@@ -59,6 +59,21 @@ import { RouterModule } from '@angular/router';
         data: { pageTitle: 'jewelsysApp.gemsPriceRate.home.title' },
         loadChildren: () => import('./gems-price-rate/gems-price-rate.module').then(m => m.GemsPriceRateModule),
       },
+      {
+        path: 'shop-info',
+        data: { pageTitle: 'jewelsysApp.shopInfo.home.title' },
+        loadChildren: () => import('./shop-info/shop-info.module').then(m => m.ShopInfoModule),
+      },
+      {
+        path: 'counter-info',
+        data: { pageTitle: 'jewelsysApp.counterInfo.home.title' },
+        loadChildren: () => import('./counter-info/counter-info.module').then(m => m.CounterInfoModule),
+      },
+      {
+        path: 'mortgage-entry',
+        data: { pageTitle: 'jewelsysApp.mortgageEntry.home.title' },
+        loadChildren: () => import('./mortgage-entry/mortgage-entry.module').then(m => m.MortgageEntryModule),
+      },
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ]),
   ],

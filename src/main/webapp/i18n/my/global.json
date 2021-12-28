@@ -7,6 +7,14 @@
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {
         "main": "Entities များ",
+        "roleMenuMap": "Role Menu Map",
+        "dataCategory": "Data Category",
+        "goldItemGroup": "Gold Item Group",
+        "goldItem": "Gold Item",
+        "goldPriceRate": "Gold Price Rate",
+        "gemsPriceRate": "Gems Price Rate",
+        "counterInfo": "Counter Info",
+        "mortgageEntry": "Mortgage Entry",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

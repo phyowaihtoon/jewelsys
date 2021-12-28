@@ -5,10 +5,12 @@ import com.devgroup.jewelsys.service.ReportService;
 import com.devgroup.jewelsys.service.UserService;
 import com.devgroup.jewelsys.service.dto.RptParamsDTO;
 import com.devgroup.jewelsys.util.SharedUtils;
+import com.devgroup.partner.domain.PGoldType;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import javax.servlet.ServletContext;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -101,5 +103,13 @@ public class ReportResource {
         data.setRptPS3("Context Path" + contextPath);
 
         return data;
+    }
+
+    @GetMapping("/testps")
+    public List<PGoldType> testps() {
+        List<PGoldType> gtList = null;
+        gtList = this.reportService.getAllGoldTypeFrmPS();
+
+        return gtList;
     }
 }

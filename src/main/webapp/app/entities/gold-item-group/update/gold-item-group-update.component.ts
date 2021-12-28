@@ -95,8 +95,20 @@ export class GoldItemGroupUpdateComponent implements OnInit {
   }
 
   protected loadRelationshipsOptions(): void {
+    /*
     this.goldTypeService
       .query()
+      .pipe(map((res: HttpResponse<IGoldType[]>) => res.body ?? []))
+      .pipe(
+        map((goldTypes: IGoldType[]) =>
+          this.goldTypeService.addGoldTypeToCollectionIfMissing(goldTypes, this.editForm.get('goldType')!.value)
+        )
+      )
+      .subscribe((goldTypes: IGoldType[]) => (this.goldTypesSharedCollection = goldTypes));
+    */
+
+    this.goldTypeService
+      .loadAll()
       .pipe(map((res: HttpResponse<IGoldType[]>) => res.body ?? []))
       .pipe(
         map((goldTypes: IGoldType[]) =>

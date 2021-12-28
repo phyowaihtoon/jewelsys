@@ -4,9 +4,7 @@ import { Router } from '@angular/router';
 import { LoginService } from 'app/login/login.service';
 import { AccountService } from 'app/core/auth/account.service';
 import { IMenuAccess } from 'app/shared/model/menu-access';
-import { SERVER_API_URL } from 'app/app.constants';
-import { HttpClient, HttpResponse } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { MenuAccessService } from './menu-access.service';
 
 @Component({
   selector: 'jhi-login',
@@ -17,7 +15,6 @@ export class LoginComponent implements OnInit, AfterViewInit {
   username?: ElementRef;
   authenticationError = false;
   menuAccess: IMenuAccess[] | null = null;
-  public menuAccessAPI = SERVER_API_URL + 'api/role-menu-maps/menus';
 
   loginForm = this.fb.group({
     username: [null, [Validators.required]],
@@ -28,7 +25,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
   constructor(
     private accountService: AccountService,
     private loginService: LoginService,
-    public http: HttpClient,
+    private menuAccessService: MenuAccessService,
     private router: Router,
     private fb: FormBuilder
   ) {}
@@ -57,12 +54,25 @@ export class LoginComponent implements OnInit, AfterViewInit {
       })
       .subscribe(
         () => {
-          this.loadMenus();
+          this.menuAccessService.loadMenuAccess().subscribe(
+            response => {
+              this.menuAccess = response.body;
+              this.loginService.storeMenuAccess(this.menuAccess);
+
+              this.authenticationError = false;
+              if (!this.router.getCurrentNavigation()) {
+                // There were no routing during login (eg from navigationToStoredUrl)
+                this.router.navigate(['']);
+              }
+            },
+            () => (this.authenticationError = true)
+          );
         },
         () => (this.authenticationError = true)
       );
   }
 
+  /*
   loadMenus(): void {
     this.subscribeToMenuAccessResponse(this.getMenus());
   }
@@ -86,4 +96,5 @@ export class LoginComponent implements OnInit, AfterViewInit {
       () => (this.authenticationError = true)
     );
   }
+  */
 }

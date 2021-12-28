@@ -1,0 +1,27 @@
+{
+  "jewelsysApp": {
+    "counterInfo": {
+      "home": {
+        "title": "Counter Infos",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Counter Info အသစ်ထည့်မည်",
+        "createOrEditLabel": "Counter Info အသစ်ထည့်ခြင်း (သို့) ပြုပြင်ခြင်း",
+        "notFound": "No Counter Infos found"
+      },
+      "created": "{{ param }} အိုင်ဒီဖြင့် Counter Info အသစ်တစ်ခုအား ထည့်ပြီးပါပြီ။",
+      "updated": "{{ param }} အိုင်ဒီဖြင့် Counter Info တစ်ခုအား ပြုပြင်ပြီးပါပြီ။",
+      "deleted": "{{ param }} အိုင်ဒီဖြင့် Counter Info တစ်ခုအား ဖျက်ပြီးပါပြီ။",
+      "delete": {
+        "question": "Counter Info {{ id }} အား ဖျက်ပါမည်။ သေချာပါသလား?"
+      },
+      "detail": {
+        "title": "Counter Info"
+      },
+      "id": "ID",
+      "counterNo": "Counter No",
+      "counterName": "Counter Name",
+      "delFlg": "Del Flg",
+      "shopInfo": "Shop Info"
+    }
+  }
+}

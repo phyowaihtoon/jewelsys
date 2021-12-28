@@ -39,6 +39,10 @@ export class GoldTypeService {
     return this.http.get<IGoldType[]>(this.resourceUrl, { params: options, observe: 'response' });
   }
 
+  loadAll(): Observable<EntityArrayResponseType> {
+    return this.http.get<IGoldType[]>(`${this.resourceUrl}/loadall`, { observe: 'response' });
+  }
+
   delete(id: number): Observable<HttpResponse<{}>> {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }

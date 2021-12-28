@@ -1,0 +1,91 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-counter-info-heading"
+        data-cy="CounterInfoCreateUpdateHeading"
+        jhiTranslate="jewelsysApp.counterInfo.home.createOrEditLabel"
+      >
+        Create or edit a Counter Info
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="jewelsysApp.counterInfo.counterNo" for="field_counterNo">Counter No</label>
+          <input type="text" class="form-control" name="counterNo" id="field_counterNo" data-cy="counterNo" formControlName="counterNo" />
+          <div *ngIf="editForm.get('counterNo')!.invalid && (editForm.get('counterNo')!.dirty || editForm.get('counterNo')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('counterNo')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="jewelsysApp.counterInfo.counterName" for="field_counterName">Counter Name</label>
+          <input
+            type="text"
+            class="form-control"
+            name="counterName"
+            id="field_counterName"
+            data-cy="counterName"
+            formControlName="counterName"
+          />
+          <div *ngIf="editForm.get('counterName')!.invalid && (editForm.get('counterName')!.dirty || editForm.get('counterName')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('counterName')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="jewelsysApp.counterInfo.delFlg" for="field_delFlg">Del Flg</label>
+          <input type="text" class="form-control" name="delFlg" id="field_delFlg" data-cy="delFlg" formControlName="delFlg" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="jewelsysApp.counterInfo.shopInfo" for="field_shopInfo">Shop Info</label>
+          <select class="form-control" id="field_shopInfo" data-cy="shopInfo" name="shopInfo" formControlName="shopInfo">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="shopInfoOption.id === editForm.get('shopInfo')!.value?.id ? editForm.get('shopInfo')!.value : shopInfoOption"
+              *ngFor="let shopInfoOption of shopInfosSharedCollection; trackBy: trackShopInfoById"
+            >
+              {{ shopInfoOption.shopCode }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

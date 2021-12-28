@@ -26,7 +26,9 @@
     <include file="config/liquibase/changelog/20210701080059_added_entity_GemsType.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20210701084157_added_entity_GemsItem.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20210701090758_added_entity_GemsPriceRate.xml" relativeToChangelogFile="false"/>
-    
+    <include file="config/liquibase/changelog/20210718090747_added_entity_ShopInfo.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210718092553_added_entity_CounterInfo.xml" relativeToChangelogFile="false"/>    
+    <include file="config/liquibase/changelog/20211227042027_added_entity_MortgageEntry.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here --> 
     <include file="config/liquibase/changelog/20210622153512_added_entity_constraints_Menu.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20210622154046_added_entity_constraints_RoleMenuMap.xml" relativeToChangelogFile="false"/>
@@ -35,6 +37,10 @@
     <include file="config/liquibase/changelog/20210701065153_added_entity_constraints_GoldPriceRate.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20210701084157_added_entity_constraints_GemsItem.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20210701090758_added_entity_constraints_GemsPriceRate.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210718092553_added_entity_constraints_CounterInfo.xml" relativeToChangelogFile="false"/>
+   
+   
+   
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
     <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->
 </databaseChangeLog>

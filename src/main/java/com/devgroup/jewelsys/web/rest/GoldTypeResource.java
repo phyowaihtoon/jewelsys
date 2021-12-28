@@ -152,6 +152,13 @@ public class GoldTypeResource {
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
+    @GetMapping("/gold-types/loadall")
+    public List<GoldTypeDTO> loadAllGoldTypes() {
+        log.debug("REST request to get a page of GoldTypes");
+        List<GoldTypeDTO> goldTypeList = goldTypeService.loadAll();
+        return goldTypeList;
+    }
+
     /**
      * {@code GET  /gold-types/:id} : get the "id" goldType.
      *

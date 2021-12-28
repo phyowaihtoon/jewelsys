@@ -1,0 +1,48 @@
+{
+  "name": "ShopInfo",
+  "fields": [
+    {
+      "fieldName": "shopCode",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique"]
+    },
+    {
+      "fieldName": "nameEng",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "nameMyan",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "addrEng",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "addrMyan",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "phone",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "delFlg",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [],
+  "entityTableName": "shop_info",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210718090747",
+  "skipClient": true,
+  "skipServer": true
+}

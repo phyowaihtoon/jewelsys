@@ -1,0 +1,30 @@
+@skipClient
+@skipServer
+entity ShopInfo {
+  shopCode String required unique,
+  nameEng String required,
+  nameMyan String,
+  addrEng String,
+  addrMyan String,
+  phone String,
+  delFlg String
+  }
+  
+entity CounterInfo {
+  counterNo String required unique,
+  counterName String required,
+  delFlg String
+  }
+  
+relationship ManyToOne {
+	CounterInfo{ShopInfo(shopCode)} to ShopInfo
+}
+
+paginate CounterInfo with pagination
+
+service CounterInfo with serviceImpl
+
+dto CounterInfo with mapstruct
+
+
+

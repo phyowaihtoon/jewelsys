@@ -1,0 +1,87 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-shop-info-heading" data-cy="ShopInfoCreateUpdateHeading" jhiTranslate="jewelsysApp.shopInfo.home.createOrEditLabel">
+        Create or edit a Shop Info
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="jewelsysApp.shopInfo.shopCode" for="field_shopCode">Shop Code</label>
+          <input type="text" class="form-control" name="shopCode" id="field_shopCode" data-cy="shopCode" formControlName="shopCode" />
+          <div *ngIf="editForm.get('shopCode')!.invalid && (editForm.get('shopCode')!.dirty || editForm.get('shopCode')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('shopCode')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="jewelsysApp.shopInfo.nameEng" for="field_nameEng">Name Eng</label>
+          <input type="text" class="form-control" name="nameEng" id="field_nameEng" data-cy="nameEng" formControlName="nameEng" />
+          <div *ngIf="editForm.get('nameEng')!.invalid && (editForm.get('nameEng')!.dirty || editForm.get('nameEng')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('nameEng')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="jewelsysApp.shopInfo.nameMyan" for="field_nameMyan">Name Myan</label>
+          <input type="text" class="form-control" name="nameMyan" id="field_nameMyan" data-cy="nameMyan" formControlName="nameMyan" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="jewelsysApp.shopInfo.addrEng" for="field_addrEng">Addr Eng</label>
+          <input type="text" class="form-control" name="addrEng" id="field_addrEng" data-cy="addrEng" formControlName="addrEng" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="jewelsysApp.shopInfo.addrMyan" for="field_addrMyan">Addr Myan</label>
+          <input type="text" class="form-control" name="addrMyan" id="field_addrMyan" data-cy="addrMyan" formControlName="addrMyan" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="jewelsysApp.shopInfo.phone" for="field_phone">Phone</label>
+          <input type="text" class="form-control" name="phone" id="field_phone" data-cy="phone" formControlName="phone" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="jewelsysApp.shopInfo.delFlg" for="field_delFlg">Del Flg</label>
+          <input type="text" class="form-control" name="delFlg" id="field_delFlg" data-cy="delFlg" formControlName="delFlg" />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,20 @@
+entity MortgageEntry {
+  name String required,
+  address String required,
+  phone String,
+  itemName String required,
+  wInKyat Integer,
+  wInPae Integer,
+  wInYway Integer,
+  principalAmount Double required,
+  interestRate Double required,
+  term Integer,
+  startDate Instant required,
+  delFlg String
+  }
+
+paginate MortgageEntry with pagination
+
+service MortgageEntry with serviceImpl
+
+dto MortgageEntry with mapstruct

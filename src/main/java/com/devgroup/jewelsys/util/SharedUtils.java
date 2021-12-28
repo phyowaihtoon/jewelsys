@@ -1,12 +1,10 @@
 package com.devgroup.jewelsys.util;
 
-import com.devgroup.jewelsys.config.ApplicationProperties;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import org.springframework.util.ResourceUtils;
-import tech.jhipster.config.JHipsterProperties;
 
 public class SharedUtils {
 
