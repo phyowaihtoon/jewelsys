@@ -8,7 +8,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
- * A MortgageEntry.
+ * MortgageEntry.
  */
 @Entity
 @Table(name = "mortgage_entry")
