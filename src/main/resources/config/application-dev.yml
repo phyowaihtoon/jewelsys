@@ -35,7 +35,7 @@ spring:
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
     url: jdbc:sqlserver://localhost:1433;database=jewelsys
     username: sa
-    password: a
+    password: sa@123
     hikari:
       poolName: Hikari
       auto-commit: false
@@ -67,7 +67,7 @@ partner:
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
     url: jdbc:sqlserver://localhost:1433;database=PTN
     username: sa
-    password: a
+    password: sa@123
     hikari:
       poolName: Hikari
       auto-commit: false

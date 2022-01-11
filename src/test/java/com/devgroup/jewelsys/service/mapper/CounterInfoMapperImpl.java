@@ -13,6 +13,12 @@ public class CounterInfoMapperImpl implements CounterInfoMapper {
     }
 
     @Override
+    public CounterInfoDTO toDto(CounterInfo entity) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
     public List<CounterInfo> toEntity(List<CounterInfoDTO> dtoList) {
         // TODO Auto-generated method stub
         return null;
@@ -28,11 +34,5 @@ public class CounterInfoMapperImpl implements CounterInfoMapper {
     public void partialUpdate(CounterInfo entity, CounterInfoDTO dto) {
         // TODO Auto-generated method stub
 
-    }
-
-    @Override
-    public CounterInfoDTO toDto(CounterInfo s) {
-        // TODO Auto-generated method stub
-        return null;
     }
 }
