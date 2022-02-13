@@ -7,6 +7,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.devgroup.jewelsys.IntegrationTest;
 import com.devgroup.jewelsys.domain.MortgageEntry;
+import com.devgroup.jewelsys.domain.enumeration.MortgageDamageType;
+import com.devgroup.jewelsys.domain.enumeration.MortgageItemGroup;
 import com.devgroup.jewelsys.repository.MortgageEntryRepository;
 import com.devgroup.jewelsys.service.dto.MortgageEntryDTO;
 import com.devgroup.jewelsys.service.mapper.MortgageEntryMapper;
@@ -42,8 +44,14 @@ class MortgageEntryResourceIT {
     private static final String DEFAULT_PHONE = "AAAAAAAAAA";
     private static final String UPDATED_PHONE = "BBBBBBBBBB";
 
-    private static final String DEFAULT_ITEM_NAME = "AAAAAAAAAA";
-    private static final String UPDATED_ITEM_NAME = "BBBBBBBBBB";
+    private static final MortgageItemGroup DEFAULT_GROUP_CODE = MortgageItemGroup.G01;
+    private static final MortgageItemGroup UPDATED_GROUP_CODE = MortgageItemGroup.G02;
+
+    private static final String DEFAULT_ITEM_CODE = "AAAAAAAAAA";
+    private static final String UPDATED_ITEM_CODE = "BBBBBBBBBB";
+
+    private static final MortgageDamageType DEFAULT_DAMAGE_TYPE = MortgageDamageType.DT01;
+    private static final MortgageDamageType UPDATED_DAMAGE_TYPE = MortgageDamageType.DT02;
 
     private static final Integer DEFAULT_W_IN_KYAT = 1;
     private static final Integer UPDATED_W_IN_KYAT = 2;
@@ -57,14 +65,14 @@ class MortgageEntryResourceIT {
     private static final Double DEFAULT_PRINCIPAL_AMOUNT = 1D;
     private static final Double UPDATED_PRINCIPAL_AMOUNT = 2D;
 
+    private static final Instant DEFAULT_START_DATE = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_START_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+
     private static final Double DEFAULT_INTEREST_RATE = 1D;
     private static final Double UPDATED_INTEREST_RATE = 2D;
 
     private static final Integer DEFAULT_TERM = 1;
     private static final Integer UPDATED_TERM = 2;
-
-    private static final Instant DEFAULT_START_DATE = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_START_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
     private static final String DEFAULT_DEL_FLG = "AAAAAAAAAA";
     private static final String UPDATED_DEL_FLG = "BBBBBBBBBB";
@@ -100,14 +108,16 @@ class MortgageEntryResourceIT {
             .name(DEFAULT_NAME)
             .address(DEFAULT_ADDRESS)
             .phone(DEFAULT_PHONE)
-            .itemName(DEFAULT_ITEM_NAME)
+            .groupCode(DEFAULT_GROUP_CODE)
+            .itemCode(DEFAULT_ITEM_CODE)
+            .damageType(DEFAULT_DAMAGE_TYPE)
             .wInKyat(DEFAULT_W_IN_KYAT)
             .wInPae(DEFAULT_W_IN_PAE)
             .wInYway(DEFAULT_W_IN_YWAY)
             .principalAmount(DEFAULT_PRINCIPAL_AMOUNT)
+            .startDate(DEFAULT_START_DATE)
             .interestRate(DEFAULT_INTEREST_RATE)
             .term(DEFAULT_TERM)
-            .startDate(DEFAULT_START_DATE)
             .delFlg(DEFAULT_DEL_FLG);
         return mortgageEntry;
     }
@@ -123,14 +133,16 @@ class MortgageEntryResourceIT {
             .name(UPDATED_NAME)
             .address(UPDATED_ADDRESS)
             .phone(UPDATED_PHONE)
-            .itemName(UPDATED_ITEM_NAME)
+            .groupCode(UPDATED_GROUP_CODE)
+            .itemCode(UPDATED_ITEM_CODE)
+            .damageType(UPDATED_DAMAGE_TYPE)
             .wInKyat(UPDATED_W_IN_KYAT)
             .wInPae(UPDATED_W_IN_PAE)
             .wInYway(UPDATED_W_IN_YWAY)
             .principalAmount(UPDATED_PRINCIPAL_AMOUNT)
+            .startDate(UPDATED_START_DATE)
             .interestRate(UPDATED_INTEREST_RATE)
             .term(UPDATED_TERM)
-            .startDate(UPDATED_START_DATE)
             .delFlg(UPDATED_DEL_FLG);
         return mortgageEntry;
     }
@@ -159,14 +171,16 @@ class MortgageEntryResourceIT {
         assertThat(testMortgageEntry.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testMortgageEntry.getAddress()).isEqualTo(DEFAULT_ADDRESS);
         assertThat(testMortgageEntry.getPhone()).isEqualTo(DEFAULT_PHONE);
-        assertThat(testMortgageEntry.getItemName()).isEqualTo(DEFAULT_ITEM_NAME);
+        assertThat(testMortgageEntry.getGroupCode()).isEqualTo(DEFAULT_GROUP_CODE);
+        assertThat(testMortgageEntry.getItemCode()).isEqualTo(DEFAULT_ITEM_CODE);
+        assertThat(testMortgageEntry.getDamageType()).isEqualTo(DEFAULT_DAMAGE_TYPE);
         assertThat(testMortgageEntry.getwInKyat()).isEqualTo(DEFAULT_W_IN_KYAT);
         assertThat(testMortgageEntry.getwInPae()).isEqualTo(DEFAULT_W_IN_PAE);
         assertThat(testMortgageEntry.getwInYway()).isEqualTo(DEFAULT_W_IN_YWAY);
         assertThat(testMortgageEntry.getPrincipalAmount()).isEqualTo(DEFAULT_PRINCIPAL_AMOUNT);
+        assertThat(testMortgageEntry.getStartDate()).isEqualTo(DEFAULT_START_DATE);
         assertThat(testMortgageEntry.getInterestRate()).isEqualTo(DEFAULT_INTEREST_RATE);
         assertThat(testMortgageEntry.getTerm()).isEqualTo(DEFAULT_TERM);
-        assertThat(testMortgageEntry.getStartDate()).isEqualTo(DEFAULT_START_DATE);
         assertThat(testMortgageEntry.getDelFlg()).isEqualTo(DEFAULT_DEL_FLG);
     }
 
@@ -233,10 +247,30 @@ class MortgageEntryResourceIT {
 
     @Test
     @Transactional
-    void checkItemNameIsRequired() throws Exception {
+    void checkGroupCodeIsRequired() throws Exception {
         int databaseSizeBeforeTest = mortgageEntryRepository.findAll().size();
         // set the field null
-        mortgageEntry.setItemName(null);
+        mortgageEntry.setGroupCode(null);
+
+        // Create the MortgageEntry, which fails.
+        MortgageEntryDTO mortgageEntryDTO = mortgageEntryMapper.toDto(mortgageEntry);
+
+        restMortgageEntryMockMvc
+            .perform(
+                post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(mortgageEntryDTO))
+            )
+            .andExpect(status().isBadRequest());
+
+        List<MortgageEntry> mortgageEntryList = mortgageEntryRepository.findAll();
+        assertThat(mortgageEntryList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    void checkItemCodeIsRequired() throws Exception {
+        int databaseSizeBeforeTest = mortgageEntryRepository.findAll().size();
+        // set the field null
+        mortgageEntry.setItemCode(null);
 
         // Create the MortgageEntry, which fails.
         MortgageEntryDTO mortgageEntryDTO = mortgageEntryMapper.toDto(mortgageEntry);
@@ -257,26 +291,6 @@ class MortgageEntryResourceIT {
         int databaseSizeBeforeTest = mortgageEntryRepository.findAll().size();
         // set the field null
         mortgageEntry.setPrincipalAmount(null);
-
-        // Create the MortgageEntry, which fails.
-        MortgageEntryDTO mortgageEntryDTO = mortgageEntryMapper.toDto(mortgageEntry);
-
-        restMortgageEntryMockMvc
-            .perform(
-                post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(mortgageEntryDTO))
-            )
-            .andExpect(status().isBadRequest());
-
-        List<MortgageEntry> mortgageEntryList = mortgageEntryRepository.findAll();
-        assertThat(mortgageEntryList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
-    void checkInterestRateIsRequired() throws Exception {
-        int databaseSizeBeforeTest = mortgageEntryRepository.findAll().size();
-        // set the field null
-        mortgageEntry.setInterestRate(null);
 
         // Create the MortgageEntry, which fails.
         MortgageEntryDTO mortgageEntryDTO = mortgageEntryMapper.toDto(mortgageEntry);
@@ -326,14 +340,16 @@ class MortgageEntryResourceIT {
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].address").value(hasItem(DEFAULT_ADDRESS)))
             .andExpect(jsonPath("$.[*].phone").value(hasItem(DEFAULT_PHONE)))
-            .andExpect(jsonPath("$.[*].itemName").value(hasItem(DEFAULT_ITEM_NAME)))
+            .andExpect(jsonPath("$.[*].groupCode").value(hasItem(DEFAULT_GROUP_CODE.toString())))
+            .andExpect(jsonPath("$.[*].itemCode").value(hasItem(DEFAULT_ITEM_CODE)))
+            .andExpect(jsonPath("$.[*].damageType").value(hasItem(DEFAULT_DAMAGE_TYPE.toString())))
             .andExpect(jsonPath("$.[*].wInKyat").value(hasItem(DEFAULT_W_IN_KYAT)))
             .andExpect(jsonPath("$.[*].wInPae").value(hasItem(DEFAULT_W_IN_PAE)))
             .andExpect(jsonPath("$.[*].wInYway").value(hasItem(DEFAULT_W_IN_YWAY)))
             .andExpect(jsonPath("$.[*].principalAmount").value(hasItem(DEFAULT_PRINCIPAL_AMOUNT.doubleValue())))
+            .andExpect(jsonPath("$.[*].startDate").value(hasItem(DEFAULT_START_DATE.toString())))
             .andExpect(jsonPath("$.[*].interestRate").value(hasItem(DEFAULT_INTEREST_RATE.doubleValue())))
             .andExpect(jsonPath("$.[*].term").value(hasItem(DEFAULT_TERM)))
-            .andExpect(jsonPath("$.[*].startDate").value(hasItem(DEFAULT_START_DATE.toString())))
             .andExpect(jsonPath("$.[*].delFlg").value(hasItem(DEFAULT_DEL_FLG)));
     }
 
@@ -352,14 +368,16 @@ class MortgageEntryResourceIT {
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
             .andExpect(jsonPath("$.address").value(DEFAULT_ADDRESS))
             .andExpect(jsonPath("$.phone").value(DEFAULT_PHONE))
-            .andExpect(jsonPath("$.itemName").value(DEFAULT_ITEM_NAME))
+            .andExpect(jsonPath("$.groupCode").value(DEFAULT_GROUP_CODE.toString()))
+            .andExpect(jsonPath("$.itemCode").value(DEFAULT_ITEM_CODE))
+            .andExpect(jsonPath("$.damageType").value(DEFAULT_DAMAGE_TYPE.toString()))
             .andExpect(jsonPath("$.wInKyat").value(DEFAULT_W_IN_KYAT))
             .andExpect(jsonPath("$.wInPae").value(DEFAULT_W_IN_PAE))
             .andExpect(jsonPath("$.wInYway").value(DEFAULT_W_IN_YWAY))
             .andExpect(jsonPath("$.principalAmount").value(DEFAULT_PRINCIPAL_AMOUNT.doubleValue()))
+            .andExpect(jsonPath("$.startDate").value(DEFAULT_START_DATE.toString()))
             .andExpect(jsonPath("$.interestRate").value(DEFAULT_INTEREST_RATE.doubleValue()))
             .andExpect(jsonPath("$.term").value(DEFAULT_TERM))
-            .andExpect(jsonPath("$.startDate").value(DEFAULT_START_DATE.toString()))
             .andExpect(jsonPath("$.delFlg").value(DEFAULT_DEL_FLG));
     }
 
@@ -386,14 +404,16 @@ class MortgageEntryResourceIT {
             .name(UPDATED_NAME)
             .address(UPDATED_ADDRESS)
             .phone(UPDATED_PHONE)
-            .itemName(UPDATED_ITEM_NAME)
+            .groupCode(UPDATED_GROUP_CODE)
+            .itemCode(UPDATED_ITEM_CODE)
+            .damageType(UPDATED_DAMAGE_TYPE)
             .wInKyat(UPDATED_W_IN_KYAT)
             .wInPae(UPDATED_W_IN_PAE)
             .wInYway(UPDATED_W_IN_YWAY)
             .principalAmount(UPDATED_PRINCIPAL_AMOUNT)
+            .startDate(UPDATED_START_DATE)
             .interestRate(UPDATED_INTEREST_RATE)
             .term(UPDATED_TERM)
-            .startDate(UPDATED_START_DATE)
             .delFlg(UPDATED_DEL_FLG);
         MortgageEntryDTO mortgageEntryDTO = mortgageEntryMapper.toDto(updatedMortgageEntry);
 
@@ -412,14 +432,16 @@ class MortgageEntryResourceIT {
         assertThat(testMortgageEntry.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testMortgageEntry.getAddress()).isEqualTo(UPDATED_ADDRESS);
         assertThat(testMortgageEntry.getPhone()).isEqualTo(UPDATED_PHONE);
-        assertThat(testMortgageEntry.getItemName()).isEqualTo(UPDATED_ITEM_NAME);
+        assertThat(testMortgageEntry.getGroupCode()).isEqualTo(UPDATED_GROUP_CODE);
+        assertThat(testMortgageEntry.getItemCode()).isEqualTo(UPDATED_ITEM_CODE);
+        assertThat(testMortgageEntry.getDamageType()).isEqualTo(UPDATED_DAMAGE_TYPE);
         assertThat(testMortgageEntry.getwInKyat()).isEqualTo(UPDATED_W_IN_KYAT);
         assertThat(testMortgageEntry.getwInPae()).isEqualTo(UPDATED_W_IN_PAE);
         assertThat(testMortgageEntry.getwInYway()).isEqualTo(UPDATED_W_IN_YWAY);
         assertThat(testMortgageEntry.getPrincipalAmount()).isEqualTo(UPDATED_PRINCIPAL_AMOUNT);
+        assertThat(testMortgageEntry.getStartDate()).isEqualTo(UPDATED_START_DATE);
         assertThat(testMortgageEntry.getInterestRate()).isEqualTo(UPDATED_INTEREST_RATE);
         assertThat(testMortgageEntry.getTerm()).isEqualTo(UPDATED_TERM);
-        assertThat(testMortgageEntry.getStartDate()).isEqualTo(UPDATED_START_DATE);
         assertThat(testMortgageEntry.getDelFlg()).isEqualTo(UPDATED_DEL_FLG);
     }
 
@@ -506,10 +528,12 @@ class MortgageEntryResourceIT {
             .name(UPDATED_NAME)
             .address(UPDATED_ADDRESS)
             .phone(UPDATED_PHONE)
-            .itemName(UPDATED_ITEM_NAME)
-            .wInKyat(UPDATED_W_IN_KYAT)
-            .term(UPDATED_TERM)
+            .groupCode(UPDATED_GROUP_CODE)
+            .itemCode(UPDATED_ITEM_CODE)
+            .principalAmount(UPDATED_PRINCIPAL_AMOUNT)
             .startDate(UPDATED_START_DATE)
+            .interestRate(UPDATED_INTEREST_RATE)
+            .term(UPDATED_TERM)
             .delFlg(UPDATED_DEL_FLG);
 
         restMortgageEntryMockMvc
@@ -527,14 +551,16 @@ class MortgageEntryResourceIT {
         assertThat(testMortgageEntry.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testMortgageEntry.getAddress()).isEqualTo(UPDATED_ADDRESS);
         assertThat(testMortgageEntry.getPhone()).isEqualTo(UPDATED_PHONE);
-        assertThat(testMortgageEntry.getItemName()).isEqualTo(UPDATED_ITEM_NAME);
-        assertThat(testMortgageEntry.getwInKyat()).isEqualTo(UPDATED_W_IN_KYAT);
+        assertThat(testMortgageEntry.getGroupCode()).isEqualTo(UPDATED_GROUP_CODE);
+        assertThat(testMortgageEntry.getItemCode()).isEqualTo(UPDATED_ITEM_CODE);
+        assertThat(testMortgageEntry.getDamageType()).isEqualTo(DEFAULT_DAMAGE_TYPE);
+        assertThat(testMortgageEntry.getwInKyat()).isEqualTo(DEFAULT_W_IN_KYAT);
         assertThat(testMortgageEntry.getwInPae()).isEqualTo(DEFAULT_W_IN_PAE);
         assertThat(testMortgageEntry.getwInYway()).isEqualTo(DEFAULT_W_IN_YWAY);
-        assertThat(testMortgageEntry.getPrincipalAmount()).isEqualTo(DEFAULT_PRINCIPAL_AMOUNT);
-        assertThat(testMortgageEntry.getInterestRate()).isEqualTo(DEFAULT_INTEREST_RATE);
-        assertThat(testMortgageEntry.getTerm()).isEqualTo(UPDATED_TERM);
+        assertThat(testMortgageEntry.getPrincipalAmount()).isEqualTo(UPDATED_PRINCIPAL_AMOUNT);
         assertThat(testMortgageEntry.getStartDate()).isEqualTo(UPDATED_START_DATE);
+        assertThat(testMortgageEntry.getInterestRate()).isEqualTo(UPDATED_INTEREST_RATE);
+        assertThat(testMortgageEntry.getTerm()).isEqualTo(UPDATED_TERM);
         assertThat(testMortgageEntry.getDelFlg()).isEqualTo(UPDATED_DEL_FLG);
     }
 
@@ -554,14 +580,16 @@ class MortgageEntryResourceIT {
             .name(UPDATED_NAME)
             .address(UPDATED_ADDRESS)
             .phone(UPDATED_PHONE)
-            .itemName(UPDATED_ITEM_NAME)
+            .groupCode(UPDATED_GROUP_CODE)
+            .itemCode(UPDATED_ITEM_CODE)
+            .damageType(UPDATED_DAMAGE_TYPE)
             .wInKyat(UPDATED_W_IN_KYAT)
             .wInPae(UPDATED_W_IN_PAE)
             .wInYway(UPDATED_W_IN_YWAY)
             .principalAmount(UPDATED_PRINCIPAL_AMOUNT)
+            .startDate(UPDATED_START_DATE)
             .interestRate(UPDATED_INTEREST_RATE)
             .term(UPDATED_TERM)
-            .startDate(UPDATED_START_DATE)
             .delFlg(UPDATED_DEL_FLG);
 
         restMortgageEntryMockMvc
@@ -579,14 +607,16 @@ class MortgageEntryResourceIT {
         assertThat(testMortgageEntry.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testMortgageEntry.getAddress()).isEqualTo(UPDATED_ADDRESS);
         assertThat(testMortgageEntry.getPhone()).isEqualTo(UPDATED_PHONE);
-        assertThat(testMortgageEntry.getItemName()).isEqualTo(UPDATED_ITEM_NAME);
+        assertThat(testMortgageEntry.getGroupCode()).isEqualTo(UPDATED_GROUP_CODE);
+        assertThat(testMortgageEntry.getItemCode()).isEqualTo(UPDATED_ITEM_CODE);
+        assertThat(testMortgageEntry.getDamageType()).isEqualTo(UPDATED_DAMAGE_TYPE);
         assertThat(testMortgageEntry.getwInKyat()).isEqualTo(UPDATED_W_IN_KYAT);
         assertThat(testMortgageEntry.getwInPae()).isEqualTo(UPDATED_W_IN_PAE);
         assertThat(testMortgageEntry.getwInYway()).isEqualTo(UPDATED_W_IN_YWAY);
         assertThat(testMortgageEntry.getPrincipalAmount()).isEqualTo(UPDATED_PRINCIPAL_AMOUNT);
+        assertThat(testMortgageEntry.getStartDate()).isEqualTo(UPDATED_START_DATE);
         assertThat(testMortgageEntry.getInterestRate()).isEqualTo(UPDATED_INTEREST_RATE);
         assertThat(testMortgageEntry.getTerm()).isEqualTo(UPDATED_TERM);
-        assertThat(testMortgageEntry.getStartDate()).isEqualTo(UPDATED_START_DATE);
         assertThat(testMortgageEntry.getDelFlg()).isEqualTo(UPDATED_DEL_FLG);
     }
 

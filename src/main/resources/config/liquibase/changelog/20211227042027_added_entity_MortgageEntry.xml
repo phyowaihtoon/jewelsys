@@ -20,11 +20,17 @@
             <column name="address" type="nvarchar(255)">
                 <constraints nullable="false" />
             </column>
-            <column name="phone" type="nvarchar(50)">
+            <column name="phone" type="nvarchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="item_name" type="nvarchar(255)">
+            <column name="group_code" type="varchar(255)">
                 <constraints nullable="false" />
+            </column>
+            <column name="item_code" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="damage_type" type="varchar(255)">
+                <constraints nullable="true" />
             </column>
             <column name="w_in_kyat" type="integer">
                 <constraints nullable="true" />
@@ -38,14 +44,14 @@
             <column name="principal_amount" type="decimal(18,2)">
                 <constraints nullable="false" />
             </column>
-            <column name="interest_rate" type="decimal(18,2)">
+            <column name="start_date" type="${datetimeType}">
                 <constraints nullable="false" />
+            </column>
+            <column name="interest_rate" type="decimal(18,2)">
+                <constraints nullable="true" />
             </column>
             <column name="term" type="integer">
                 <constraints nullable="true" />
-            </column>
-            <column name="start_date" type="${datetimeType}">
-                <constraints nullable="false" />
             </column>
             <column name="del_flg" type="varchar(1)">
                 <constraints nullable="true" />
@@ -86,14 +92,16 @@
             <column name="name" type="string"/>
             <column name="address" type="string"/>
             <column name="phone" type="string"/>
-            <column name="item_name" type="string"/>
+            <column name="group_code" type="string"/>
+            <column name="item_code" type="string"/>
+            <column name="damage_type" type="string"/>
             <column name="w_in_kyat" type="numeric"/>
             <column name="w_in_pae" type="numeric"/>
             <column name="w_in_yway" type="numeric"/>
             <column name="principal_amount" type="numeric"/>
+            <column name="start_date" type="${datetimeType}"/>
             <column name="interest_rate" type="numeric"/>
             <column name="term" type="numeric"/>
-            <column name="start_date" type="${datetimeType}"/>
             <column name="del_flg" type="string"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>

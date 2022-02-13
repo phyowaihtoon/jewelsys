@@ -1,5 +1,7 @@
 package com.devgroup.jewelsys.service.dto;
 
+import com.devgroup.jewelsys.domain.enumeration.MortgageDamageType;
+import com.devgroup.jewelsys.domain.enumeration.MortgageItemGroup;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
@@ -21,7 +23,14 @@ public class MortgageEntryDTO implements Serializable {
     private String phone;
 
     @NotNull
+    private MortgageItemGroup groupCode;
+
+    @NotNull
+    private String itemCode;
+
     private String itemName;
+
+    private MortgageDamageType damageType;
 
     private Integer wInKyat;
 
@@ -33,12 +42,11 @@ public class MortgageEntryDTO implements Serializable {
     private Double principalAmount;
 
     @NotNull
+    private Instant startDate;
+
     private Double interestRate;
 
     private Integer term;
-
-    @NotNull
-    private Instant startDate;
 
     private String delFlg;
 
@@ -74,12 +82,36 @@ public class MortgageEntryDTO implements Serializable {
         this.phone = phone;
     }
 
+    public MortgageItemGroup getGroupCode() {
+        return groupCode;
+    }
+
+    public void setGroupCode(MortgageItemGroup groupCode) {
+        this.groupCode = groupCode;
+    }
+
+    public String getItemCode() {
+        return itemCode;
+    }
+
+    public void setItemCode(String itemCode) {
+        this.itemCode = itemCode;
+    }
+
     public String getItemName() {
         return itemName;
     }
 
     public void setItemName(String itemName) {
         this.itemName = itemName;
+    }
+
+    public MortgageDamageType getDamageType() {
+        return damageType;
+    }
+
+    public void setDamageType(MortgageDamageType damageType) {
+        this.damageType = damageType;
     }
 
     public Integer getwInKyat() {
@@ -114,6 +146,14 @@ public class MortgageEntryDTO implements Serializable {
         this.principalAmount = principalAmount;
     }
 
+    public Instant getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Instant startDate) {
+        this.startDate = startDate;
+    }
+
     public Double getInterestRate() {
         return interestRate;
     }
@@ -128,14 +168,6 @@ public class MortgageEntryDTO implements Serializable {
 
     public void setTerm(Integer term) {
         this.term = term;
-    }
-
-    public Instant getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(Instant startDate) {
-        this.startDate = startDate;
     }
 
     public String getDelFlg() {
@@ -175,14 +207,16 @@ public class MortgageEntryDTO implements Serializable {
             ", name='" + getName() + "'" +
             ", address='" + getAddress() + "'" +
             ", phone='" + getPhone() + "'" +
-            ", itemName='" + getItemName() + "'" +
+            ", groupCode='" + getGroupCode() + "'" +
+            ", itemCode='" + getItemCode() + "'" +
+            ", damageType='" + getDamageType() + "'" +
             ", wInKyat=" + getwInKyat() +
             ", wInPae=" + getwInPae() +
             ", wInYway=" + getwInYway() +
             ", principalAmount=" + getPrincipalAmount() +
+            ", startDate='" + getStartDate() + "'" +
             ", interestRate=" + getInterestRate() +
             ", term=" + getTerm() +
-            ", startDate='" + getStartDate() + "'" +
             ", delFlg='" + getDelFlg() + "'" +
             "}";
     }

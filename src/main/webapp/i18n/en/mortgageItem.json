@@ -1,0 +1,27 @@
+{
+  "jewelsysApp": {
+    "mortgageItem": {
+      "home": {
+        "title": "Mortgage Items",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Mortgage Item",
+        "createOrEditLabel": "Create or edit a Mortgage Item",
+        "notFound": "No Mortgage Items found"
+      },
+      "created": "A new Mortgage Item is created with identifier {{ param }}",
+      "updated": "A Mortgage Item is updated with identifier {{ param }}",
+      "deleted": "A Mortgage Item is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Mortgage Item {{ id }}?"
+      },
+      "detail": {
+        "title": "Mortgage Item"
+      },
+      "id": "ID",
+      "groupCode": "Group Code",
+      "code": "Code",
+      "itemName": "Item Name",
+      "delFlg": "Del Flg"
+    }
+  }
+}

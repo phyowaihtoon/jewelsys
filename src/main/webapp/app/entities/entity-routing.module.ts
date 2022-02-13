@@ -74,6 +74,11 @@ import { RouterModule } from '@angular/router';
         data: { pageTitle: 'jewelsysApp.mortgageEntry.home.title' },
         loadChildren: () => import('./mortgage-entry/mortgage-entry.module').then(m => m.MortgageEntryModule),
       },
+      {
+        path: 'mortgage-item',
+        data: { pageTitle: 'jewelsysApp.mortgageItem.home.title' },
+        loadChildren: () => import('./mortgage-item/mortgage-item.module').then(m => m.MortgageItemModule),
+      },
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ]),
   ],

@@ -60,6 +60,7 @@ public class CacheConfiguration {
             createCache(cm, com.devgroup.jewelsys.domain.GemsPriceRate.class.getName());
             createCache(cm, com.devgroup.jewelsys.domain.CounterInfo.class.getName());
             createCache(cm, com.devgroup.jewelsys.domain.MortgageEntry.class.getName());
+            createCache(cm, com.devgroup.jewelsys.domain.MortgageItem.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

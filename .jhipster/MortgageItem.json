@@ -1,0 +1,36 @@
+{
+  "name": "MortgageItem",
+  "fields": [
+    {
+      "fieldName": "groupCode",
+      "fieldType": "MortgageItemGroup",
+      "fieldValues": "G01 (လက်စွပ်),G02 (လက်ကောက်),G03 (ဆွဲကြိုး),G04 (နားကပ်),G05 (ကလစ်),G06 (ဆွဲပြား),G07 (ဘယက်),G08 (ဟန်းချိန်း),G09 (ဖူးချိန်း)",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "code",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "itemName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "delFlg",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [],
+  "entityTableName": "mortgage_item",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20220123081409"
+}

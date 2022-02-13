@@ -2,16 +2,38 @@ entity MortgageEntry {
   name String required,
   address String required,
   phone String,
-  itemName String required,
+  groupCode MortgageItemGroup required,
+  itemCode String required,
+  damageType MortgageDamageType
   wInKyat Integer,
   wInPae Integer,
   wInYway Integer,
   principalAmount Double required,
-  interestRate Double required,
-  term Integer,
   startDate Instant required,
+  interestRate Double,
+  term Integer,
   delFlg String
   }
+  
+enum MortgageItemGroup {
+G01("လက်စွပ်"),
+G02("လက်ကောက်"),
+G03("ဆွဲကြိုး"),
+G04("နားကပ်"),
+G05("ကလစ်"),
+G06("ဆွဲပြား"),
+G07("ဘယက်"),
+G08("ဟန်းချိန်း"),
+G09("ဖူးချိန်း")
+}
+
+enum MortgageDamageType {
+DT01("ပိန်"),
+DT02("ပြတ်"),
+DT03("ကျိုး"),
+DT04("ပေါက်"),
+DT05("ကျောက်ထွက်")
+}
 
 paginate MortgageEntry with pagination
 

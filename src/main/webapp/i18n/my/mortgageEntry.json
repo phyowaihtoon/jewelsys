@@ -2,10 +2,10 @@
   "jewelsysApp": {
     "mortgageEntry": {
       "home": {
-        "title": "အပေါင်စာရင်း",
-        "refreshListLabel": "Refresh",
-        "createLabel": "အသစ်ထည့်မည်",
-        "createOrEditLabel": "အပေါင်စာရင်းသွင်းခြင်း",
+        "title": "Mortgage Entries",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Mortgage Entry အသစ်ထည့်မည်",
+        "createOrEditLabel": "Mortgage Entry အသစ်ထည့်ခြင်း (သို့) ပြုပြင်ခြင်း",
         "notFound": "No Mortgage Entries found"
       },
       "created": "{{ param }} အိုင်ဒီဖြင့် Mortgage Entry အသစ်တစ်ခုအား ထည့်ပြီးပါပြီ။",
@@ -18,18 +18,19 @@
         "title": "Mortgage Entry"
       },
       "id": "ID",
-      "name": "အမည်",
-      "address": "လိပ်စာ",
-      "phone": "ဖုန်း",
-      "itemName": "ပစ္စည်းအမည်",
-      "weight": "အလေးချိန်",
-      "wInKyat": "ကျပ်",
-      "wInPae": "ပဲ",
-      "wInYway": "ရွေး",
-      "principalAmount": "ငွေရင်း",
-      "interestRate": "အတိုးနှုန်း",
-      "term": "အပေါင်သက်တမ်း",
-      "startDate": "အပေါင်ထားသည့်နေ့စွဲ",
+      "name": "Name",
+      "address": "Address",
+      "phone": "Phone",
+      "groupCode": "Group Code",
+      "itemCode": "Item Code",
+      "damageType": "Damage Type",
+      "wInKyat": "W In Kyat",
+      "wInPae": "W In Pae",
+      "wInYway": "W In Yway",
+      "principalAmount": "Principal Amount",
+      "startDate": "Start Date",
+      "interestRate": "Interest Rate",
+      "term": "Term",
       "delFlg": "Del Flg"
     }
   }

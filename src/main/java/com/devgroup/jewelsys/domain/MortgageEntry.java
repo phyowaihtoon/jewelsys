@@ -1,5 +1,7 @@
 package com.devgroup.jewelsys.domain;
 
+import com.devgroup.jewelsys.domain.enumeration.MortgageDamageType;
+import com.devgroup.jewelsys.domain.enumeration.MortgageItemGroup;
 import java.io.Serializable;
 import java.time.Instant;
 import javax.persistence.*;
@@ -8,7 +10,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
- * MortgageEntry.
+ * A MortgageEntry.
  */
 @Entity
 @Table(name = "mortgage_entry")
@@ -34,8 +36,17 @@ public class MortgageEntry extends AbstractAuditingEntity implements Serializabl
     private String phone;
 
     @NotNull
-    @Column(name = "item_name", nullable = false)
-    private String itemName;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "group_code", nullable = false)
+    private MortgageItemGroup groupCode;
+
+    @NotNull
+    @Column(name = "item_code", nullable = false)
+    private String itemCode;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "damage_type")
+    private MortgageDamageType damageType;
 
     @Column(name = "w_in_kyat")
     private Integer wInKyat;
@@ -51,15 +62,14 @@ public class MortgageEntry extends AbstractAuditingEntity implements Serializabl
     private Double principalAmount;
 
     @NotNull
-    @Column(name = "interest_rate", nullable = false)
+    @Column(name = "start_date", nullable = false)
+    private Instant startDate;
+
+    @Column(name = "interest_rate")
     private Double interestRate;
 
     @Column(name = "term")
     private Integer term;
-
-    @NotNull
-    @Column(name = "start_date", nullable = false)
-    private Instant startDate;
 
     @Column(name = "del_flg")
     private String delFlg;
@@ -117,17 +127,43 @@ public class MortgageEntry extends AbstractAuditingEntity implements Serializabl
         this.phone = phone;
     }
 
-    public String getItemName() {
-        return this.itemName;
+    public MortgageItemGroup getGroupCode() {
+        return this.groupCode;
     }
 
-    public MortgageEntry itemName(String itemName) {
-        this.itemName = itemName;
+    public MortgageEntry groupCode(MortgageItemGroup groupCode) {
+        this.groupCode = groupCode;
         return this;
     }
 
-    public void setItemName(String itemName) {
-        this.itemName = itemName;
+    public void setGroupCode(MortgageItemGroup groupCode) {
+        this.groupCode = groupCode;
+    }
+
+    public String getItemCode() {
+        return this.itemCode;
+    }
+
+    public MortgageEntry itemCode(String itemCode) {
+        this.itemCode = itemCode;
+        return this;
+    }
+
+    public void setItemCode(String itemCode) {
+        this.itemCode = itemCode;
+    }
+
+    public MortgageDamageType getDamageType() {
+        return this.damageType;
+    }
+
+    public MortgageEntry damageType(MortgageDamageType damageType) {
+        this.damageType = damageType;
+        return this;
+    }
+
+    public void setDamageType(MortgageDamageType damageType) {
+        this.damageType = damageType;
     }
 
     public Integer getwInKyat() {
@@ -182,6 +218,19 @@ public class MortgageEntry extends AbstractAuditingEntity implements Serializabl
         this.principalAmount = principalAmount;
     }
 
+    public Instant getStartDate() {
+        return this.startDate;
+    }
+
+    public MortgageEntry startDate(Instant startDate) {
+        this.startDate = startDate;
+        return this;
+    }
+
+    public void setStartDate(Instant startDate) {
+        this.startDate = startDate;
+    }
+
     public Double getInterestRate() {
         return this.interestRate;
     }
@@ -206,19 +255,6 @@ public class MortgageEntry extends AbstractAuditingEntity implements Serializabl
 
     public void setTerm(Integer term) {
         this.term = term;
-    }
-
-    public Instant getStartDate() {
-        return this.startDate;
-    }
-
-    public MortgageEntry startDate(Instant startDate) {
-        this.startDate = startDate;
-        return this;
-    }
-
-    public void setStartDate(Instant startDate) {
-        this.startDate = startDate;
     }
 
     public String getDelFlg() {
@@ -261,14 +297,16 @@ public class MortgageEntry extends AbstractAuditingEntity implements Serializabl
             ", name='" + getName() + "'" +
             ", address='" + getAddress() + "'" +
             ", phone='" + getPhone() + "'" +
-            ", itemName='" + getItemName() + "'" +
+            ", groupCode='" + getGroupCode() + "'" +
+            ", itemCode='" + getItemCode() + "'" +
+            ", damageType='" + getDamageType() + "'" +
             ", wInKyat=" + getwInKyat() +
             ", wInPae=" + getwInPae() +
             ", wInYway=" + getwInYway() +
             ", principalAmount=" + getPrincipalAmount() +
+            ", startDate='" + getStartDate() + "'" +
             ", interestRate=" + getInterestRate() +
             ", term=" + getTerm() +
-            ", startDate='" + getStartDate() + "'" +
             ", delFlg='" + getDelFlg() + "'" +
             "}";
     }

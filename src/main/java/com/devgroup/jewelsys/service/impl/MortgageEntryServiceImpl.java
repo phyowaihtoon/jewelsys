@@ -1,10 +1,15 @@
 package com.devgroup.jewelsys.service.impl;
 
 import com.devgroup.jewelsys.domain.MortgageEntry;
+import com.devgroup.jewelsys.domain.MortgageItem;
 import com.devgroup.jewelsys.repository.MortgageEntryRepository;
+import com.devgroup.jewelsys.repository.MortgageItemRepository;
 import com.devgroup.jewelsys.service.MortgageEntryService;
+import com.devgroup.jewelsys.service.dto.CommonDTO;
 import com.devgroup.jewelsys.service.dto.MortgageEntryDTO;
 import com.devgroup.jewelsys.service.mapper.MortgageEntryMapper;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,11 +29,18 @@ public class MortgageEntryServiceImpl implements MortgageEntryService {
 
     private final MortgageEntryRepository mortgageEntryRepository;
 
+    private final MortgageItemRepository mortgageItemRepository;
+
     private final MortgageEntryMapper mortgageEntryMapper;
 
-    public MortgageEntryServiceImpl(MortgageEntryRepository mortgageEntryRepository, MortgageEntryMapper mortgageEntryMapper) {
+    public MortgageEntryServiceImpl(
+        MortgageEntryRepository mortgageEntryRepository,
+        MortgageEntryMapper mortgageEntryMapper,
+        MortgageItemRepository mortgageItemRepository
+    ) {
         this.mortgageEntryRepository = mortgageEntryRepository;
         this.mortgageEntryMapper = mortgageEntryMapper;
+        this.mortgageItemRepository = mortgageItemRepository;
     }
 
     @Override
@@ -57,9 +69,22 @@ public class MortgageEntryServiceImpl implements MortgageEntryService {
 
     @Override
     @Transactional(readOnly = true)
-    public Page<MortgageEntryDTO> findAll(Pageable pageable) {
+    public CommonDTO findAll(Pageable pageable) {
         log.debug("Request to get all MortgageEntries");
-        return mortgageEntryRepository.findAll(pageable).map(mortgageEntryMapper::toDto);
+        CommonDTO commonDTO = new CommonDTO();
+        Page<MortgageEntryDTO> page = mortgageEntryRepository.findAll(pageable).map(mortgageEntryMapper::toDto);
+        commonDTO.setmEntryPage(page);
+        List<MortgageEntryDTO> mortgageList = page.getContent();
+        if (page != null && mortgageList != null && mortgageList.size() > 0) {
+            List<MortgageEntryDTO> updatedList = new ArrayList<MortgageEntryDTO>();
+            for (MortgageEntryDTO mortgage : mortgageList) {
+                MortgageItem item = mortgageItemRepository.findByCode(mortgage.getItemCode());
+                mortgage.setItemName(item.getItemName());
+                updatedList.add(mortgage);
+            }
+            commonDTO.setUpdatedMEList(updatedList);
+        }
+        return commonDTO;
     }
 
     @Override

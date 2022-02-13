@@ -3,9 +3,9 @@
     "mortgageEntry": {
       "home": {
         "title": "Mortgage Entries",
-        "refreshListLabel": "Refresh",
-        "createLabel": "Add New",
-        "createOrEditLabel": "Mortgage Entry",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Mortgage Entry",
+        "createOrEditLabel": "Create or edit a Mortgage Entry",
         "notFound": "No Mortgage Entries found"
       },
       "created": "A new Mortgage Entry is created with identifier {{ param }}",
@@ -21,15 +21,16 @@
       "name": "Name",
       "address": "Address",
       "phone": "Phone",
-      "itemName": "Item Name",
-      "weight": "Weight",
+      "groupCode": "Group",
+      "itemCode": "Item",
+      "damageType": "Damage Type",
       "wInKyat": "Kyat",
       "wInPae": "Pae",
       "wInYway": "Yway",
       "principalAmount": "Principal Amount",
+      "startDate": "Date",
       "interestRate": "Interest Rate",
       "term": "Term",
-      "startDate": "Start Date",
       "delFlg": "Del Flg"
     }
   }

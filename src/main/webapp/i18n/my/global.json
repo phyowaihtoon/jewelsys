@@ -15,6 +15,7 @@
         "gemsPriceRate": "Gems Price Rate",
         "counterInfo": "Counter Info",
         "mortgageEntry": "Mortgage Entry",
+        "mortgageItem": "Mortgage Item",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

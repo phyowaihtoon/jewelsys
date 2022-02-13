@@ -3,6 +3,8 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import * as dayjs from 'dayjs';
 
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
+import { MortgageItemGroup } from 'app/entities/enumerations/mortgage-item-group.model';
+import { MortgageDamageType } from 'app/entities/enumerations/mortgage-damage-type.model';
 import { IMortgageEntry, MortgageEntry } from '../mortgage-entry.model';
 
 import { MortgageEntryService } from './mortgage-entry.service';
@@ -29,14 +31,16 @@ describe('Service Tests', () => {
         name: 'AAAAAAA',
         address: 'AAAAAAA',
         phone: 'AAAAAAA',
-        itemName: 'AAAAAAA',
+        groupCode: MortgageItemGroup.G01,
+        itemCode: 'AAAAAAA',
+        damageType: MortgageDamageType.DT01,
         wInKyat: 0,
         wInPae: 0,
         wInYway: 0,
         principalAmount: 0,
+        startDate: currentDate,
         interestRate: 0,
         term: 0,
-        startDate: currentDate,
         delFlg: 'AAAAAAA',
       };
     });
@@ -87,14 +91,16 @@ describe('Service Tests', () => {
             name: 'BBBBBB',
             address: 'BBBBBB',
             phone: 'BBBBBB',
-            itemName: 'BBBBBB',
+            groupCode: 'BBBBBB',
+            itemCode: 'BBBBBB',
+            damageType: 'BBBBBB',
             wInKyat: 1,
             wInPae: 1,
             wInYway: 1,
             principalAmount: 1,
+            startDate: currentDate.format(DATE_TIME_FORMAT),
             interestRate: 1,
             term: 1,
-            startDate: currentDate.format(DATE_TIME_FORMAT),
             delFlg: 'BBBBBB',
           },
           elemDefault
@@ -120,10 +126,12 @@ describe('Service Tests', () => {
             name: 'BBBBBB',
             address: 'BBBBBB',
             phone: 'BBBBBB',
-            itemName: 'BBBBBB',
-            wInKyat: 1,
-            term: 1,
+            groupCode: 'BBBBBB',
+            itemCode: 'BBBBBB',
+            principalAmount: 1,
             startDate: currentDate.format(DATE_TIME_FORMAT),
+            interestRate: 1,
+            term: 1,
             delFlg: 'BBBBBB',
           },
           new MortgageEntry()
@@ -152,14 +160,16 @@ describe('Service Tests', () => {
             name: 'BBBBBB',
             address: 'BBBBBB',
             phone: 'BBBBBB',
-            itemName: 'BBBBBB',
+            groupCode: 'BBBBBB',
+            itemCode: 'BBBBBB',
+            damageType: 'BBBBBB',
             wInKyat: 1,
             wInPae: 1,
             wInYway: 1,
             principalAmount: 1,
+            startDate: currentDate.format(DATE_TIME_FORMAT),
             interestRate: 1,
             term: 1,
-            startDate: currentDate.format(DATE_TIME_FORMAT),
             delFlg: 'BBBBBB',
           },
           elemDefault
@@ -217,7 +227,7 @@ describe('Service Tests', () => {
         });
 
         it('should add only unique MortgageEntry to an array', () => {
-          const mortgageEntryArray: IMortgageEntry[] = [{ id: 123 }, { id: 456 }, { id: 70008 }];
+          const mortgageEntryArray: IMortgageEntry[] = [{ id: 123 }, { id: 456 }, { id: 31427 }];
           const mortgageEntryCollection: IMortgageEntry[] = [{ id: 123 }];
           expectedResult = service.addMortgageEntryToCollectionIfMissing(mortgageEntryCollection, ...mortgageEntryArray);
           expect(expectedResult).toHaveLength(3);

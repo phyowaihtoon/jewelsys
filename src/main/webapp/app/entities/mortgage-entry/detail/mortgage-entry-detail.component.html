@@ -26,9 +26,17 @@
         <dd>
           <span>{{ mortgageEntry.phone }}</span>
         </dd>
-        <dt><span jhiTranslate="jewelsysApp.mortgageEntry.itemName">Item Name</span></dt>
+        <dt><span jhiTranslate="jewelsysApp.mortgageEntry.groupCode">Group Code</span></dt>
         <dd>
-          <span>{{ mortgageEntry.itemName }}</span>
+          <span jhiTranslate="{{ 'jewelsysApp.MortgageItemGroup.' + mortgageEntry.groupCode }}">{{ mortgageEntry.groupCode }}</span>
+        </dd>
+        <dt><span jhiTranslate="jewelsysApp.mortgageEntry.itemCode">Item Code</span></dt>
+        <dd>
+          <span>{{ mortgageEntry.itemCode }}</span>
+        </dd>
+        <dt><span jhiTranslate="jewelsysApp.mortgageEntry.damageType">Damage Type</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'jewelsysApp.MortgageDamageType.' + mortgageEntry.damageType }}">{{ mortgageEntry.damageType }}</span>
         </dd>
         <dt><span jhiTranslate="jewelsysApp.mortgageEntry.wInKyat">W In Kyat</span></dt>
         <dd>
@@ -46,6 +54,10 @@
         <dd>
           <span>{{ mortgageEntry.principalAmount }}</span>
         </dd>
+        <dt><span jhiTranslate="jewelsysApp.mortgageEntry.startDate">Start Date</span></dt>
+        <dd>
+          <span>{{ mortgageEntry.startDate | formatMediumDatetime }}</span>
+        </dd>
         <dt><span jhiTranslate="jewelsysApp.mortgageEntry.interestRate">Interest Rate</span></dt>
         <dd>
           <span>{{ mortgageEntry.interestRate }}</span>
@@ -54,9 +66,9 @@
         <dd>
           <span>{{ mortgageEntry.term }}</span>
         </dd>
-        <dt><span jhiTranslate="jewelsysApp.mortgageEntry.startDate">Start Date</span></dt>
+        <dt><span jhiTranslate="jewelsysApp.mortgageEntry.delFlg">Del Flg</span></dt>
         <dd>
-          <span>{{ mortgageEntry.startDate | formatMediumDatetime }}</span>
+          <span>{{ mortgageEntry.delFlg }}</span>
         </dd>
       </dl>
 

@@ -1,0 +1,27 @@
+{
+  "jewelsysApp": {
+    "mortgageItem": {
+      "home": {
+        "title": "Mortgage Items",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Mortgage Item အသစ်ထည့်မည်",
+        "createOrEditLabel": "Mortgage Item အသစ်ထည့်ခြင်း (သို့) ပြုပြင်ခြင်း",
+        "notFound": "No Mortgage Items found"
+      },
+      "created": "{{ param }} အိုင်ဒီဖြင့် Mortgage Item အသစ်တစ်ခုအား ထည့်ပြီးပါပြီ။",
+      "updated": "{{ param }} အိုင်ဒီဖြင့် Mortgage Item တစ်ခုအား ပြုပြင်ပြီးပါပြီ။",
+      "deleted": "{{ param }} အိုင်ဒီဖြင့် Mortgage Item တစ်ခုအား ဖျက်ပြီးပါပြီ။",
+      "delete": {
+        "question": "Mortgage Item {{ id }} အား ဖျက်ပါမည်။ သေချာပါသလား?"
+      },
+      "detail": {
+        "title": "Mortgage Item"
+      },
+      "id": "ID",
+      "groupCode": "Group Code",
+      "code": "Code",
+      "itemName": "Item Name",
+      "delFlg": "Del Flg"
+    }
+  }
+}

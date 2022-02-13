@@ -16,9 +16,20 @@
       "fieldType": "String"
     },
     {
-      "fieldName": "itemName",
+      "fieldName": "groupCode",
+      "fieldType": "MortgageItemGroup",
+      "fieldValues": "G01 (လက်စွပ်),G02 (လက်ကောက်),G03 (ဆွဲကြိုး),G04 (နားကပ်),G05 (ကလစ်),G06 (ဆွဲပြား),G07 (ဘယက်),G08 (ဟန်းချိန်း),G09 (ဖူးချိန်း)",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "itemCode",
       "fieldType": "String",
       "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "damageType",
+      "fieldType": "MortgageDamageType",
+      "fieldValues": "DT01 (ပိန်),DT02 (ပြတ်),DT03 (ကျိုး),DT04 (ပေါက်),DT05 (ကျောက်ထွက်)"
     },
     {
       "fieldName": "wInKyat",
@@ -38,18 +49,17 @@
       "fieldValidateRules": ["required"]
     },
     {
-      "fieldName": "interestRate",
-      "fieldType": "Double",
+      "fieldName": "startDate",
+      "fieldType": "Instant",
       "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "interestRate",
+      "fieldType": "Double"
     },
     {
       "fieldName": "term",
       "fieldType": "Integer"
-    },
-    {
-      "fieldName": "startDate",
-      "fieldType": "Instant",
-      "fieldValidateRules": ["required"]
     },
     {
       "fieldName": "delFlg",

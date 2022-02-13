@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { finalize } from 'rxjs/operators';
+import { finalize, map } from 'rxjs/operators';
 
 import * as dayjs from 'dayjs';
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 
 import { IMortgageEntry, MortgageEntry } from '../mortgage-entry.model';
 import { MortgageEntryService } from '../service/mortgage-entry.service';
+import { IMortgageItem } from 'app/entities/mortgage-item/mortgage-item.model';
+import { MortgageItemService } from 'app/entities/mortgage-item/service/mortgage-item.service';
 
 @Component({
   selector: 'jhi-mortgage-entry-update',
@@ -18,23 +20,33 @@ import { MortgageEntryService } from '../service/mortgage-entry.service';
 export class MortgageEntryUpdateComponent implements OnInit {
   isSaving = false;
 
+  orgMortgItemCollection: IMortgageItem[] = [];
+  mortgageItemCollection: IMortgageItem[] = [];
+
   editForm = this.fb.group({
     id: [],
     name: [null, [Validators.required]],
     address: [null, [Validators.required]],
     phone: [],
-    itemName: [null, [Validators.required]],
+    groupCode: [null, [Validators.required]],
+    itemCode: [null, [Validators.required]],
+    damageType: [],
     wInKyat: [],
     wInPae: [],
     wInYway: [],
     principalAmount: [null, [Validators.required]],
-    interestRate: [null, [Validators.required]],
-    term: [],
     startDate: [null, [Validators.required]],
+    interestRate: [],
+    term: [],
     delFlg: [],
   });
 
-  constructor(protected mortgageEntryService: MortgageEntryService, protected activatedRoute: ActivatedRoute, protected fb: FormBuilder) {}
+  constructor(
+    protected mortgageEntryService: MortgageEntryService,
+    protected mortgageItemService: MortgageItemService,
+    protected activatedRoute: ActivatedRoute,
+    protected fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ mortgageEntry }) => {
@@ -44,6 +56,8 @@ export class MortgageEntryUpdateComponent implements OnInit {
       }
 
       this.updateForm(mortgageEntry);
+
+      this.loadRelationshipsOptions(mortgageEntry.groupCode);
     });
   }
 
@@ -59,6 +73,15 @@ export class MortgageEntryUpdateComponent implements OnInit {
     } else {
       this.subscribeToSaveResponse(this.mortgageEntryService.create(mortgageEntry));
     }
+  }
+
+  trackMortgageItemByCode(index: number, item: IMortgageItem): string {
+    return item.code!;
+  }
+
+  onItemGroupChange(): void {
+    const selectedGroupCode = this.editForm.get(['groupCode'])!.value;
+    this.mortgageItemCollection = this.orgMortgItemCollection.filter(value => value.groupCode === selectedGroupCode);
   }
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<IMortgageEntry>>): void {
@@ -80,20 +103,39 @@ export class MortgageEntryUpdateComponent implements OnInit {
     this.isSaving = false;
   }
 
+  protected loadRelationshipsOptions(groupCode: string): void {
+    this.mortgageItemService
+      .loadAll()
+      .pipe(map((res: HttpResponse<IMortgageItem[]>) => res.body ?? []))
+      .pipe(
+        map((mortgageItems: IMortgageItem[]) =>
+          this.mortgageItemService.addMortgageItemToCollectionIfMissing(mortgageItems, this.editForm.get('itemCode')!.value)
+        )
+      )
+      .subscribe((mortgageItems: IMortgageItem[]) => {
+        this.orgMortgItemCollection = mortgageItems;
+        console.log('Group Code saved');
+        console.log(groupCode);
+        this.mortgageItemCollection = this.orgMortgItemCollection.filter(value => value.groupCode === groupCode);
+      });
+  }
+
   protected updateForm(mortgageEntry: IMortgageEntry): void {
     this.editForm.patchValue({
       id: mortgageEntry.id,
       name: mortgageEntry.name,
       address: mortgageEntry.address,
       phone: mortgageEntry.phone,
-      itemName: mortgageEntry.itemName,
+      groupCode: mortgageEntry.groupCode,
+      itemCode: mortgageEntry.itemCode,
+      damageType: mortgageEntry.damageType,
       wInKyat: mortgageEntry.wInKyat,
       wInPae: mortgageEntry.wInPae,
       wInYway: mortgageEntry.wInYway,
       principalAmount: mortgageEntry.principalAmount,
+      startDate: mortgageEntry.startDate ? mortgageEntry.startDate.format(DATE_TIME_FORMAT) : null,
       interestRate: mortgageEntry.interestRate,
       term: mortgageEntry.term,
-      startDate: mortgageEntry.startDate ? mortgageEntry.startDate.format(DATE_TIME_FORMAT) : null,
       delFlg: mortgageEntry.delFlg,
     });
   }
@@ -105,15 +147,17 @@ export class MortgageEntryUpdateComponent implements OnInit {
       name: this.editForm.get(['name'])!.value,
       address: this.editForm.get(['address'])!.value,
       phone: this.editForm.get(['phone'])!.value,
-      itemName: this.editForm.get(['itemName'])!.value,
+      groupCode: this.editForm.get(['groupCode'])!.value,
+      itemCode: this.editForm.get(['itemCode'])!.value,
+      damageType: this.editForm.get(['damageType'])!.value,
       wInKyat: this.editForm.get(['wInKyat'])!.value,
       wInPae: this.editForm.get(['wInPae'])!.value,
       wInYway: this.editForm.get(['wInYway'])!.value,
       principalAmount: this.editForm.get(['principalAmount'])!.value,
+      startDate: this.editForm.get(['startDate'])!.value ? dayjs(this.editForm.get(['startDate'])!.value, DATE_TIME_FORMAT) : undefined,
       interestRate: this.editForm.get(['interestRate'])!.value,
       term: this.editForm.get(['term'])!.value,
-      startDate: this.editForm.get(['startDate'])!.value ? dayjs(this.editForm.get(['startDate'])!.value, DATE_TIME_FORMAT) : undefined,
-      delFlg: 'N',
+      delFlg: this.editForm.get(['delFlg'])!.value,
     };
   }
 }

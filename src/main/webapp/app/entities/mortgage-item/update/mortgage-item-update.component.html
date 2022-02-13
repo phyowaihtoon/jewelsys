@@ -1,0 +1,92 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-mortgage-item-heading"
+        data-cy="MortgageItemCreateUpdateHeading"
+        jhiTranslate="jewelsysApp.mortgageItem.home.createOrEditLabel"
+      >
+        Create or edit a Mortgage Item
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="jewelsysApp.mortgageItem.groupCode" for="field_groupCode">Group Code</label>
+          <select class="form-control" name="groupCode" formControlName="groupCode" id="field_groupCode" data-cy="groupCode">
+            <option [ngValue]="null">{{ 'jewelsysApp.MortgageItemGroup.null' | translate }}</option>
+            <option value="G01">{{ 'jewelsysApp.MortgageItemGroup.G01' | translate }}</option>
+            <option value="G02">{{ 'jewelsysApp.MortgageItemGroup.G02' | translate }}</option>
+            <option value="G03">{{ 'jewelsysApp.MortgageItemGroup.G03' | translate }}</option>
+            <option value="G04">{{ 'jewelsysApp.MortgageItemGroup.G04' | translate }}</option>
+            <option value="G05">{{ 'jewelsysApp.MortgageItemGroup.G05' | translate }}</option>
+            <option value="G06">{{ 'jewelsysApp.MortgageItemGroup.G06' | translate }}</option>
+            <option value="G07">{{ 'jewelsysApp.MortgageItemGroup.G07' | translate }}</option>
+            <option value="G08">{{ 'jewelsysApp.MortgageItemGroup.G08' | translate }}</option>
+            <option value="G09">{{ 'jewelsysApp.MortgageItemGroup.G09' | translate }}</option>
+          </select>
+          <div *ngIf="editForm.get('groupCode')!.invalid && (editForm.get('groupCode')!.dirty || editForm.get('groupCode')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('groupCode')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="jewelsysApp.mortgageItem.code" for="field_code">Code</label>
+          <input type="text" class="form-control" name="code" id="field_code" data-cy="code" formControlName="code" />
+          <div *ngIf="editForm.get('code')!.invalid && (editForm.get('code')!.dirty || editForm.get('code')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('code')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="jewelsysApp.mortgageItem.itemName" for="field_itemName">Item Name</label>
+          <input type="text" class="form-control" name="itemName" id="field_itemName" data-cy="itemName" formControlName="itemName" />
+          <div *ngIf="editForm.get('itemName')!.invalid && (editForm.get('itemName')!.dirty || editForm.get('itemName')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('itemName')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="jewelsysApp.mortgageItem.delFlg" for="field_delFlg">Del Flg</label>
+          <input type="text" class="form-control" name="delFlg" id="field_delFlg" data-cy="delFlg" formControlName="delFlg" />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

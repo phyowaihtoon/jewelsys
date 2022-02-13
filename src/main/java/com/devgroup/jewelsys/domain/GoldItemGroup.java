@@ -12,7 +12,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Entity
 @Table(name = "gold_item_group")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class GoldItemGroup extends AbstractAuditingEntity implements Serializable {
+public class GoldItemGroup implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

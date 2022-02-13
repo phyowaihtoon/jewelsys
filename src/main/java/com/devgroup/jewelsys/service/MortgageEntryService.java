@@ -1,8 +1,8 @@
 package com.devgroup.jewelsys.service;
 
+import com.devgroup.jewelsys.service.dto.CommonDTO;
 import com.devgroup.jewelsys.service.dto.MortgageEntryDTO;
 import java.util.Optional;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 /**
@@ -31,7 +31,7 @@ public interface MortgageEntryService {
      * @param pageable the pagination information.
      * @return the list of entities.
      */
-    Page<MortgageEntryDTO> findAll(Pageable pageable);
+    CommonDTO findAll(Pageable pageable);
 
     /**
      * Get the "id" mortgageEntry.
