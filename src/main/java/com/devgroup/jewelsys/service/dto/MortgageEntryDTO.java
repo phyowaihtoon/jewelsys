@@ -5,7 +5,7 @@ import com.devgroup.jewelsys.domain.enumeration.MortgageItemGroup;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotNull;
 
 /**
  * A DTO for the {@link com.devgroup.jewelsys.domain.MortgageEntry} entity.
@@ -46,7 +46,13 @@ public class MortgageEntryDTO implements Serializable {
 
     private Double interestRate;
 
-    private Integer term;
+    private String mmYear;
+
+    private String mmMonth;
+
+    private String mmDayGR;
+
+    private String mmDay;
 
     private String delFlg;
 
@@ -162,12 +168,36 @@ public class MortgageEntryDTO implements Serializable {
         this.interestRate = interestRate;
     }
 
-    public Integer getTerm() {
-        return term;
+    public String getMmYear() {
+        return mmYear;
     }
 
-    public void setTerm(Integer term) {
-        this.term = term;
+    public void setMmYear(String mmYear) {
+        this.mmYear = mmYear;
+    }
+
+    public String getMmMonth() {
+        return mmMonth;
+    }
+
+    public void setMmMonth(String mmMonth) {
+        this.mmMonth = mmMonth;
+    }
+
+    public String getMmDayGR() {
+        return mmDayGR;
+    }
+
+    public void setMmDayGR(String mmDayGR) {
+        this.mmDayGR = mmDayGR;
+    }
+
+    public String getMmDay() {
+        return mmDay;
+    }
+
+    public void setMmDay(String mmDay) {
+        this.mmDay = mmDay;
     }
 
     public String getDelFlg() {
@@ -216,7 +246,10 @@ public class MortgageEntryDTO implements Serializable {
             ", principalAmount=" + getPrincipalAmount() +
             ", startDate='" + getStartDate() + "'" +
             ", interestRate=" + getInterestRate() +
-            ", term=" + getTerm() +
+            ", mmYear='" + getMmYear() + "'" +
+            ", mmMonth='" + getMmMonth() + "'" +
+            ", mmDayGR='" + getMmDayGR() + "'" +
+            ", mmDay='" + getMmDay() + "'" +
             ", delFlg='" + getDelFlg() + "'" +
             "}";
     }

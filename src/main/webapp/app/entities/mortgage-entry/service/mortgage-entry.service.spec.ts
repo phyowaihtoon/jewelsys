@@ -40,7 +40,10 @@ describe('Service Tests', () => {
         principalAmount: 0,
         startDate: currentDate,
         interestRate: 0,
-        term: 0,
+        mmYear: 'AAAAAAA',
+        mmMonth: 'AAAAAAA',
+        mmDayGR: 'AAAAAAA',
+        mmDay: 'AAAAAAA',
         delFlg: 'AAAAAAA',
       };
     });
@@ -100,7 +103,10 @@ describe('Service Tests', () => {
             principalAmount: 1,
             startDate: currentDate.format(DATE_TIME_FORMAT),
             interestRate: 1,
-            term: 1,
+            mmYear: 'BBBBBB',
+            mmMonth: 'BBBBBB',
+            mmDayGR: 'BBBBBB',
+            mmDay: 'BBBBBB',
             delFlg: 'BBBBBB',
           },
           elemDefault
@@ -131,8 +137,9 @@ describe('Service Tests', () => {
             principalAmount: 1,
             startDate: currentDate.format(DATE_TIME_FORMAT),
             interestRate: 1,
-            term: 1,
-            delFlg: 'BBBBBB',
+            mmYear: 'BBBBBB',
+            mmMonth: 'BBBBBB',
+            mmDay: 'BBBBBB',
           },
           new MortgageEntry()
         );
@@ -169,7 +176,10 @@ describe('Service Tests', () => {
             principalAmount: 1,
             startDate: currentDate.format(DATE_TIME_FORMAT),
             interestRate: 1,
-            term: 1,
+            mmYear: 'BBBBBB',
+            mmMonth: 'BBBBBB',
+            mmDayGR: 'BBBBBB',
+            mmDay: 'BBBBBB',
             delFlg: 'BBBBBB',
           },
           elemDefault
@@ -227,7 +237,7 @@ describe('Service Tests', () => {
         });
 
         it('should add only unique MortgageEntry to an array', () => {
-          const mortgageEntryArray: IMortgageEntry[] = [{ id: 123 }, { id: 456 }, { id: 31427 }];
+          const mortgageEntryArray: IMortgageEntry[] = [{ id: 123 }, { id: 456 }, { id: 932 }];
           const mortgageEntryCollection: IMortgageEntry[] = [{ id: 123 }];
           expectedResult = service.addMortgageEntryToCollectionIfMissing(mortgageEntryCollection, ...mortgageEntryArray);
           expect(expectedResult).toHaveLength(3);

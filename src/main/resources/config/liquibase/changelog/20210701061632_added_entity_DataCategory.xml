@@ -21,7 +21,7 @@
 			<column name="value" type="varchar(255)">
 				<constraints nullable="true" />
 			</column>
-			<column name="category_desc" type="varchar(255)">
+			<column name="category_desc" type="nvarchar(255)">
 				<constraints nullable="true" />
 			</column>
 			<column name="created_by" type="varchar(20)">

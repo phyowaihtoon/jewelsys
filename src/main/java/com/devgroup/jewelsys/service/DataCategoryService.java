@@ -1,6 +1,7 @@
 package com.devgroup.jewelsys.service;
 
 import com.devgroup.jewelsys.service.dto.DataCategoryDTO;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -47,4 +48,11 @@ public interface DataCategoryService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+
+    /**
+     * Get all Myanmar Calendar Setup Data.
+     *
+     * @return the list of entities.
+     */
+    List<DataCategoryDTO> findMMCalendar();
 }

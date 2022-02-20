@@ -68,8 +68,17 @@ public class MortgageEntry extends AbstractAuditingEntity implements Serializabl
     @Column(name = "interest_rate")
     private Double interestRate;
 
-    @Column(name = "term")
-    private Integer term;
+    @Column(name = "mm_year")
+    private String mmYear;
+
+    @Column(name = "mm_month")
+    private String mmMonth;
+
+    @Column(name = "mm_day_gr")
+    private String mmDayGR;
+
+    @Column(name = "mm_day")
+    private String mmDay;
 
     @Column(name = "del_flg")
     private String delFlg;
@@ -244,17 +253,56 @@ public class MortgageEntry extends AbstractAuditingEntity implements Serializabl
         this.interestRate = interestRate;
     }
 
-    public Integer getTerm() {
-        return this.term;
+    public String getMmYear() {
+        return this.mmYear;
     }
 
-    public MortgageEntry term(Integer term) {
-        this.term = term;
+    public MortgageEntry mmYear(String mmYear) {
+        this.mmYear = mmYear;
         return this;
     }
 
-    public void setTerm(Integer term) {
-        this.term = term;
+    public void setMmYear(String mmYear) {
+        this.mmYear = mmYear;
+    }
+
+    public String getMmMonth() {
+        return this.mmMonth;
+    }
+
+    public MortgageEntry mmMonth(String mmMonth) {
+        this.mmMonth = mmMonth;
+        return this;
+    }
+
+    public void setMmMonth(String mmMonth) {
+        this.mmMonth = mmMonth;
+    }
+
+    public String getMmDayGR() {
+        return this.mmDayGR;
+    }
+
+    public MortgageEntry mmDayGR(String mmDayGR) {
+        this.mmDayGR = mmDayGR;
+        return this;
+    }
+
+    public void setMmDayGR(String mmDayGR) {
+        this.mmDayGR = mmDayGR;
+    }
+
+    public String getMmDay() {
+        return this.mmDay;
+    }
+
+    public MortgageEntry mmDay(String mmDay) {
+        this.mmDay = mmDay;
+        return this;
+    }
+
+    public void setMmDay(String mmDay) {
+        this.mmDay = mmDay;
     }
 
     public String getDelFlg() {
@@ -306,7 +354,10 @@ public class MortgageEntry extends AbstractAuditingEntity implements Serializabl
             ", principalAmount=" + getPrincipalAmount() +
             ", startDate='" + getStartDate() + "'" +
             ", interestRate=" + getInterestRate() +
-            ", term=" + getTerm() +
+            ", mmYear='" + getMmYear() + "'" +
+            ", mmMonth='" + getMmMonth() + "'" +
+            ", mmDayGR='" + getMmDayGR() + "'" +
+            ", mmDay='" + getMmDay() + "'" +
             ", delFlg='" + getDelFlg() + "'" +
             "}";
     }

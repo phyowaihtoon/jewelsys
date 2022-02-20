@@ -11,7 +11,10 @@ entity MortgageEntry {
   principalAmount Double required,
   startDate Instant required,
   interestRate Double,
-  term Integer,
+  mmYear String,
+  mmMonth String,
+  mmDayGR String,
+  mmDay String,
   delFlg String
   }
   

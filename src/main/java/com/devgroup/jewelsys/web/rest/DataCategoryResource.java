@@ -3,6 +3,7 @@ package com.devgroup.jewelsys.web.rest;
 import com.devgroup.jewelsys.repository.DataCategoryRepository;
 import com.devgroup.jewelsys.service.DataCategoryService;
 import com.devgroup.jewelsys.service.dto.DataCategoryDTO;
+import com.devgroup.jewelsys.service.dto.MortgageItemDTO;
 import com.devgroup.jewelsys.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -177,5 +178,11 @@ public class DataCategoryResource {
             .noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
             .build();
+    }
+
+    @GetMapping("/data-categories/loadMMC")
+    public List<DataCategoryDTO> loadMMCalendar() {
+        List<DataCategoryDTO> itemList = dataCategoryService.findMMCalendar();
+        return itemList;
     }
 }

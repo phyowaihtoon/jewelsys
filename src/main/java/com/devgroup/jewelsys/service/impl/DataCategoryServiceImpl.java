@@ -1,10 +1,14 @@
 package com.devgroup.jewelsys.service.impl;
 
 import com.devgroup.jewelsys.domain.DataCategory;
+import com.devgroup.jewelsys.domain.MortgageItem;
 import com.devgroup.jewelsys.repository.DataCategoryRepository;
 import com.devgroup.jewelsys.service.DataCategoryService;
 import com.devgroup.jewelsys.service.dto.DataCategoryDTO;
+import com.devgroup.jewelsys.service.dto.MortgageItemDTO;
 import com.devgroup.jewelsys.service.mapper.DataCategoryMapper;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -73,5 +77,16 @@ public class DataCategoryServiceImpl implements DataCategoryService {
     public void delete(Long id) {
         log.debug("Request to delete DataCategory : {}", id);
         dataCategoryRepository.deleteById(id);
+    }
+
+    @Override
+    public List<DataCategoryDTO> findMMCalendar() {
+        List<DataCategoryDTO> dtoList = new ArrayList<DataCategoryDTO>();
+        List<DataCategory> itemList = dataCategoryRepository.findAll();
+        for (DataCategory data : itemList) {
+            DataCategoryDTO dto = dataCategoryMapper.toDto(data);
+            dtoList.add(dto);
+        }
+        return dtoList;
     }
 }

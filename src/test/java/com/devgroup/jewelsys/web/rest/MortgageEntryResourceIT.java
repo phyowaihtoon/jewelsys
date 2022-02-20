@@ -71,9 +71,6 @@ class MortgageEntryResourceIT {
     private static final Double DEFAULT_INTEREST_RATE = 1D;
     private static final Double UPDATED_INTEREST_RATE = 2D;
 
-    private static final Integer DEFAULT_TERM = 1;
-    private static final Integer UPDATED_TERM = 2;
-
     private static final String DEFAULT_DEL_FLG = "AAAAAAAAAA";
     private static final String UPDATED_DEL_FLG = "BBBBBBBBBB";
 
@@ -117,7 +114,6 @@ class MortgageEntryResourceIT {
             .principalAmount(DEFAULT_PRINCIPAL_AMOUNT)
             .startDate(DEFAULT_START_DATE)
             .interestRate(DEFAULT_INTEREST_RATE)
-            .term(DEFAULT_TERM)
             .delFlg(DEFAULT_DEL_FLG);
         return mortgageEntry;
     }
@@ -142,7 +138,6 @@ class MortgageEntryResourceIT {
             .principalAmount(UPDATED_PRINCIPAL_AMOUNT)
             .startDate(UPDATED_START_DATE)
             .interestRate(UPDATED_INTEREST_RATE)
-            .term(UPDATED_TERM)
             .delFlg(UPDATED_DEL_FLG);
         return mortgageEntry;
     }
@@ -180,7 +175,6 @@ class MortgageEntryResourceIT {
         assertThat(testMortgageEntry.getPrincipalAmount()).isEqualTo(DEFAULT_PRINCIPAL_AMOUNT);
         assertThat(testMortgageEntry.getStartDate()).isEqualTo(DEFAULT_START_DATE);
         assertThat(testMortgageEntry.getInterestRate()).isEqualTo(DEFAULT_INTEREST_RATE);
-        assertThat(testMortgageEntry.getTerm()).isEqualTo(DEFAULT_TERM);
         assertThat(testMortgageEntry.getDelFlg()).isEqualTo(DEFAULT_DEL_FLG);
     }
 
@@ -349,7 +343,6 @@ class MortgageEntryResourceIT {
             .andExpect(jsonPath("$.[*].principalAmount").value(hasItem(DEFAULT_PRINCIPAL_AMOUNT.doubleValue())))
             .andExpect(jsonPath("$.[*].startDate").value(hasItem(DEFAULT_START_DATE.toString())))
             .andExpect(jsonPath("$.[*].interestRate").value(hasItem(DEFAULT_INTEREST_RATE.doubleValue())))
-            .andExpect(jsonPath("$.[*].term").value(hasItem(DEFAULT_TERM)))
             .andExpect(jsonPath("$.[*].delFlg").value(hasItem(DEFAULT_DEL_FLG)));
     }
 
@@ -377,7 +370,6 @@ class MortgageEntryResourceIT {
             .andExpect(jsonPath("$.principalAmount").value(DEFAULT_PRINCIPAL_AMOUNT.doubleValue()))
             .andExpect(jsonPath("$.startDate").value(DEFAULT_START_DATE.toString()))
             .andExpect(jsonPath("$.interestRate").value(DEFAULT_INTEREST_RATE.doubleValue()))
-            .andExpect(jsonPath("$.term").value(DEFAULT_TERM))
             .andExpect(jsonPath("$.delFlg").value(DEFAULT_DEL_FLG));
     }
 
@@ -413,7 +405,6 @@ class MortgageEntryResourceIT {
             .principalAmount(UPDATED_PRINCIPAL_AMOUNT)
             .startDate(UPDATED_START_DATE)
             .interestRate(UPDATED_INTEREST_RATE)
-            .term(UPDATED_TERM)
             .delFlg(UPDATED_DEL_FLG);
         MortgageEntryDTO mortgageEntryDTO = mortgageEntryMapper.toDto(updatedMortgageEntry);
 
@@ -441,7 +432,6 @@ class MortgageEntryResourceIT {
         assertThat(testMortgageEntry.getPrincipalAmount()).isEqualTo(UPDATED_PRINCIPAL_AMOUNT);
         assertThat(testMortgageEntry.getStartDate()).isEqualTo(UPDATED_START_DATE);
         assertThat(testMortgageEntry.getInterestRate()).isEqualTo(UPDATED_INTEREST_RATE);
-        assertThat(testMortgageEntry.getTerm()).isEqualTo(UPDATED_TERM);
         assertThat(testMortgageEntry.getDelFlg()).isEqualTo(UPDATED_DEL_FLG);
     }
 
@@ -533,7 +523,6 @@ class MortgageEntryResourceIT {
             .principalAmount(UPDATED_PRINCIPAL_AMOUNT)
             .startDate(UPDATED_START_DATE)
             .interestRate(UPDATED_INTEREST_RATE)
-            .term(UPDATED_TERM)
             .delFlg(UPDATED_DEL_FLG);
 
         restMortgageEntryMockMvc
@@ -560,7 +549,6 @@ class MortgageEntryResourceIT {
         assertThat(testMortgageEntry.getPrincipalAmount()).isEqualTo(UPDATED_PRINCIPAL_AMOUNT);
         assertThat(testMortgageEntry.getStartDate()).isEqualTo(UPDATED_START_DATE);
         assertThat(testMortgageEntry.getInterestRate()).isEqualTo(UPDATED_INTEREST_RATE);
-        assertThat(testMortgageEntry.getTerm()).isEqualTo(UPDATED_TERM);
         assertThat(testMortgageEntry.getDelFlg()).isEqualTo(UPDATED_DEL_FLG);
     }
 
@@ -589,7 +577,6 @@ class MortgageEntryResourceIT {
             .principalAmount(UPDATED_PRINCIPAL_AMOUNT)
             .startDate(UPDATED_START_DATE)
             .interestRate(UPDATED_INTEREST_RATE)
-            .term(UPDATED_TERM)
             .delFlg(UPDATED_DEL_FLG);
 
         restMortgageEntryMockMvc
@@ -616,7 +603,6 @@ class MortgageEntryResourceIT {
         assertThat(testMortgageEntry.getPrincipalAmount()).isEqualTo(UPDATED_PRINCIPAL_AMOUNT);
         assertThat(testMortgageEntry.getStartDate()).isEqualTo(UPDATED_START_DATE);
         assertThat(testMortgageEntry.getInterestRate()).isEqualTo(UPDATED_INTEREST_RATE);
-        assertThat(testMortgageEntry.getTerm()).isEqualTo(UPDATED_TERM);
         assertThat(testMortgageEntry.getDelFlg()).isEqualTo(UPDATED_DEL_FLG);
     }
 

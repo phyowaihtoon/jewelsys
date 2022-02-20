@@ -32,6 +32,7 @@
     <table class="table table-striped" aria-describedby="page-heading">
       <thead>
         <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
           <th scope="col" jhiSortBy="name">
             <span jhiTranslate="jewelsysApp.mortgageEntry.name">Name</span> <fa-icon icon="sort"></fa-icon>
           </th>
@@ -42,10 +43,10 @@
             <span jhiTranslate="jewelsysApp.mortgageEntry.phone">Phone</span> <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" jhiSortBy="groupCode">
-            <span jhiTranslate="jewelsysApp.mortgageEntry.groupCode">Group</span> <fa-icon icon="sort"></fa-icon>
+            <span jhiTranslate="jewelsysApp.mortgageEntry.groupCode">Group Code</span> <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" jhiSortBy="itemCode">
-            <span jhiTranslate="jewelsysApp.mortgageEntry.itemCode">Item</span> <fa-icon icon="sort"></fa-icon>
+            <span jhiTranslate="jewelsysApp.mortgageEntry.itemCode">Item Code</span> <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" jhiSortBy="damageType">
             <span jhiTranslate="jewelsysApp.mortgageEntry.damageType">Damage Type</span> <fa-icon icon="sort"></fa-icon>
@@ -68,19 +69,34 @@
           <th scope="col" jhiSortBy="interestRate">
             <span jhiTranslate="jewelsysApp.mortgageEntry.interestRate">Interest Rate</span> <fa-icon icon="sort"></fa-icon>
           </th>
-          <th scope="col" jhiSortBy="term">
-            <span jhiTranslate="jewelsysApp.mortgageEntry.term">Term</span> <fa-icon icon="sort"></fa-icon>
+          <th scope="col" jhiSortBy="mmYear">
+            <span jhiTranslate="jewelsysApp.mortgageEntry.mmYear">Mm Year</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="mmMonth">
+            <span jhiTranslate="jewelsysApp.mortgageEntry.mmMonth">Mm Month</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="mmDayGR">
+            <span jhiTranslate="jewelsysApp.mortgageEntry.mmDayGR">Mm Day GR</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="mmDay">
+            <span jhiTranslate="jewelsysApp.mortgageEntry.mmDay">Mm Day</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="delFlg">
+            <span jhiTranslate="jewelsysApp.mortgageEntry.delFlg">Del Flg</span> <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col"></th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let mortgageEntry of mortgageEntries; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/mortgage-entry', mortgageEntry.id, 'view']">{{ mortgageEntry.id }}</a>
+          </td>
           <td>{{ mortgageEntry.name }}</td>
           <td>{{ mortgageEntry.address }}</td>
           <td>{{ mortgageEntry.phone }}</td>
           <td jhiTranslate="{{ 'jewelsysApp.MortgageItemGroup.' + mortgageEntry.groupCode }}">{{ mortgageEntry.groupCode }}</td>
-          <td>{{ mortgageEntry.itemName }}</td>
+          <td>{{ mortgageEntry.itemCode }}</td>
           <td jhiTranslate="{{ 'jewelsysApp.MortgageDamageType.' + mortgageEntry.damageType }}">{{ mortgageEntry.damageType }}</td>
           <td>{{ mortgageEntry.wInKyat }}</td>
           <td>{{ mortgageEntry.wInPae }}</td>
@@ -88,7 +104,11 @@
           <td>{{ mortgageEntry.principalAmount }}</td>
           <td>{{ mortgageEntry.startDate | formatMediumDatetime }}</td>
           <td>{{ mortgageEntry.interestRate }}</td>
-          <td>{{ mortgageEntry.term }}</td>
+          <td>{{ mortgageEntry.mmYear }}</td>
+          <td>{{ mortgageEntry.mmMonth }}</td>
+          <td>{{ mortgageEntry.mmDayGR }}</td>
+          <td>{{ mortgageEntry.mmDay }}</td>
+          <td>{{ mortgageEntry.delFlg }}</td>
           <td class="text-right">
             <div class="btn-group">
               <button

@@ -58,8 +58,20 @@
       "fieldType": "Double"
     },
     {
-      "fieldName": "term",
-      "fieldType": "Integer"
+      "fieldName": "mmYear",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "mmMonth",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "mmDayGR",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "mmDay",
+      "fieldType": "String"
     },
     {
       "fieldName": "delFlg",
