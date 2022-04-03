@@ -49,8 +49,7 @@ export class MortgageEntryUpdateComponent implements OnInit {
     mmMonth: [],
     mmDayGR: [],
     mmDay: [],
-    mortgageStatus: [],
-    delFlg: [],
+    mortgageStatus: [{ value: 'MN', disabled: true }],
   });
 
   constructor(
@@ -108,15 +107,6 @@ export class MortgageEntryUpdateComponent implements OnInit {
       this.mmMonthCollection = this.mmCalendarCollection.filter(value => value.categoryType === monthType);
     }
   }
-
-  /*
-  onDateSelect(event:any) {
-    const year = event.year;
-    const month = event.month <= 9 ? '0' + event.month : event.month;;
-    const day = event.day <= 9 ? '0' + event.day : event.day;;
-    const finalDate = day + "-" + month + "-" + year;
-   }
-  */
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<IMortgageEntry>>): void {
     result.pipe(finalize(() => this.onSaveFinalize())).subscribe(
@@ -192,7 +182,6 @@ export class MortgageEntryUpdateComponent implements OnInit {
       mmDayGR: mortgageEntry.mmDayGR,
       mmDay: mortgageEntry.mmDay,
       mortgageStatus: mortgageEntry.mortgageStatus,
-      delFlg: mortgageEntry.delFlg,
     });
   }
 
@@ -217,7 +206,6 @@ export class MortgageEntryUpdateComponent implements OnInit {
       mmDayGR: this.editForm.get(['mmDayGR'])!.value,
       mmDay: this.editForm.get(['mmDay'])!.value,
       mortgageStatus: this.editForm.get(['mortgageStatus'])!.value,
-      delFlg: 'N',
     };
   }
 }

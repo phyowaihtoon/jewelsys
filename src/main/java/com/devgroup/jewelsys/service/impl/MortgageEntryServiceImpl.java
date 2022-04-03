@@ -52,6 +52,8 @@ public class MortgageEntryServiceImpl implements MortgageEntryService {
     @Override
     public MortgageEntryDTO save(MortgageEntryDTO mortgageEntryDTO) {
         log.debug("Request to save MortgageEntry : {}", mortgageEntryDTO);
+        mortgageEntryDTO.setDelFlg("N");
+        mortgageEntryDTO.setMortgageStatus("MN");
         MortgageEntry mortgageEntry = mortgageEntryMapper.toEntity(mortgageEntryDTO);
         mortgageEntry = mortgageEntryRepository.save(mortgageEntry);
         return mortgageEntryMapper.toDto(mortgageEntry);

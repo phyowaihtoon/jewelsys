@@ -54,12 +54,10 @@ public class MortgageEntryDTO implements Serializable {
 
     private String mmDay;
 
-    @NotNull
     private String mortgageStatus;
 
     private String mortStatusDesc;
 
-    @NotNull
     private String delFlg;
 
     public Long getId() {
