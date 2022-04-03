@@ -36,17 +36,22 @@
           <div class="col-2">
             <label class="form-control-label" jhiTranslate="jewelsysApp.mortgageEntry.startDate" for="field_startDate">Start Date</label>
           </div>
-          <div class="col-4">
-            <div class="d-flex">
-              <input
-                id="field_startDate"
-                data-cy="startDate"
-                type="datetime-local"
-                class="form-control"
-                name="startDate"
-                formControlName="startDate"
-                placeholder="YYYY-MM-DD HH:mm"
-              />
+
+          <div class="col-4 input-group">
+            <input
+              class="form-control"
+              id="field_startDate"
+              data-cy="startDate"
+              placeholder="DD-MM-YYYY"
+              name="startDate"
+              formControlName="startDate"
+              ngbDatepicker
+              #date="ngbDatepicker"
+            />
+            <div class="input-group-append">
+              <button id="startDateButton" (click)="date.toggle()" type="button">
+                <fa-icon icon="calendar" [fixedWidth]="true"></fa-icon>
+              </button>
             </div>
             <div *ngIf="editForm.get('startDate')!.invalid && (editForm.get('startDate')!.dirty || editForm.get('startDate')!.touched)">
               <small
@@ -197,7 +202,7 @@
                 [ngValue]="
                   mmYearData.categoryCode === editForm.get('mmYear')!.value ? editForm.get('mmYear')!.value : mmYearData.categoryCode
                 "
-                *ngFor="let mmYearData of mmYearCollection; trackBy: trackMMCalendarByCode"
+                *ngFor="let mmYearData of mmYearCollection; trackBy: trackCategoryByCode"
               >
                 {{ mmYearData.categoryDesc }}
               </option>
@@ -230,7 +235,7 @@
                 [ngValue]="
                   mmMonthData.categoryCode === editForm.get('mmMonth')!.value ? editForm.get('mmMonth')!.value : mmMonthData.categoryCode
                 "
-                *ngFor="let mmMonthData of mmMonthCollection; trackBy: trackMMCalendarByCode"
+                *ngFor="let mmMonthData of mmMonthCollection; trackBy: trackCategoryByCode"
               >
                 {{ mmMonthData.categoryDesc }}
               </option>
@@ -279,7 +284,7 @@
                         ? editForm.get('mmDayGR')!.value
                         : mmDayGroupData.categoryCode
                     "
-                    *ngFor="let mmDayGroupData of mmDayGroupCollection; trackBy: trackMMCalendarByCode"
+                    *ngFor="let mmDayGroupData of mmDayGroupCollection; trackBy: trackCategoryByCode"
                   >
                     {{ mmDayGroupData.categoryDesc }}
                   </option>
@@ -292,13 +297,40 @@
                     [ngValue]="
                       mmDayData.categoryCode === editForm.get('mmDay')!.value ? editForm.get('mmDay')!.value : mmDayData.categoryCode
                     "
-                    *ngFor="let mmDayData of mmDayCollection; trackBy: trackMMCalendarByCode"
+                    *ngFor="let mmDayData of mmDayCollection; trackBy: trackCategoryByCode"
                   >
                     {{ mmDayData.categoryDesc }}
                   </option>
                 </select>
               </div>
             </div>
+          </div>
+        </div>
+
+        <div class="row form-group">
+          <div class="col-2">
+            <label class="form-control-label" jhiTranslate="jewelsysApp.mortgageEntry.mStatus" for="field_mortgageStatus">Status</label>
+          </div>
+          <div class="col-4">
+            <select
+              class="form-control"
+              id="field_mortgageStatus"
+              data-cy="mortgageStatus"
+              name="mortgageStatus"
+              formControlName="mortgageStatus"
+            >
+              <option [ngValue]="null"></option>
+              <option
+                [ngValue]="
+                  mStatusData.categoryCode === editForm.get('mortgageStatus')!.value
+                    ? editForm.get('mortgageStatus')!.value
+                    : mStatusData.categoryCode
+                "
+                *ngFor="let mStatusData of mortgageStatusCollection; trackBy: trackCategoryByCode"
+              >
+                {{ mStatusData.categoryDesc }}
+              </option>
+            </select>
           </div>
         </div>
 

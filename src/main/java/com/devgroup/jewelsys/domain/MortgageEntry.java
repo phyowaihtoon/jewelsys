@@ -80,6 +80,11 @@ public class MortgageEntry extends AbstractAuditingEntity implements Serializabl
     @Column(name = "mm_day")
     private String mmDay;
 
+    @NotNull
+    @Column(name = "mortgage_status")
+    private String mortgageStatus;
+
+    @NotNull
     @Column(name = "del_flg")
     private String delFlg;
 
@@ -305,6 +310,19 @@ public class MortgageEntry extends AbstractAuditingEntity implements Serializabl
         this.mmDay = mmDay;
     }
 
+    public String getMortgageStatus() {
+        return mortgageStatus;
+    }
+
+    public MortgageEntry mortgageStatus(String mortgageStatus) {
+        this.mortgageStatus = mortgageStatus;
+        return this;
+    }
+
+    public void setMortgageStatus(String mortgageStatus) {
+        this.mortgageStatus = mortgageStatus;
+    }
+
     public String getDelFlg() {
         return this.delFlg;
     }
@@ -317,8 +335,6 @@ public class MortgageEntry extends AbstractAuditingEntity implements Serializabl
     public void setDelFlg(String delFlg) {
         this.delFlg = delFlg;
     }
-
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
     public boolean equals(Object o) {
@@ -358,6 +374,7 @@ public class MortgageEntry extends AbstractAuditingEntity implements Serializabl
             ", mmMonth='" + getMmMonth() + "'" +
             ", mmDayGR='" + getMmDayGR() + "'" +
             ", mmDay='" + getMmDay() + "'" +
+            ", mortgageStatus='" + getMortgageStatus() + "'" +
             ", delFlg='" + getDelFlg() + "'" +
             "}";
     }

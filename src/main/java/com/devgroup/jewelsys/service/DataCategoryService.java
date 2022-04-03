@@ -55,4 +55,11 @@ public interface DataCategoryService {
      * @return the list of entities.
      */
     List<DataCategoryDTO> findMMCalendar();
+
+    /**
+     * Get all categories by category type
+     *
+     * @return the list of entities.
+     */
+    List<DataCategoryDTO> findAllByCategoryType(String categoryType);
 }

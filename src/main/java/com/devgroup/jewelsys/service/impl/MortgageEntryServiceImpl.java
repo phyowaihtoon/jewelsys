@@ -1,7 +1,9 @@
 package com.devgroup.jewelsys.service.impl;
 
+import com.devgroup.jewelsys.domain.DataCategory;
 import com.devgroup.jewelsys.domain.MortgageEntry;
 import com.devgroup.jewelsys.domain.MortgageItem;
+import com.devgroup.jewelsys.repository.DataCategoryRepository;
 import com.devgroup.jewelsys.repository.MortgageEntryRepository;
 import com.devgroup.jewelsys.repository.MortgageItemRepository;
 import com.devgroup.jewelsys.service.MortgageEntryService;
@@ -31,16 +33,20 @@ public class MortgageEntryServiceImpl implements MortgageEntryService {
 
     private final MortgageItemRepository mortgageItemRepository;
 
+    private final DataCategoryRepository dataCategoryRepository;
+
     private final MortgageEntryMapper mortgageEntryMapper;
 
     public MortgageEntryServiceImpl(
         MortgageEntryRepository mortgageEntryRepository,
         MortgageEntryMapper mortgageEntryMapper,
-        MortgageItemRepository mortgageItemRepository
+        MortgageItemRepository mortgageItemRepository,
+        DataCategoryRepository dataCategoryRepository
     ) {
         this.mortgageEntryRepository = mortgageEntryRepository;
         this.mortgageEntryMapper = mortgageEntryMapper;
         this.mortgageItemRepository = mortgageItemRepository;
+        this.dataCategoryRepository = dataCategoryRepository;
     }
 
     @Override
@@ -80,6 +86,8 @@ public class MortgageEntryServiceImpl implements MortgageEntryService {
             for (MortgageEntryDTO mortgage : mortgageList) {
                 MortgageItem item = mortgageItemRepository.findByCode(mortgage.getItemCode());
                 mortgage.setItemName(item.getItemName());
+                DataCategory dcMortStatus = dataCategoryRepository.findByCategoryCode(mortgage.getMortgageStatus());
+                mortgage.setMortStatusDesc(dcMortStatus.getCategoryDesc());
                 updatedList.add(mortgage);
             }
             commonDTO.setUpdatedMEList(updatedList);

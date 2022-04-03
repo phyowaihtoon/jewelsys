@@ -1,6 +1,7 @@
 package com.devgroup.jewelsys.repository;
 
 import com.devgroup.jewelsys.domain.DataCategory;
+import java.util.List;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 
@@ -9,4 +10,7 @@ import org.springframework.stereotype.Repository;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface DataCategoryRepository extends JpaRepository<DataCategory, Long> {}
+public interface DataCategoryRepository extends JpaRepository<DataCategory, Long> {
+    List<DataCategory> findByCategoryType(String categoryType);
+    DataCategory findByCategoryCode(String categoryCode);
+}

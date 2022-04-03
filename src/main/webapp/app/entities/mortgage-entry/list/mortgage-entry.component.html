@@ -29,62 +29,34 @@
   </div>
 
   <div class="table-responsive" id="entities" *ngIf="mortgageEntries && mortgageEntries.length > 0">
-    <table class="table table-striped" aria-describedby="page-heading">
+    <table class="table table-sm table-striped" aria-describedby="page-heading">
       <thead>
         <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
-          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="name">
+          <th scope="col" class="col-sm-1" jhiSortBy="id">
+            <span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" class="col-sm-2" jhiSortBy="name">
             <span jhiTranslate="jewelsysApp.mortgageEntry.name">Name</span> <fa-icon icon="sort"></fa-icon>
           </th>
-          <th scope="col" jhiSortBy="address">
+          <th scope="col" class="col-sm-2" jhiSortBy="address">
             <span jhiTranslate="jewelsysApp.mortgageEntry.address">Address</span> <fa-icon icon="sort"></fa-icon>
           </th>
-          <th scope="col" jhiSortBy="phone">
-            <span jhiTranslate="jewelsysApp.mortgageEntry.phone">Phone</span> <fa-icon icon="sort"></fa-icon>
-          </th>
-          <th scope="col" jhiSortBy="groupCode">
+          <th scope="col" class="col-sm-1" jhiSortBy="groupCode">
             <span jhiTranslate="jewelsysApp.mortgageEntry.groupCode">Group Code</span> <fa-icon icon="sort"></fa-icon>
           </th>
-          <th scope="col" jhiSortBy="itemCode">
+          <th scope="col" class="col-sm-1" jhiSortBy="itemCode">
             <span jhiTranslate="jewelsysApp.mortgageEntry.itemCode">Item Code</span> <fa-icon icon="sort"></fa-icon>
           </th>
-          <th scope="col" jhiSortBy="damageType">
-            <span jhiTranslate="jewelsysApp.mortgageEntry.damageType">Damage Type</span> <fa-icon icon="sort"></fa-icon>
-          </th>
-          <th scope="col" jhiSortBy="wInKyat">
-            <span jhiTranslate="jewelsysApp.mortgageEntry.wInKyat">W In Kyat</span> <fa-icon icon="sort"></fa-icon>
-          </th>
-          <th scope="col" jhiSortBy="wInPae">
-            <span jhiTranslate="jewelsysApp.mortgageEntry.wInPae">W In Pae</span> <fa-icon icon="sort"></fa-icon>
-          </th>
-          <th scope="col" jhiSortBy="wInYway">
-            <span jhiTranslate="jewelsysApp.mortgageEntry.wInYway">W In Yway</span> <fa-icon icon="sort"></fa-icon>
-          </th>
-          <th scope="col" jhiSortBy="principalAmount">
+          <th scope="col" class="col-sm-2" jhiSortBy="principalAmount">
             <span jhiTranslate="jewelsysApp.mortgageEntry.principalAmount">Principal Amount</span> <fa-icon icon="sort"></fa-icon>
           </th>
-          <th scope="col" jhiSortBy="startDate">
+          <th scope="col" class="col-sm-1" jhiSortBy="startDate">
             <span jhiTranslate="jewelsysApp.mortgageEntry.startDate">Start Date</span> <fa-icon icon="sort"></fa-icon>
           </th>
-          <th scope="col" jhiSortBy="interestRate">
-            <span jhiTranslate="jewelsysApp.mortgageEntry.interestRate">Interest Rate</span> <fa-icon icon="sort"></fa-icon>
+          <th scope="col" class="col-sm-1" jhiSortBy="mortStatusDesc">
+            <span jhiTranslate="jewelsysApp.mortgageEntry.mStatus">Status</span> <fa-icon icon="sort"></fa-icon>
           </th>
-          <th scope="col" jhiSortBy="mmYear">
-            <span jhiTranslate="jewelsysApp.mortgageEntry.mmYear">Mm Year</span> <fa-icon icon="sort"></fa-icon>
-          </th>
-          <th scope="col" jhiSortBy="mmMonth">
-            <span jhiTranslate="jewelsysApp.mortgageEntry.mmMonth">Mm Month</span> <fa-icon icon="sort"></fa-icon>
-          </th>
-          <th scope="col" jhiSortBy="mmDayGR">
-            <span jhiTranslate="jewelsysApp.mortgageEntry.mmDayGR">Mm Day GR</span> <fa-icon icon="sort"></fa-icon>
-          </th>
-          <th scope="col" jhiSortBy="mmDay">
-            <span jhiTranslate="jewelsysApp.mortgageEntry.mmDay">Mm Day</span> <fa-icon icon="sort"></fa-icon>
-          </th>
-          <th scope="col" jhiSortBy="delFlg">
-            <span jhiTranslate="jewelsysApp.mortgageEntry.delFlg">Del Flg</span> <fa-icon icon="sort"></fa-icon>
-          </th>
-          <th scope="col"></th>
+          <th scope="col" class="col-sm-1"></th>
         </tr>
       </thead>
       <tbody>
@@ -94,21 +66,14 @@
           </td>
           <td>{{ mortgageEntry.name }}</td>
           <td>{{ mortgageEntry.address }}</td>
-          <td>{{ mortgageEntry.phone }}</td>
           <td jhiTranslate="{{ 'jewelsysApp.MortgageItemGroup.' + mortgageEntry.groupCode }}">{{ mortgageEntry.groupCode }}</td>
-          <td>{{ mortgageEntry.itemCode }}</td>
-          <td jhiTranslate="{{ 'jewelsysApp.MortgageDamageType.' + mortgageEntry.damageType }}">{{ mortgageEntry.damageType }}</td>
-          <td>{{ mortgageEntry.wInKyat }}</td>
-          <td>{{ mortgageEntry.wInPae }}</td>
-          <td>{{ mortgageEntry.wInYway }}</td>
-          <td>{{ mortgageEntry.principalAmount }}</td>
-          <td>{{ mortgageEntry.startDate | formatMediumDatetime }}</td>
-          <td>{{ mortgageEntry.interestRate }}</td>
-          <td>{{ mortgageEntry.mmYear }}</td>
-          <td>{{ mortgageEntry.mmMonth }}</td>
-          <td>{{ mortgageEntry.mmDayGR }}</td>
-          <td>{{ mortgageEntry.mmDay }}</td>
-          <td>{{ mortgageEntry.delFlg }}</td>
+          <td>
+            {{ mortgageEntry.itemName }} {{ mortgageEntry.damageType ? '/' : '' }}
+            <span jhiTranslate="{{ 'jewelsysApp.MortgageDamageType.' + mortgageEntry.damageType }}"> {{ mortgageEntry.damageType }}</span>
+          </td>
+          <td style="text-align: right">{{ mortgageEntry.principalAmount }}</td>
+          <td>{{ mortgageEntry.startDate ? mortgageEntry.startDate.format('DD-MM-YYYY') : '-' }}</td>
+          <td>{{ mortgageEntry.mortStatusDesc }}</td>
           <td class="text-right">
             <div class="btn-group">
               <button
@@ -118,7 +83,6 @@
                 data-cy="entityDetailsButton"
               >
                 <fa-icon icon="eye"></fa-icon>
-                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
               </button>
 
               <button
@@ -128,13 +92,14 @@
                 data-cy="entityEditButton"
               >
                 <fa-icon icon="pencil-alt"></fa-icon>
-                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
               </button>
 
+              <!--
               <button type="submit" (click)="delete(mortgageEntry)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
                 <fa-icon icon="times"></fa-icon>
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
               </button>
+             -->
             </div>
           </td>
         </tr>

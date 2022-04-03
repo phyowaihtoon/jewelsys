@@ -1,5 +1,6 @@
 export const DATE_FORMAT = 'YYYY-MM-DD';
 export const DATE_TIME_FORMAT = 'YYYY-MM-DDTHH:mm';
+export const MY_DATE_FORMAT = 'DD-MM-YYYY';
 export const MY_DATE_FORMATS = {
   parse: {
     dateInput: 'DD-MM-YYYY',

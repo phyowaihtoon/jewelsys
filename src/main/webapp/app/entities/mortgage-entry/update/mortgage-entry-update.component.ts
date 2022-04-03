@@ -4,10 +4,8 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { finalize, map } from 'rxjs/operators';
-
 import * as dayjs from 'dayjs';
-import { DATE_TIME_FORMAT } from 'app/config/input.constants';
-
+import { MY_DATE_FORMAT } from 'app/config/input.constants';
 import { IMortgageEntry, MortgageEntry } from '../mortgage-entry.model';
 import { MortgageEntryService } from '../service/mortgage-entry.service';
 import { IMortgageItem } from 'app/entities/mortgage-item/mortgage-item.model';
@@ -31,6 +29,8 @@ export class MortgageEntryUpdateComponent implements OnInit {
   mmDayGroupCollection: IDataCategory[] = [];
   mmDayCollection: IDataCategory[] = [];
 
+  mortgageStatusCollection: IDataCategory[] = [];
+
   editForm = this.fb.group({
     id: [],
     name: [null, [Validators.required]],
@@ -49,6 +49,7 @@ export class MortgageEntryUpdateComponent implements OnInit {
     mmMonth: [],
     mmDayGR: [],
     mmDay: [],
+    mortgageStatus: [],
     delFlg: [],
   });
 
@@ -66,7 +67,6 @@ export class MortgageEntryUpdateComponent implements OnInit {
         const today = dayjs().startOf('day');
         mortgageEntry.startDate = today;
       }
-
       this.updateForm(mortgageEntry);
       this.loadRelationshipsOptions(mortgageEntry.groupCode);
     });
@@ -95,7 +95,7 @@ export class MortgageEntryUpdateComponent implements OnInit {
     this.mortgageItemCollection = this.orgMortgItemCollection.filter(value => value.groupCode === selectedGroupCode);
   }
 
-  trackMMCalendarByCode(index: number, item: IDataCategory): string {
+  trackCategoryByCode(index: number, item: IDataCategory): string {
     return item.categoryCode!;
   }
 
@@ -108,6 +108,15 @@ export class MortgageEntryUpdateComponent implements OnInit {
       this.mmMonthCollection = this.mmCalendarCollection.filter(value => value.categoryType === monthType);
     }
   }
+
+  /*
+  onDateSelect(event:any) {
+    const year = event.year;
+    const month = event.month <= 9 ? '0' + event.month : event.month;;
+    const day = event.day <= 9 ? '0' + event.day : event.day;;
+    const finalDate = day + "-" + month + "-" + year;
+   }
+  */
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<IMortgageEntry>>): void {
     result.pipe(finalize(() => this.onSaveFinalize())).subscribe(
@@ -154,6 +163,13 @@ export class MortgageEntryUpdateComponent implements OnInit {
         this.mmDayGroupCollection = this.mmCalendarCollection.filter(value => value.categoryType === 'MM_DAY_GR');
         this.mmDayCollection = this.mmCalendarCollection.filter(value => value.categoryType === 'MM_DAY');
       });
+
+    this.dataCategoryService
+      .loadAllByCategoryType('MS_TYPE')
+      .pipe(map((res: HttpResponse<IDataCategory[]>) => res.body ?? []))
+      .subscribe((mStatusCollection: IDataCategory[]) => {
+        this.mortgageStatusCollection = mStatusCollection;
+      });
   }
 
   protected updateForm(mortgageEntry: IMortgageEntry): void {
@@ -169,12 +185,13 @@ export class MortgageEntryUpdateComponent implements OnInit {
       wInPae: mortgageEntry.wInPae,
       wInYway: mortgageEntry.wInYway,
       principalAmount: mortgageEntry.principalAmount,
-      startDate: mortgageEntry.startDate ? mortgageEntry.startDate.format(DATE_TIME_FORMAT) : null,
+      startDate: mortgageEntry.startDate,
       interestRate: mortgageEntry.interestRate,
       mmYear: mortgageEntry.mmYear,
       mmMonth: mortgageEntry.mmMonth,
       mmDayGR: mortgageEntry.mmDayGR,
       mmDay: mortgageEntry.mmDay,
+      mortgageStatus: mortgageEntry.mortgageStatus,
       delFlg: mortgageEntry.delFlg,
     });
   }
@@ -193,13 +210,14 @@ export class MortgageEntryUpdateComponent implements OnInit {
       wInPae: this.editForm.get(['wInPae'])!.value,
       wInYway: this.editForm.get(['wInYway'])!.value,
       principalAmount: this.editForm.get(['principalAmount'])!.value,
-      startDate: this.editForm.get(['startDate'])!.value ? dayjs(this.editForm.get(['startDate'])!.value, DATE_TIME_FORMAT) : undefined,
+      startDate: this.editForm.get(['startDate'])!.value,
       interestRate: this.editForm.get(['interestRate'])!.value,
       mmYear: this.editForm.get(['mmYear'])!.value,
       mmMonth: this.editForm.get(['mmMonth'])!.value,
       mmDayGR: this.editForm.get(['mmDayGR'])!.value,
       mmDay: this.editForm.get(['mmDay'])!.value,
-      delFlg: this.editForm.get(['delFlg'])!.value,
+      mortgageStatus: this.editForm.get(['mortgageStatus'])!.value,
+      delFlg: 'N',
     };
   }
 }

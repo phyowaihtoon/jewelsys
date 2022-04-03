@@ -80,7 +80,7 @@ export class MortgageEntryService {
 
   protected convertDateFromClient(mortgageEntry: IMortgageEntry): IMortgageEntry {
     return Object.assign({}, mortgageEntry, {
-      startDate: mortgageEntry.startDate?.isValid() ? mortgageEntry.startDate.toJSON() : undefined,
+      startDate: mortgageEntry.startDate?.isValid() ? mortgageEntry.startDate.format('YYYY-MM-DD') + 'T00:00:00.000Z' : undefined,
     });
   }
 

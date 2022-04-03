@@ -45,6 +45,10 @@ export class DataCategoryService {
     return this.http.get<IDataCategory[]>(`${this.resourceUrl}/loadMMC`, { observe: 'response' });
   }
 
+  loadAllByCategoryType(categoryType: string): Observable<EntityArrayResponseType> {
+    return this.http.get<IDataCategory[]>(`${this.resourceUrl}/load/${categoryType}`, { observe: 'response' });
+  }
+
   delete(id: number): Observable<HttpResponse<{}>> {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }

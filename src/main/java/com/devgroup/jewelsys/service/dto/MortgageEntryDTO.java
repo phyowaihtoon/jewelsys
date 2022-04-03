@@ -54,6 +54,12 @@ public class MortgageEntryDTO implements Serializable {
 
     private String mmDay;
 
+    @NotNull
+    private String mortgageStatus;
+
+    private String mortStatusDesc;
+
+    @NotNull
     private String delFlg;
 
     public Long getId() {
@@ -200,12 +206,28 @@ public class MortgageEntryDTO implements Serializable {
         this.mmDay = mmDay;
     }
 
+    public String getMortgageStatus() {
+        return mortgageStatus;
+    }
+
+    public void setMortgageStatus(String mortgageStatus) {
+        this.mortgageStatus = mortgageStatus;
+    }
+
     public String getDelFlg() {
         return delFlg;
     }
 
     public void setDelFlg(String delFlg) {
         this.delFlg = delFlg;
+    }
+
+    public String getMortStatusDesc() {
+        return mortStatusDesc;
+    }
+
+    public void setMortStatusDesc(String mortStatusDesc) {
+        this.mortStatusDesc = mortStatusDesc;
     }
 
     @Override
@@ -250,6 +272,7 @@ public class MortgageEntryDTO implements Serializable {
             ", mmMonth='" + getMmMonth() + "'" +
             ", mmDayGR='" + getMmDayGR() + "'" +
             ", mmDay='" + getMmDay() + "'" +
+            ", mortgageStatus='" + getMortgageStatus() + "'" +
             ", delFlg='" + getDelFlg() + "'" +
             "}";
     }
