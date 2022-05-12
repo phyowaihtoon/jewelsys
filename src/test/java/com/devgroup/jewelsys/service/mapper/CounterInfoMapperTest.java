@@ -8,6 +8,6 @@ class CounterInfoMapperTest {
 
     @BeforeEach
     public void setUp() {
-        counterInfoMapper = new CounterInfoMapperImpl();
+        //counterInfoMapper = new CounterInfoMapperImpl();
     }
 }

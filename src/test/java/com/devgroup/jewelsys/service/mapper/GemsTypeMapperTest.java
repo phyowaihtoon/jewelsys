@@ -8,6 +8,6 @@ class GemsTypeMapperTest {
 
     @BeforeEach
     public void setUp() {
-        gemsTypeMapper = new GemsTypeMapperImpl();
+       // gemsTypeMapper = new GemsTypeMapperImpl();
     }
 }

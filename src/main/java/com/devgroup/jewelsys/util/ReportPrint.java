@@ -1,5 +1,6 @@
 package com.devgroup.jewelsys.util;
 
+import com.devgroup.jewelsys.service.dto.MortgageEntryDTO;
 import com.devgroup.jewelsys.service.dto.RptParamsDTO;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -13,6 +14,8 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.design.JRDesignStyle;
+import net.sf.jasperreports.engine.export.JRPdfExporter;
 import net.sf.jasperreports.engine.export.JRXlsExporter;
 import net.sf.jasperreports.export.SimpleExporterInput;
 import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
@@ -22,7 +25,7 @@ import org.springframework.util.ResourceUtils;
 
 public class ReportPrint {
 
-    public static String print(List<Object> rptData, RptParamsDTO rptPara) {
+    public static String print(List<?> rptData, RptParamsDTO rptPara, Map<String, Object> parameters) {
         Logger log = LoggerFactory.getLogger(ReportPrint.class);
         log.debug("ReportPrint:print() Step1");
         log.debug("Report Output Path:" + rptPara.getRptOutputPath());
@@ -30,9 +33,6 @@ public class ReportPrint {
         String rptFilePath = "";
         try {
             JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(rptData);
-            Map<String, Object> parameters = new HashMap<String, Object>();
-            parameters.put("rpt", rptPara);
-
             File file = ResourceUtils.getFile("classpath:jrxml/" + rptPara.getRptJrxml());
             JasperReport jasper = JasperCompileManager.compileReport(file.getAbsolutePath());
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasper, parameters, dataSource);
@@ -70,6 +70,11 @@ public class ReportPrint {
 
     private static String export(RptParamsDTO rptPara, JasperPrint jasperPrint) throws JRException {
         String rptFilePath;
+
+        // Export HTML file
+        rptFilePath = rptPara.getRptOutputPath() + rptPara.getRptFileName() + ".html";
+        JasperExportManager.exportReportToHtmlFile(jasperPrint, rptFilePath);
+
         // Export PDF file
         rptFilePath = rptPara.getRptOutputPath() + rptPara.getRptFileName() + ".pdf";
         JasperExportManager.exportReportToPdfFile(jasperPrint, rptFilePath);
@@ -80,6 +85,7 @@ public class ReportPrint {
         xlsExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
         xlsExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(rptFilePath));
         xlsExporter.exportReport();
+
         return rptFilePath;
     }
 }

@@ -8,6 +8,6 @@ class ShopInfoMapperTest {
 
     @BeforeEach
     public void setUp() {
-        shopInfoMapper = new ShopInfoMapperImpl();
+        //shopInfoMapper = new ShopInfoMapperImpl();
     }
 }

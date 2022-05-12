@@ -112,4 +112,18 @@ public class ReportResource {
 
         return gtList;
     }
+
+    @PostMapping("/mortgage-list-rpt")
+    public RptParamsDTO generateMortgage(@Valid @RequestBody RptParamsDTO rptParams) {
+        User loginUser = userService.getUserWithAuthorities().get();
+        String rptOutFolder = context.getRealPath("RPT_OUTPUT");
+        String rptOutputPath = rptOutFolder + "\\" + loginUser.getLogin() + "\\";
+        String rptFileName = SharedUtils.generateFileName("MortgageListRpt");
+        rptParams.setRptFileName(rptFileName);
+        rptParams.setRptOutputPath(rptOutputPath);
+        rptParams.setRptJrxml("MortgageListRpt.jrxml");
+        rptParams.setRptJasper("MortgageListRpt.jrxml");
+        String rptOutFilePath = this.reportService.generateMortgage(rptParams);
+        if (rptOutFilePath != null && rptOutFilePath != "") return rptParams; else return null;
+    }
 }

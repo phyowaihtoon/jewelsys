@@ -7,5 +7,5 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity {@link CounterInfo} and its DTO {@link CounterInfoDTO}.
  */
-@Mapper(componentModel = "spring", uses = { ShopInfoMapper.class })
+@Mapper(componentModel = "spring", uses = {})
 public interface CounterInfoMapper extends EntityMapper<CounterInfoDTO, CounterInfo> {}

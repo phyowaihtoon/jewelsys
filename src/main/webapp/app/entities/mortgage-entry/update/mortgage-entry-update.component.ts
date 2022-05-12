@@ -19,6 +19,7 @@ import { IDataCategory } from 'app/entities/data-category/data-category.model';
 })
 export class MortgageEntryUpdateComponent implements OnInit {
   isSaving = false;
+  regExpDecimal:RegExp=new RegExp('^[0-9]+(\\.[0-9]{1,2}){0,1}$');
 
   orgMortgItemCollection: IMortgageItem[] = [];
   mortgageItemCollection: IMortgageItem[] = [];
@@ -42,7 +43,7 @@ export class MortgageEntryUpdateComponent implements OnInit {
     wInKyat: [],
     wInPae: [],
     wInYway: [],
-    principalAmount: [null, [Validators.required]],
+    principalAmount: [null, [Validators.required,Validators.pattern(this.regExpDecimal)]],
     startDate: [null, [Validators.required]],
     interestRate: [],
     mmYear: [],

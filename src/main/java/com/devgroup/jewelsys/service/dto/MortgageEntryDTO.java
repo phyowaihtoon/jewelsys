@@ -25,12 +25,16 @@ public class MortgageEntryDTO implements Serializable {
     @NotNull
     private MortgageItemGroup groupCode;
 
+    private String groupDesc;
+
     @NotNull
     private String itemCode;
 
     private String itemName;
 
     private MortgageDamageType damageType;
+
+    private String damageTypeDesc;
 
     private Integer wInKyat;
 
@@ -48,17 +52,28 @@ public class MortgageEntryDTO implements Serializable {
 
     private String mmYear;
 
+    private String mmYearDesc;
+
     private String mmMonth;
+
+    private String mmMonthDesc;
 
     private String mmDayGR;
 
+    private String mmDayGRDesc;
+
     private String mmDay;
+
+    private String mmDayDesc;
 
     private String mortgageStatus;
 
     private String mortStatusDesc;
 
     private String delFlg;
+
+    // Additional Fields for Reporting
+    private String startDateStr;
 
     public Long getId() {
         return id;
@@ -100,6 +115,14 @@ public class MortgageEntryDTO implements Serializable {
         this.groupCode = groupCode;
     }
 
+    public String getGroupDesc() {
+        return groupDesc;
+    }
+
+    public void setGroupDesc(String groupDesc) {
+        this.groupDesc = groupDesc;
+    }
+
     public String getItemCode() {
         return itemCode;
     }
@@ -122,6 +145,14 @@ public class MortgageEntryDTO implements Serializable {
 
     public void setDamageType(MortgageDamageType damageType) {
         this.damageType = damageType;
+    }
+
+    public String getDamageTypeDesc() {
+        return damageTypeDesc;
+    }
+
+    public void setDamageTypeDesc(String damageTypeDesc) {
+        this.damageTypeDesc = damageTypeDesc;
     }
 
     public Integer getwInKyat() {
@@ -180,12 +211,28 @@ public class MortgageEntryDTO implements Serializable {
         this.mmYear = mmYear;
     }
 
+    public String getMmYearDesc() {
+        return mmYearDesc;
+    }
+
+    public void setMmYearDesc(String mmYearDesc) {
+        this.mmYearDesc = mmYearDesc;
+    }
+
     public String getMmMonth() {
         return mmMonth;
     }
 
     public void setMmMonth(String mmMonth) {
         this.mmMonth = mmMonth;
+    }
+
+    public String getMmMonthDesc() {
+        return mmMonthDesc;
+    }
+
+    public void setMmMonthDesc(String mmMonthDesc) {
+        this.mmMonthDesc = mmMonthDesc;
     }
 
     public String getMmDayGR() {
@@ -196,12 +243,28 @@ public class MortgageEntryDTO implements Serializable {
         this.mmDayGR = mmDayGR;
     }
 
+    public String getMmDayGRDesc() {
+        return mmDayGRDesc;
+    }
+
+    public void setMmDayGRDesc(String mmDayGRDesc) {
+        this.mmDayGRDesc = mmDayGRDesc;
+    }
+
     public String getMmDay() {
         return mmDay;
     }
 
     public void setMmDay(String mmDay) {
         this.mmDay = mmDay;
+    }
+
+    public String getMmDayDesc() {
+        return mmDayDesc;
+    }
+
+    public void setMmDayDesc(String mmDayDesc) {
+        this.mmDayDesc = mmDayDesc;
     }
 
     public String getMortgageStatus() {
@@ -226,6 +289,14 @@ public class MortgageEntryDTO implements Serializable {
 
     public void setMortStatusDesc(String mortStatusDesc) {
         this.mortStatusDesc = mortStatusDesc;
+    }
+
+    public String getStartDateStr() {
+        return startDateStr;
+    }
+
+    public void setStartDateStr(String startDateStr) {
+        this.startDateStr = startDateStr;
     }
 
     @Override

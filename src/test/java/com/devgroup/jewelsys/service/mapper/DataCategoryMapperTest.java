@@ -8,6 +8,6 @@ class DataCategoryMapperTest {
 
     @BeforeEach
     public void setUp() {
-        dataCategoryMapper = new DataCategoryMapperImpl();
+        //dataCategoryMapper = new DataCategoryMapperImpl();
     }
 }

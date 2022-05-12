@@ -1,8 +1,10 @@
 package com.devgroup.jewelsys.service.impl;
 
 import com.devgroup.jewelsys.config.PartnerDBConfiguration;
-import com.devgroup.jewelsys.repository.UserRepository;
+import com.devgroup.jewelsys.domain.enumeration.MortgageDamageType;
+import com.devgroup.jewelsys.domain.enumeration.MortgageItemGroup;
 import com.devgroup.jewelsys.service.ReportService;
+import com.devgroup.jewelsys.service.dto.MortgageEntryDTO;
 import com.devgroup.jewelsys.service.dto.RptParamsDTO;
 import com.devgroup.jewelsys.service.dto.UserDTO;
 import com.devgroup.jewelsys.util.ReportPrint;
@@ -13,9 +15,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.LinkedList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Map;
+import javax.persistence.EntityManager;
+import javax.persistence.ParameterMode;
+import javax.persistence.PersistenceContext;
+import javax.persistence.StoredProcedureQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,14 +30,13 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class ReportServiceImpl implements ReportService {
 
-    private final UserRepository userRepository;
+    @PersistenceContext
+    EntityManager em;
 
     @Autowired
     PartnerDBConfiguration dbconfig;
 
-    public ReportServiceImpl(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+    public ReportServiceImpl() {}
 
     public Connection getConnecton() throws SQLException {
         Connection con = null;
@@ -44,15 +49,6 @@ public class ReportServiceImpl implements ReportService {
 
         return con;
     }
-
-    /*
-    @Override
-    public String printUserList(RptParamsDTO rptPara) {
-        List<Object> userList = userRepository.findAll().stream().map(UserDTO::new).collect(Collectors.toCollection(LinkedList::new));
-        String rptFilePath = ReportPrint.print(userList, rptPara);
-        return rptFilePath;
-    }
-    */
 
     @Override
     public String printUserList(RptParamsDTO rptPara) {
@@ -84,7 +80,8 @@ public class ReportServiceImpl implements ReportService {
             }
         }
 
-        String rptFilePath = ReportPrint.print(userList, rptPara);
+        Map<String, Object> parameters = new HashMap<String, Object>();
+        String rptFilePath = ReportPrint.print(userList, rptPara, parameters);
         return rptFilePath;
     }
 
@@ -119,5 +116,109 @@ public class ReportServiceImpl implements ReportService {
         }
 
         return gtList;
+    }
+
+    @Override
+    public String generateMortgage(RptParamsDTO rptPara) {
+        /*
+    	List<MortgageEntryDTO> mortgageList=em.createStoredProcedureQuery("SP_MORTGAGE_LIST_RPT")
+    	.unwrap(org.hibernate.query.NativeQuery.class)
+    	.setResultTransformer(Transformers.aliasToBean(MortgageEntryDTO.class))
+    	.getResultList();
+    	*/
+
+        StoredProcedureQuery query = em.createStoredProcedureQuery("SP_MORTGAGE_LIST_RPT");
+        query.registerStoredProcedureParameter("frmDate", String.class, ParameterMode.IN);
+        query.registerStoredProcedureParameter("toDate", String.class, ParameterMode.IN);
+        query.setParameter("frmDate", rptPara.getRptPS1());
+        query.setParameter("toDate", rptPara.getRptPS2());
+
+        List<MortgageEntryDTO> mortgageList = null;
+        List<Object[]> resultList = query.getResultList();
+        if (resultList != null) {
+            mortgageList = new ArrayList<MortgageEntryDTO>();
+            for (Object[] arr : resultList) {
+                MortgageEntryDTO dto = new MortgageEntryDTO();
+                dto.setStartDateStr(String.valueOf(arr[0]));
+                dto.setName(String.valueOf(arr[1]));
+                String groupCode = arr[2].toString();
+                String groupDesc = getGroupDesc(groupCode);
+                dto.setGroupDesc(groupDesc);
+                dto.setItemName(String.valueOf(arr[3]));
+                String dtCode = arr[4] != null ? arr[4].toString() : "";
+                String damageTypeDesc = getDamageTypeDesc(dtCode);
+                dto.setDamageTypeDesc(damageTypeDesc);
+                dto.setPrincipalAmount(Double.valueOf(String.valueOf(arr[5])));
+                dto.setAddress(String.valueOf(arr[6]));
+                dto.setMortStatusDesc(String.valueOf(arr[7]));
+                mortgageList.add(dto);
+            }
+        }
+
+        Map<String, Object> parameters = new HashMap<String, Object>();
+        parameters.put("frmDate", rptPara.getRptPS1());
+        parameters.put("toDate", rptPara.getRptPS2());
+        String rptFilePath = ReportPrint.print(mortgageList, rptPara, parameters);
+        return rptFilePath;
+    }
+
+    private String getGroupDesc(String groupCode) {
+        String groupDesc = "";
+        switch (groupCode) {
+            case "G01":
+                groupDesc = MortgageItemGroup.G01.getValue();
+                break;
+            case "G02":
+                groupDesc = MortgageItemGroup.G02.getValue();
+                break;
+            case "G03":
+                groupDesc = MortgageItemGroup.G03.getValue();
+                break;
+            case "G04":
+                groupDesc = MortgageItemGroup.G04.getValue();
+                break;
+            case "G05":
+                groupDesc = MortgageItemGroup.G05.getValue();
+                break;
+            case "G06":
+                groupDesc = MortgageItemGroup.G06.getValue();
+                break;
+            case "G07":
+                groupDesc = MortgageItemGroup.G07.getValue();
+                break;
+            case "G08":
+                groupDesc = MortgageItemGroup.G08.getValue();
+                break;
+            case "G09":
+                groupDesc = MortgageItemGroup.G09.getValue();
+                break;
+            default:
+                break;
+        }
+        return groupDesc;
+    }
+
+    private String getDamageTypeDesc(String code) {
+        String damageTypeDesc = "";
+        switch (code) {
+            case "DT01":
+                damageTypeDesc = MortgageDamageType.DT01.getValue();
+                break;
+            case "DT02":
+                damageTypeDesc = MortgageDamageType.DT02.getValue();
+                break;
+            case "DT03":
+                damageTypeDesc = MortgageDamageType.DT03.getValue();
+                break;
+            case "DT04":
+                damageTypeDesc = MortgageDamageType.DT04.getValue();
+                break;
+            case "DT05":
+                damageTypeDesc = MortgageDamageType.DT05.getValue();
+                break;
+            default:
+                break;
+        }
+        return damageTypeDesc;
     }
 }
