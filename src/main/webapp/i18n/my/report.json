@@ -1,0 +1,12 @@
+{
+    "report": {
+        "parameter": {
+            "startDate":"အစရက်",
+            "endDate":"အဆုံးရက်"
+        },
+        "validation":{
+            "datePattern":"နေ့စွဲကို DD-MM-YYYY ပုံစံအတိုင်းထည့်သွင်းပါ"
+        }
+        
+    }
+}

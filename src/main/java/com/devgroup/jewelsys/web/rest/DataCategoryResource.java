@@ -185,4 +185,10 @@ public class DataCategoryResource {
         List<DataCategoryDTO> itemList = dataCategoryService.findMMCalendar();
         return itemList;
     }
+
+    @GetMapping("/data-categories/load/{categoryType}")
+    public List<DataCategoryDTO> findAllByCategoryType(@PathVariable String categoryType) {
+        List<DataCategoryDTO> itemList = dataCategoryService.findAllByCategoryType(categoryType);
+        return itemList;
+    }
 }

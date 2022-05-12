@@ -8,6 +8,6 @@ class GoldItemMapperTest {
 
     @BeforeEach
     public void setUp() {
-        goldItemMapper = new GoldItemMapperImpl();
+       // goldItemMapper = new GoldItemMapperImpl();
     }
 }

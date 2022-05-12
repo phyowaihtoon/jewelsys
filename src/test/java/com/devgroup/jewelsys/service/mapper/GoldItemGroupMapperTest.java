@@ -8,6 +8,6 @@ class GoldItemGroupMapperTest {
 
     @BeforeEach
     public void setUp() {
-        goldItemGroupMapper = new GoldItemGroupMapperImpl();
+        // goldItemGroupMapper = new GoldItemGroupMapperImpl();
     }
 }

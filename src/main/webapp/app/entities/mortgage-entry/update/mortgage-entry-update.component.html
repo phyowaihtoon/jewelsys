@@ -1,13 +1,11 @@
-<div class="row justify-content-center">
-  <div class="col-12">
-    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-      <h2
-        id="jhi-mortgage-entry-heading"
-        data-cy="MortgageEntryCreateUpdateHeading"
-        jhiTranslate="jewelsysApp.mortgageEntry.home.createOrEditLabel"
-      >
-        Create or edit a Mortgage Entry
-      </h2>
+<div class="justify-content-center">
+  <h2 id="jhi-mortgage-entry-heading" data-cy="MortgageEntryCreateUpdateHeading"
+    jhiTranslate="jewelsysApp.mortgageEntry.home.createOrEditLabel">
+    Create or edit a Mortgage Entry
+  </h2>
+  
+  <div class="col-12" style="padding-top:10px;">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm" autocomplete="off">
 
       <div>
         <jhi-alert-error></jhi-alert-error>
@@ -17,50 +15,64 @@
             <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
           </div>
           <div class="col-4">
-            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id"
+              [readonly]="true" />
+          </div>
+          <div class="col-2">
+            <label class="form-control-label" jhiTranslate="jewelsysApp.mortgageEntry.mStatus"
+              for="field_mortgageStatus">Status</label>
+          </div>
+          <div class="col-4">
+            <select class="form-control" id="field_mortgageStatus" data-cy="mortgageStatus" name="mortgageStatus"
+              formControlName="mortgageStatus">
+              <option [ngValue]="null"></option>
+              <option [ngValue]="
+                  mStatusData.categoryCode === editForm.get('mortgageStatus')!.value
+                    ? editForm.get('mortgageStatus')!.value
+                    : mStatusData.categoryCode
+                " *ngFor="let mStatusData of mortgageStatusCollection; trackBy: trackCategoryByCode">
+                {{ mStatusData.categoryDesc }}
+              </option>
+            </select>
           </div>
         </div>
 
         <div class="row form-group">
           <div class="col-2">
-            <label class="form-control-label" jhiTranslate="jewelsysApp.mortgageEntry.name" for="field_name">Name</label>
+            <label class="form-control-label" jhiTranslate="jewelsysApp.mortgageEntry.name"
+              for="field_name">Name</label>
           </div>
           <div class="col-4">
             <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
-            <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
-              <small class="form-text text-danger" *ngIf="editForm.get('name')?.errors?.required" jhiTranslate="entity.validation.required">
+            <div
+              *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
+              <small class="form-text text-danger" *ngIf="editForm.get('name')?.errors?.required"
+                jhiTranslate="entity.validation.required">
                 This field is required.
               </small>
             </div>
           </div>
           <div class="col-2">
-            <label class="form-control-label" jhiTranslate="jewelsysApp.mortgageEntry.startDate" for="field_startDate">Start Date</label>
+            <label class="form-control-label" jhiTranslate="jewelsysApp.mortgageEntry.startDate"
+              for="field_startDate">Start Date</label>
           </div>
-          <div class="col-4">
-            <div class="d-flex">
-              <input
-                id="field_startDate"
-                data-cy="startDate"
-                type="datetime-local"
-                class="form-control"
-                name="startDate"
-                formControlName="startDate"
-                placeholder="YYYY-MM-DD HH:mm"
-              />
+
+          <div class="col-4 input-group">
+            <input class="form-control" id="field_startDate" data-cy="startDate" placeholder="DD-MM-YYYY"
+              name="startDate" formControlName="startDate" ngbDatepicker #date="ngbDatepicker" />
+            <div class="input-group-append">
+              <button id="startDateButton" (click)="date.toggle()" type="button">
+                <fa-icon icon="calendar" [fixedWidth]="true"></fa-icon>
+              </button>
             </div>
-            <div *ngIf="editForm.get('startDate')!.invalid && (editForm.get('startDate')!.dirty || editForm.get('startDate')!.touched)">
-              <small
-                class="form-text text-danger"
-                *ngIf="editForm.get('startDate')?.errors?.required"
-                jhiTranslate="entity.validation.required"
-              >
+            <div
+              *ngIf="editForm.get('startDate')!.invalid && (editForm.get('startDate')!.dirty || editForm.get('startDate')!.touched)">
+              <small class="form-text text-danger" *ngIf="editForm.get('startDate')?.errors?.required"
+                jhiTranslate="entity.validation.required">
                 This field is required.
               </small>
-              <small
-                class="form-text text-danger"
-                [hidden]="!editForm.get('startDate')?.errors?.ZonedDateTimelocal"
-                jhiTranslate="entity.validation.ZonedDateTimelocal"
-              >
+              <small class="form-text text-danger" [hidden]="!editForm.get('startDate')?.errors?.ZonedDateTimelocal"
+                jhiTranslate="entity.validation.ZonedDateTimelocal">
                 This field should be a date and time.
               </small>
             </div>
@@ -69,43 +81,30 @@
 
         <div class="row form-group">
           <div class="col-2">
-            <label class="form-control-label" jhiTranslate="jewelsysApp.mortgageEntry.phone" for="field_phone">Phone</label>
+            <label class="form-control-label" jhiTranslate="jewelsysApp.mortgageEntry.phone"
+              for="field_phone">Phone</label>
           </div>
           <div class="col-4">
-            <input type="text" class="form-control" name="phone" id="field_phone" data-cy="phone" formControlName="phone" />
+            <input type="text" class="form-control" name="phone" id="field_phone" data-cy="phone"
+              formControlName="phone" />
           </div>
           <div class="col-2">
-            <label class="form-control-label" jhiTranslate="jewelsysApp.mortgageEntry.principalAmount" for="field_principalAmount"
-              >Principal Amount</label
-            >
+            <label class="form-control-label" jhiTranslate="jewelsysApp.mortgageEntry.principalAmount"
+              for="field_principalAmount">Principal Amount</label>
           </div>
           <div class="col-4">
-            <input
-              type="number"
-              class="form-control"
-              name="principalAmount"
-              id="field_principalAmount"
-              data-cy="principalAmount"
-              formControlName="principalAmount"
-            />
-            <div
-              *ngIf="
+            <input class="form-control" name="principalAmount" id="field_principalAmount" data-cy="principalAmount"
+              formControlName="principalAmount" jhiAllowedDecimal />
+            <div *ngIf="
                 editForm.get('principalAmount')!.invalid &&
                 (editForm.get('principalAmount')!.dirty || editForm.get('principalAmount')!.touched)
-              "
-            >
-              <small
-                class="form-text text-danger"
-                *ngIf="editForm.get('principalAmount')?.errors?.required"
-                jhiTranslate="entity.validation.required"
-              >
+              ">
+              <small class="form-text text-danger" *ngIf="editForm.get('principalAmount')?.errors?.required"
+                jhiTranslate="entity.validation.required">
                 This field is required.
               </small>
-              <small
-                class="form-text text-danger"
-                [hidden]="!editForm.get('principalAmount')?.errors?.number"
-                jhiTranslate="entity.validation.number"
-              >
+              <small class="form-text text-danger" [hidden]="!editForm.get('principalAmount')?.errors?.number"
+                jhiTranslate="entity.validation.number">
                 This field should be a number.
               </small>
             </div>
@@ -114,17 +113,12 @@
 
         <div class="row form-group">
           <div class="col-2">
-            <label class="form-control-label" jhiTranslate="jewelsysApp.mortgageEntry.groupCode" for="field_groupCode">Group Code</label>
+            <label class="form-control-label" jhiTranslate="jewelsysApp.mortgageEntry.groupCode"
+              for="field_groupCode">Group Code</label>
           </div>
           <div class="col-4">
-            <select
-              (change)="onItemGroupChange()"
-              class="form-control"
-              name="groupCode"
-              formControlName="groupCode"
-              id="field_groupCode"
-              data-cy="groupCode"
-            >
+            <select (change)="onItemGroupChange()" class="form-control" name="groupCode" formControlName="groupCode"
+              id="field_groupCode" data-cy="groupCode">
               <option [ngValue]="null">{{ 'jewelsysApp.MortgageItemGroup.null' | translate }}</option>
               <option value="G01">{{ 'jewelsysApp.MortgageItemGroup.G01' | translate }}</option>
               <option value="G02">{{ 'jewelsysApp.MortgageItemGroup.G02' | translate }}</option>
@@ -136,69 +130,58 @@
               <option value="G08">{{ 'jewelsysApp.MortgageItemGroup.G08' | translate }}</option>
               <option value="G09">{{ 'jewelsysApp.MortgageItemGroup.G09' | translate }}</option>
             </select>
-            <div *ngIf="editForm.get('groupCode')!.invalid && (editForm.get('groupCode')!.dirty || editForm.get('groupCode')!.touched)">
-              <small
-                class="form-text text-danger"
-                *ngIf="editForm.get('groupCode')?.errors?.required"
-                jhiTranslate="entity.validation.required"
-              >
+            <div
+              *ngIf="editForm.get('groupCode')!.invalid && (editForm.get('groupCode')!.dirty || editForm.get('groupCode')!.touched)">
+              <small class="form-text text-danger" *ngIf="editForm.get('groupCode')?.errors?.required"
+                jhiTranslate="entity.validation.required">
                 This field is required.
               </small>
             </div>
           </div>
           <div class="col-2">
-            <label class="form-control-label" jhiTranslate="jewelsysApp.mortgageEntry.interestRate" for="field_interestRate"
-              >Interest Rate</label
-            >
+            <label class="form-control-label" jhiTranslate="jewelsysApp.mortgageEntry.interestRate"
+              for="field_interestRate">Interest Rate</label>
           </div>
           <div class="col-4">
-            <input class="form-control" name="interestRate" id="field_interestRate" data-cy="interestRate" formControlName="interestRate" />
+            <input jhiAllowedDecimal class="form-control" name="interestRate" id="field_interestRate"
+              data-cy="interestRate" formControlName="interestRate" />
           </div>
         </div>
 
         <div class="row form-group">
           <div class="col-2">
-            <label class="form-control-label" jhiTranslate="jewelsysApp.mortgageEntry.itemCode" for="field_itemCode">Item Code</label>
+            <label class="form-control-label" jhiTranslate="jewelsysApp.mortgageEntry.itemCode"
+              for="field_itemCode">Item Code</label>
           </div>
           <div class="col-4">
-            <select class="form-control" id="field_itemCode" data-cy="itemCode" name="itemCode" formControlName="itemCode">
+            <select class="form-control" id="field_itemCode" data-cy="itemCode" name="itemCode"
+              formControlName="itemCode">
               <option [ngValue]="null"></option>
               <option
                 [ngValue]="mortgageItem.code === editForm.get('itemCode')!.value ? editForm.get('itemCode')!.value : mortgageItem.code"
-                *ngFor="let mortgageItem of mortgageItemCollection; trackBy: trackMortgageItemByCode"
-              >
+                *ngFor="let mortgageItem of mortgageItemCollection; trackBy: trackMortgageItemByCode">
                 {{ mortgageItem.itemName }}
               </option>
             </select>
-            <div *ngIf="editForm.get('itemCode')!.invalid && (editForm.get('itemCode')!.dirty || editForm.get('itemCode')!.touched)">
-              <small
-                class="form-text text-danger"
-                *ngIf="editForm.get('itemCode')?.errors?.required"
-                jhiTranslate="entity.validation.required"
-              >
+            <div
+              *ngIf="editForm.get('itemCode')!.invalid && (editForm.get('itemCode')!.dirty || editForm.get('itemCode')!.touched)">
+              <small class="form-text text-danger" *ngIf="editForm.get('itemCode')?.errors?.required"
+                jhiTranslate="entity.validation.required">
                 This field is required.
               </small>
             </div>
           </div>
           <div class="col-2">
-            <label class="form-control-label" jhiTranslate="jewelsysApp.mortgageEntry.mmYear" for="field_mmYear">Mm Year</label>
+            <label class="form-control-label" jhiTranslate="jewelsysApp.mortgageEntry.mmYear" for="field_mmYear">Mm
+              Year</label>
           </div>
           <div class="col-4">
-            <select
-              (change)="onMMYearChange()"
-              class="form-control"
-              id="field_mmYear"
-              data-cy="mmYear"
-              name="mmYear"
-              formControlName="mmYear"
-            >
+            <select (change)="onMMYearChange()" class="form-control" id="field_mmYear" data-cy="mmYear" name="mmYear"
+              formControlName="mmYear">
               <option [ngValue]="null"></option>
-              <option
-                [ngValue]="
+              <option [ngValue]="
                   mmYearData.categoryCode === editForm.get('mmYear')!.value ? editForm.get('mmYear')!.value : mmYearData.categoryCode
-                "
-                *ngFor="let mmYearData of mmYearCollection; trackBy: trackMMCalendarByCode"
-              >
+                " *ngFor="let mmYearData of mmYearCollection; trackBy: trackCategoryByCode">
                 {{ mmYearData.categoryDesc }}
               </option>
             </select>
@@ -207,10 +190,12 @@
 
         <div class="row form-group">
           <div class="col-2">
-            <label class="form-control-label" jhiTranslate="jewelsysApp.mortgageEntry.damageType" for="field_damageType">Damage Type</label>
+            <label class="form-control-label" jhiTranslate="jewelsysApp.mortgageEntry.damageType"
+              for="field_damageType">Damage Type</label>
           </div>
           <div class="col-4">
-            <select class="form-control" name="damageType" formControlName="damageType" id="field_damageType" data-cy="damageType">
+            <select class="form-control" name="damageType" formControlName="damageType" id="field_damageType"
+              data-cy="damageType">
               <option [ngValue]="null">{{ 'jewelsysApp.MortgageDamageType.null' | translate }}</option>
               <option value="DT01">{{ 'jewelsysApp.MortgageDamageType.DT01' | translate }}</option>
               <option value="DT02">{{ 'jewelsysApp.MortgageDamageType.DT02' | translate }}</option>
@@ -221,17 +206,15 @@
           </div>
 
           <div class="col-2">
-            <label class="form-control-label" jhiTranslate="jewelsysApp.mortgageEntry.mmMonth" for="field_mmMonth">Mm Month</label>
+            <label class="form-control-label" jhiTranslate="jewelsysApp.mortgageEntry.mmMonth" for="field_mmMonth">Mm
+              Month</label>
           </div>
           <div class="col-4">
             <select class="form-control" id="field_mmMonth" data-cy="mmMonth" name="mmMonth" formControlName="mmMonth">
               <option [ngValue]="null"></option>
-              <option
-                [ngValue]="
+              <option [ngValue]="
                   mmMonthData.categoryCode === editForm.get('mmMonth')!.value ? editForm.get('mmMonth')!.value : mmMonthData.categoryCode
-                "
-                *ngFor="let mmMonthData of mmMonthCollection; trackBy: trackMMCalendarByCode"
-              >
+                " *ngFor="let mmMonthData of mmMonthCollection; trackBy: trackCategoryByCode">
                 {{ mmMonthData.categoryDesc }}
               </option>
             </select>
@@ -240,47 +223,53 @@
 
         <div class="row form-group">
           <div class="col-2">
-            <label class="form-control-label" jhiTranslate="jewelsysApp.mortgageEntry.weight" for="field_wInKyat">Weight</label>
+            <label class="form-control-label" jhiTranslate="jewelsysApp.mortgageEntry.weight"
+              for="field_wInKyat">Weight</label>
           </div>
           <div class="col-4">
             <div class="row">
               <div class="col-3">
-                <input type="number" class="form-control" name="wInKyat" id="field_wInKyat" data-cy="wInKyat" formControlName="wInKyat" />
+                <input jhiNumberonly class="form-control" name="wInKyat" id="field_wInKyat" data-cy="wInKyat"
+                  formControlName="wInKyat" />
               </div>
               <div class="col-1" style="padding-left: 0px">
-                <label class="form-control-label" jhiTranslate="jewelsysApp.mortgageEntry.wInKyat" for="field_wInKyat">W In Kyat</label>
+                <label class="form-control-label" jhiTranslate="jewelsysApp.mortgageEntry.wInKyat" for="field_wInKyat">W
+                  In Kyat</label>
               </div>
               <div class="col-3">
-                <input type="number" class="form-control" name="wInPae" id="field_wInPae" data-cy="wInPae" formControlName="wInPae" />
+                <input jhiNumberonly class="form-control" name="wInPae" id="field_wInPae" data-cy="wInPae"
+                  formControlName="wInPae" />
               </div>
               <div class="col-1" style="padding-left: 0px">
-                <label class="form-control-label" jhiTranslate="jewelsysApp.mortgageEntry.wInPae" for="field_wInPae">W In Pae</label>
+                <label class="form-control-label" jhiTranslate="jewelsysApp.mortgageEntry.wInPae" for="field_wInPae">W
+                  In Pae</label>
               </div>
               <div class="col-3">
-                <input type="number" class="form-control" name="wInYway" id="field_wInYway" data-cy="wInYway" formControlName="wInYway" />
+                <input jhiNumberonly class="form-control" name="wInYway" id="field_wInYway" data-cy="wInYway"
+                  formControlName="wInYway" />
               </div>
               <div class="col-1" style="padding-left: 0px">
-                <label class="form-control-label" jhiTranslate="jewelsysApp.mortgageEntry.wInYway" for="field_wInYway">Yway</label>
+                <label class="form-control-label" jhiTranslate="jewelsysApp.mortgageEntry.wInYway"
+                  for="field_wInYway">Yway</label>
               </div>
             </div>
           </div>
 
           <div class="col-2">
-            <label class="form-control-label" jhiTranslate="jewelsysApp.mortgageEntry.mmDay" for="field_mmDay">Mm Day</label>
+            <label class="form-control-label" jhiTranslate="jewelsysApp.mortgageEntry.mmDay" for="field_mmDay">Mm
+              Day</label>
           </div>
           <div class="col-4">
             <div class="row">
               <div class="col-6">
-                <select class="form-control" id="field_mmDayGR" data-cy="mmDayGR" name="mmDayGR" formControlName="mmDayGR">
+                <select class="form-control" id="field_mmDayGR" data-cy="mmDayGR" name="mmDayGR"
+                  formControlName="mmDayGR">
                   <option [ngValue]="null"></option>
-                  <option
-                    [ngValue]="
+                  <option [ngValue]="
                       mmDayGroupData.categoryCode === editForm.get('mmDayGR')!.value
                         ? editForm.get('mmDayGR')!.value
                         : mmDayGroupData.categoryCode
-                    "
-                    *ngFor="let mmDayGroupData of mmDayGroupCollection; trackBy: trackMMCalendarByCode"
-                  >
+                    " *ngFor="let mmDayGroupData of mmDayGroupCollection; trackBy: trackCategoryByCode">
                     {{ mmDayGroupData.categoryDesc }}
                   </option>
                 </select>
@@ -288,12 +277,9 @@
               <div class="col-6">
                 <select class="form-control" id="field_mmDay" data-cy="mmDay" name="mmDay" formControlName="mmDay">
                   <option [ngValue]="null"></option>
-                  <option
-                    [ngValue]="
+                  <option [ngValue]="
                       mmDayData.categoryCode === editForm.get('mmDay')!.value ? editForm.get('mmDay')!.value : mmDayData.categoryCode
-                    "
-                    *ngFor="let mmDayData of mmDayCollection; trackBy: trackMMCalendarByCode"
-                  >
+                    " *ngFor="let mmDayData of mmDayCollection; trackBy: trackCategoryByCode">
                     {{ mmDayData.categoryDesc }}
                   </option>
                 </select>
@@ -304,16 +290,16 @@
 
         <div class="row form-group">
           <div class="col-2">
-            <label class="form-control-label" jhiTranslate="jewelsysApp.mortgageEntry.address" for="field_address">Address</label>
+            <label class="form-control-label" jhiTranslate="jewelsysApp.mortgageEntry.address"
+              for="field_address">Address</label>
           </div>
           <div class="col-6">
-            <input type="text" class="form-control" name="address" id="field_address" data-cy="address" formControlName="address" />
-            <div *ngIf="editForm.get('address')!.invalid && (editForm.get('address')!.dirty || editForm.get('address')!.touched)">
-              <small
-                class="form-text text-danger"
-                *ngIf="editForm.get('address')?.errors?.required"
-                jhiTranslate="entity.validation.required"
-              >
+            <input type="text" class="form-control" name="address" id="field_address" data-cy="address"
+              formControlName="address" />
+            <div
+              *ngIf="editForm.get('address')!.invalid && (editForm.get('address')!.dirty || editForm.get('address')!.touched)">
+              <small class="form-text text-danger" *ngIf="editForm.get('address')?.errors?.required"
+                jhiTranslate="entity.validation.required">
                 This field is required.
               </small>
             </div>
@@ -326,13 +312,8 @@
           <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
         </button>
 
-        <button
-          type="submit"
-          id="save-entity"
-          data-cy="entityCreateSaveButton"
-          [disabled]="editForm.invalid || isSaving"
-          class="btn btn-primary"
-        >
+        <button type="submit" id="save-entity" data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
           <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
         </button>
       </div>

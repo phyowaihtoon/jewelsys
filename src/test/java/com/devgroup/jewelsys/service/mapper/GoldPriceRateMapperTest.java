@@ -8,6 +8,6 @@ class GoldPriceRateMapperTest {
 
     @BeforeEach
     public void setUp() {
-        goldPriceRateMapper = new GoldPriceRateMapperImpl();
+        //goldPriceRateMapper = new GoldPriceRateMapperImpl();
     }
 }

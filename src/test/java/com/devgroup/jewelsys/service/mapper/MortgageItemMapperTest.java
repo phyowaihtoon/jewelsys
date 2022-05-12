@@ -11,6 +11,6 @@ class MortgageItemMapperTest {
 
     @BeforeEach
     public void setUp() {
-        mortgageItemMapper = new MortgageItemMapperImpl();
+       // mortgageItemMapper = new MortgageItemMapperImpl();
     }
 }

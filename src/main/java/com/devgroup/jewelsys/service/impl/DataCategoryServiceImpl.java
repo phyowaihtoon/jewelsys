@@ -89,4 +89,15 @@ public class DataCategoryServiceImpl implements DataCategoryService {
         }
         return dtoList;
     }
+
+    @Override
+    public List<DataCategoryDTO> findAllByCategoryType(String categoryType) {
+        List<DataCategoryDTO> dtoList = new ArrayList<DataCategoryDTO>();
+        List<DataCategory> itemList = dataCategoryRepository.findByCategoryType(categoryType);
+        for (DataCategory data : itemList) {
+            DataCategoryDTO dto = dataCategoryMapper.toDto(data);
+            dtoList.add(dto);
+        }
+        return dtoList;
+    }
 }

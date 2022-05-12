@@ -21,21 +21,22 @@
       "name": "Name",
       "address": "Address",
       "phone": "Phone",
-      "groupCode": "Group Code",
-      "itemCode": "Item Code",
+      "groupCode": "Group",
+      "itemCode": "Item",
       "damageType": "Damage Type",
       "weight": "Weight",
       "wInKyat": "Kyat",
       "wInPae": "Pae",
       "wInYway": "Yway",
       "principalAmount": "Principal Amount",
-      "startDate": "Start Date",
+      "startDate": "Date",
       "interestRate": "Interest Rate",
       "mmYear": "Myanmar Year",
       "mmMonth": "Month",
       "mmDayGR": "Mm Day GR",
       "mmDay": "Day",
-      "delFlg": "Del Flg"
+      "delFlg": "Del Flg",
+      "mStatus": "Status"
     }
   }
 }

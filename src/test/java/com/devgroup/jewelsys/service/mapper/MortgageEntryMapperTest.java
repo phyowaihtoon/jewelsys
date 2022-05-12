@@ -11,6 +11,6 @@ class MortgageEntryMapperTest {
 
     @BeforeEach
     public void setUp() {
-        mortgageEntryMapper = new MortgageEntryMapperImpl();
+        //mortgageEntryMapper = new MortgageEntryMapperImpl();
     }
 }

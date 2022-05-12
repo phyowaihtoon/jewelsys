@@ -9,6 +9,7 @@ export interface IMortgageEntry {
   phone?: string | null;
   groupCode?: MortgageItemGroup;
   itemCode?: string;
+  itemName?: string;
   damageType?: MortgageDamageType | null;
   wInKyat?: number | null;
   wInPae?: number | null;
@@ -17,9 +18,15 @@ export interface IMortgageEntry {
   startDate?: dayjs.Dayjs;
   interestRate?: number | null;
   mmYear?: string | null;
+  mmYearDesc?:string | null;
   mmMonth?: string | null;
+  mmMonthDesc?:string | null;
   mmDayGR?: string | null;
+  mmDayGRDesc?:string | null;
   mmDay?: string | null;
+  mmDayDesc?:string | null;
+  mortgageStatus?: string | null;
+  mortStatusDesc?: string | null;
   delFlg?: string | null;
 }
 
@@ -42,6 +49,7 @@ export class MortgageEntry implements IMortgageEntry {
     public mmMonth?: string | null,
     public mmDayGR?: string | null,
     public mmDay?: string | null,
+    public mortgageStatus?: string | null,
     public delFlg?: string | null
   ) {}
 }

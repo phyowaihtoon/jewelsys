@@ -8,6 +8,6 @@ class GemsPriceRateMapperTest {
 
     @BeforeEach
     public void setUp() {
-        gemsPriceRateMapper = new GemsPriceRateMapperImpl();
+       // gemsPriceRateMapper = new GemsPriceRateMapperImpl();
     }
 }

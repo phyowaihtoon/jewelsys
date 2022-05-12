@@ -11,6 +11,7 @@ export type EntityResponseType = HttpResponse<IRptParamsDTO>;
 })
 export class ReportService {
   public generateRptUrl = this.applicationConfigService.getEndpointFor('api/user-list-rpt');
+  public generateMortgageRptUrl = this.applicationConfigService.getEndpointFor('api/mortgage-list-rpt');
   public showPDFUrl = this.applicationConfigService.getEndpointFor('api/viewPdf');
   public downloadUrl = this.applicationConfigService.getEndpointFor('api/download');
   public testAPI = this.applicationConfigService.getEndpointFor('api/test');
@@ -19,6 +20,10 @@ export class ReportService {
 
   generateUserListRpt(reportDTO: IRptParamsDTO): Observable<EntityResponseType> {
     return this.http.post<IRptParamsDTO>(this.generateRptUrl, reportDTO, { observe: 'response' });
+  }
+
+  generateMortgageListRpt(reportDTO: IRptParamsDTO): Observable<EntityResponseType> {
+    return this.http.post<IRptParamsDTO>(this.generateMortgageRptUrl, reportDTO, { observe: 'response' });
   }
 
   showPDF(fileName: string): Observable<Blob> {

@@ -8,8 +8,7 @@ import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { TranslateModule, TranslateService, TranslateLoader, MissingTranslationHandler } from '@ngx-translate/core';
 import { NgxWebstorageModule } from 'ngx-webstorage';
 import * as dayjs from 'dayjs';
-import { NgbDateAdapter, NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
-
+import { NgbDateAdapter, NgbDateParserFormatter, NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
 import { SERVER_API_URL } from './app.constants';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import './config/dayjs';
@@ -19,6 +18,7 @@ import { HomeModule } from './home/home.module';
 import { EntityRoutingModule } from './entities/entity-routing.module';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 import { NgbDateDayjsAdapter } from './config/datepicker-adapter';
+import { NgbDateCustomParserFormatter } from './config/NgbDateCustomParserFormatter';
 import { fontAwesomeIcons } from './config/font-awesome-icons';
 import { httpInterceptorProviders } from 'app/core/interceptor/index';
 import { translatePartialLoader, missingTranslationHandler } from './config/translation.config';
@@ -61,6 +61,7 @@ import { ReporRoutingtModule } from './reports/report.routing.module';
     Title,
     { provide: LOCALE_ID, useValue: 'en' },
     { provide: NgbDateAdapter, useClass: NgbDateDayjsAdapter },
+    { provide: NgbDateParserFormatter, useClass: NgbDateCustomParserFormatter },
     httpInterceptorProviders,
   ],
   declarations: [MainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent],
@@ -69,14 +70,14 @@ import { ReporRoutingtModule } from './reports/report.routing.module';
 export class AppModule {
   constructor(
     applicationConfigService: ApplicationConfigService,
-    iconLibrary: FaIconLibrary,
     dpConfig: NgbDatepickerConfig,
-    translateService: TranslateService
+    translateService: TranslateService,
+    faIconLibrary: FaIconLibrary
   ) {
     applicationConfigService.setEndpointPrefix(SERVER_API_URL);
     registerLocaleData(locale);
-    iconLibrary.addIcons(...fontAwesomeIcons);
-    dpConfig.minDate = { year: dayjs().subtract(100, 'year').year(), month: 1, day: 1 };
+    faIconLibrary.addIcons(...fontAwesomeIcons);
+    dpConfig.minDate = { year: dayjs().subtract(10, 'year').year(), month: 1, day: 1 };
     translateService.setDefaultLang('en');
     translateService.use('en');
   }

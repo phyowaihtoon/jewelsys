@@ -7,5 +7,7 @@ import java.util.List;
 public interface ReportService {
     public String printUserList(RptParamsDTO rptPara);
 
+    public String generateMortgage(RptParamsDTO rptPara);
+
     public List<PGoldType> getAllGoldTypeFrmPS();
 }

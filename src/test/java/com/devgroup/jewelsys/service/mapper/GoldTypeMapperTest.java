@@ -8,6 +8,6 @@ class GoldTypeMapperTest {
 
     @BeforeEach
     public void setUp() {
-        goldTypeMapper = new GoldTypeMapperImpl();
+      //  goldTypeMapper = new GoldTypeMapperImpl();
     }
 }

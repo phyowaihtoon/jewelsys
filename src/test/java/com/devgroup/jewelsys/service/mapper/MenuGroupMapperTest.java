@@ -8,6 +8,6 @@ class MenuGroupMapperTest {
 
     @BeforeEach
     public void setUp() {
-        menuGroupMapper = new MenuGroupMapperImpl();
+       // menuGroupMapper = new MenuGroupMapperImpl();
     }
 }

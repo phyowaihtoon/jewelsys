@@ -1,5 +1,5 @@
 <div class="row justify-content-center">
-  <div class="col-8">
+  <div class="col-12">
     <div *ngIf="mortgageEntry">
       <h2 data-cy="mortgageEntryDetailsHeading"><span jhiTranslate="jewelsysApp.mortgageEntry.detail.title">Mortgage Entry</span></h2>
 
@@ -9,80 +9,145 @@
 
       <jhi-alert></jhi-alert>
 
-      <dl class="row-md jh-entity-details">
-        <dt><span jhiTranslate="global.field.id">ID</span></dt>
-        <dd>
+      <div class="row mb-3">
+        <div class="col-2">
+          <span style="font-weight:bold" jhiTranslate="global.field.id">ID</span>
+        </div>
+        <div class="col-4">
           <span>{{ mortgageEntry.id }}</span>
-        </dd>
-        <dt><span jhiTranslate="jewelsysApp.mortgageEntry.name">Name</span></dt>
-        <dd>
+        </div>
+        <div class="col-2">
+          <span style="font-weight:bold" jhiTranslate="jewelsysApp.mortgageEntry.mStatus">Status</span>
+        </div>
+        <div class="col-4">
+          <span>{{ mortgageEntry.mortStatusDesc }}</span>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-2">
+          <span style="font-weight:bold" jhiTranslate="jewelsysApp.mortgageEntry.name">Name</span>
+        </div>
+        <div class="col-4">
           <span>{{ mortgageEntry.name }}</span>
-        </dd>
-        <dt><span jhiTranslate="jewelsysApp.mortgageEntry.address">Address</span></dt>
-        <dd>
-          <span>{{ mortgageEntry.address }}</span>
-        </dd>
-        <dt><span jhiTranslate="jewelsysApp.mortgageEntry.phone">Phone</span></dt>
-        <dd>
-          <span>{{ mortgageEntry.phone }}</span>
-        </dd>
-        <dt><span jhiTranslate="jewelsysApp.mortgageEntry.groupCode">Group Code</span></dt>
-        <dd>
+        </div>
+        <div class="col-2">
+          <span style="font-weight:bold" jhiTranslate="jewelsysApp.mortgageEntry.startDate">Start Date</span>
+        </div>
+        <div class="col-4">
+          <span>{{ mortgageEntry.startDate ? mortgageEntry.startDate.format('DD-MM-YYYY') : '-' }}</span>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-2">
+          <span style="font-weight:bold" jhiTranslate="jewelsysApp.mortgageEntry.phone">Phone</span>
+        </div>
+        <div class="col-4">
+          {{ mortgageEntry.phone }}
+        </div>
+        <div class="col-2">
+          <span style="font-weight:bold" jhiTranslate="jewelsysApp.mortgageEntry.principalAmount">Principal Amount</span>
+        </div>
+        <div class="col-4">
+          {{ mortgageEntry.principalAmount }}
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-2">
+          <span style="font-weight:bold" jhiTranslate="jewelsysApp.mortgageEntry.groupCode">Group Code</span>
+        </div>
+        <div class="col-4">
           <span jhiTranslate="{{ 'jewelsysApp.MortgageItemGroup.' + mortgageEntry.groupCode }}">{{ mortgageEntry.groupCode }}</span>
-        </dd>
-        <dt><span jhiTranslate="jewelsysApp.mortgageEntry.itemCode">Item Code</span></dt>
-        <dd>
-          <span>{{ mortgageEntry.itemCode }}</span>
-        </dd>
-        <dt><span jhiTranslate="jewelsysApp.mortgageEntry.damageType">Damage Type</span></dt>
-        <dd>
+        </div>
+        <div class="col-2">
+          <span style="font-weight:bold" jhiTranslate="jewelsysApp.mortgageEntry.interestRate">Interest Rate</span>
+        </div>
+        <div class="col-4">
+          {{ mortgageEntry.interestRate }}
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-2">
+          <span style="font-weight:bold" jhiTranslate="jewelsysApp.mortgageEntry.itemCode">Item</span>
+        </div>
+        <div class="col-4">
+          {{ mortgageEntry.itemName }}
+        </div>
+        <div class="col-2">
+          <span style="font-weight:bold" jhiTranslate="jewelsysApp.mortgageEntry.mmYear">Mm Year</span>
+        </div>
+        <div class="col-4">
+          {{ mortgageEntry.mmYearDesc }}
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-2">
+          <span style="font-weight:bold" jhiTranslate="jewelsysApp.mortgageEntry.damageType">Damage Type</span>
+        </div>
+        <div class="col-4">
           <span jhiTranslate="{{ 'jewelsysApp.MortgageDamageType.' + mortgageEntry.damageType }}">{{ mortgageEntry.damageType }}</span>
-        </dd>
-        <dt><span jhiTranslate="jewelsysApp.mortgageEntry.wInKyat">W In Kyat</span></dt>
-        <dd>
-          <span>{{ mortgageEntry.wInKyat }}</span>
-        </dd>
-        <dt><span jhiTranslate="jewelsysApp.mortgageEntry.wInPae">W In Pae</span></dt>
-        <dd>
-          <span>{{ mortgageEntry.wInPae }}</span>
-        </dd>
-        <dt><span jhiTranslate="jewelsysApp.mortgageEntry.wInYway">W In Yway</span></dt>
-        <dd>
-          <span>{{ mortgageEntry.wInYway }}</span>
-        </dd>
-        <dt><span jhiTranslate="jewelsysApp.mortgageEntry.principalAmount">Principal Amount</span></dt>
-        <dd>
-          <span>{{ mortgageEntry.principalAmount }}</span>
-        </dd>
-        <dt><span jhiTranslate="jewelsysApp.mortgageEntry.startDate">Start Date</span></dt>
-        <dd>
-          <span>{{ mortgageEntry.startDate | formatMediumDatetime }}</span>
-        </dd>
-        <dt><span jhiTranslate="jewelsysApp.mortgageEntry.interestRate">Interest Rate</span></dt>
-        <dd>
-          <span>{{ mortgageEntry.interestRate }}</span>
-        </dd>
-        <dt><span jhiTranslate="jewelsysApp.mortgageEntry.mmYear">Mm Year</span></dt>
-        <dd>
-          <span>{{ mortgageEntry.mmYear }}</span>
-        </dd>
-        <dt><span jhiTranslate="jewelsysApp.mortgageEntry.mmMonth">Mm Month</span></dt>
-        <dd>
-          <span>{{ mortgageEntry.mmMonth }}</span>
-        </dd>
-        <dt><span jhiTranslate="jewelsysApp.mortgageEntry.mmDayGR">Mm Day GR</span></dt>
-        <dd>
-          <span>{{ mortgageEntry.mmDayGR }}</span>
-        </dd>
-        <dt><span jhiTranslate="jewelsysApp.mortgageEntry.mmDay">Mm Day</span></dt>
-        <dd>
-          <span>{{ mortgageEntry.mmDay }}</span>
-        </dd>
-        <dt><span jhiTranslate="jewelsysApp.mortgageEntry.delFlg">Del Flg</span></dt>
-        <dd>
-          <span>{{ mortgageEntry.delFlg }}</span>
-        </dd>
-      </dl>
+        </div>
+        <div class="col-2">
+          <span style="font-weight:bold" jhiTranslate="jewelsysApp.mortgageEntry.mmMonth">Mm Month</span>
+        </div>
+        <div class="col-4">
+          {{ mortgageEntry.mmMonthDesc }}
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-2">
+          <span style="font-weight:bold" jhiTranslate="jewelsysApp.mortgageEntry.weight">Weight</span>
+        </div>
+        <div class="col-4">
+          <div class="row col-12">
+            <div>
+              <span *ngIf="mortgageEntry.wInKyat"> {{ mortgageEntry.wInKyat }} &nbsp;-&nbsp;</span>
+            </div>
+            <div>
+              <span *ngIf="mortgageEntry.wInKyat" jhiTranslate="jewelsysApp.mortgageEntry.wInKyat">Kyat</span>
+            </div>
+            <div>
+              <span *ngIf="mortgageEntry.wInPae"> &nbsp; {{ mortgageEntry.wInPae }} &nbsp;-&nbsp;</span>
+            </div>
+            <div>
+              <span *ngIf="mortgageEntry.wInPae" jhiTranslate="jewelsysApp.mortgageEntry.wInPae">Pae</span>
+            </div>
+            <div>
+              <span *ngIf="mortgageEntry.wInYway"> &nbsp; {{ mortgageEntry.wInYway }} &nbsp;-&nbsp;</span>
+            </div>
+            <div>
+              <span *ngIf="mortgageEntry.wInYway" jhiTranslate="jewelsysApp.mortgageEntry.wInYway">Yway</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-2">
+          <span style="font-weight:bold" jhiTranslate="jewelsysApp.mortgageEntry.mmDay">Day</span>
+        </div>
+        <div class="col-4">
+          <div class="row">
+            <div class="col-6">
+              {{ mortgageEntry.mmDayGRDesc }} {{ mortgageEntry.mmDayDesc }}
+            </div>
+            <div class="col-6">
+              
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-2">
+          <span style="font-weight:bold" jhiTranslate="jewelsysApp.mortgageEntry.address">Address</span>
+        </div>
+        <div class="col-10">
+          <span>{{ mortgageEntry.address }}</span>
+        </div>
+      </div>
 
       <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
         <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
@@ -91,6 +156,8 @@
       <button type="button" [routerLink]="['/mortgage-entry', mortgageEntry.id, 'edit']" class="btn btn-primary">
         <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
       </button>
+
     </div>
+
   </div>
 </div>

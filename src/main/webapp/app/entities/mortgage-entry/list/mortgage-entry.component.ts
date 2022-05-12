@@ -3,9 +3,7 @@ import { HttpHeaders, HttpResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { combineLatest } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-
 import { IMortgageEntry } from '../mortgage-entry.model';
-
 import { ITEMS_PER_PAGE } from 'app/config/pagination.constants';
 import { MortgageEntryService } from '../service/mortgage-entry.service';
 import { MortgageEntryDeleteDialogComponent } from '../delete/mortgage-entry-delete-dialog.component';

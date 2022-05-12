@@ -1,7 +1,9 @@
 package com.devgroup.jewelsys.service.impl;
 
+import com.devgroup.jewelsys.domain.DataCategory;
 import com.devgroup.jewelsys.domain.MortgageEntry;
 import com.devgroup.jewelsys.domain.MortgageItem;
+import com.devgroup.jewelsys.repository.DataCategoryRepository;
 import com.devgroup.jewelsys.repository.MortgageEntryRepository;
 import com.devgroup.jewelsys.repository.MortgageItemRepository;
 import com.devgroup.jewelsys.service.MortgageEntryService;
@@ -31,21 +33,27 @@ public class MortgageEntryServiceImpl implements MortgageEntryService {
 
     private final MortgageItemRepository mortgageItemRepository;
 
+    private final DataCategoryRepository dataCategoryRepository;
+
     private final MortgageEntryMapper mortgageEntryMapper;
 
     public MortgageEntryServiceImpl(
         MortgageEntryRepository mortgageEntryRepository,
         MortgageEntryMapper mortgageEntryMapper,
-        MortgageItemRepository mortgageItemRepository
+        MortgageItemRepository mortgageItemRepository,
+        DataCategoryRepository dataCategoryRepository
     ) {
         this.mortgageEntryRepository = mortgageEntryRepository;
         this.mortgageEntryMapper = mortgageEntryMapper;
         this.mortgageItemRepository = mortgageItemRepository;
+        this.dataCategoryRepository = dataCategoryRepository;
     }
 
     @Override
     public MortgageEntryDTO save(MortgageEntryDTO mortgageEntryDTO) {
         log.debug("Request to save MortgageEntry : {}", mortgageEntryDTO);
+        mortgageEntryDTO.setDelFlg("N");
+        mortgageEntryDTO.setMortgageStatus("MN");
         MortgageEntry mortgageEntry = mortgageEntryMapper.toEntity(mortgageEntryDTO);
         mortgageEntry = mortgageEntryRepository.save(mortgageEntry);
         return mortgageEntryMapper.toDto(mortgageEntry);
@@ -80,6 +88,8 @@ public class MortgageEntryServiceImpl implements MortgageEntryService {
             for (MortgageEntryDTO mortgage : mortgageList) {
                 MortgageItem item = mortgageItemRepository.findByCode(mortgage.getItemCode());
                 mortgage.setItemName(item.getItemName());
+                DataCategory dcMortStatus = dataCategoryRepository.findByCategoryCode(mortgage.getMortgageStatus());
+                mortgage.setMortStatusDesc(dcMortStatus.getCategoryDesc());
                 updatedList.add(mortgage);
             }
             commonDTO.setUpdatedMEList(updatedList);
@@ -91,7 +101,28 @@ public class MortgageEntryServiceImpl implements MortgageEntryService {
     @Transactional(readOnly = true)
     public Optional<MortgageEntryDTO> findOne(Long id) {
         log.debug("Request to get MortgageEntry : {}", id);
-        return mortgageEntryRepository.findById(id).map(mortgageEntryMapper::toDto);
+        Optional<MortgageEntryDTO> dtoOptional = mortgageEntryRepository.findById(id).map(mortgageEntryMapper::toDto);
+        if (dtoOptional != null) {
+            //Extracting Mortgage Item Description
+            MortgageItem item = mortgageItemRepository.findByCode(dtoOptional.get().getItemCode());
+            dtoOptional.get().setItemName(item.getItemName());
+            //Extracting Mortgage Status Description
+            DataCategory dcMortStatus = dataCategoryRepository.findByCategoryCode(dtoOptional.get().getMortgageStatus());
+            dtoOptional.get().setMortStatusDesc(dcMortStatus.getCategoryDesc());
+            //Extracting MM Year Description
+            DataCategory dcMMYear = dataCategoryRepository.findByCategoryCode(dtoOptional.get().getMmYear());
+            dtoOptional.get().setMmYearDesc(dcMMYear != null ? dcMMYear.getCategoryDesc() : "");
+            //Extracting MM Month Description
+            DataCategory dcMMMonth = dataCategoryRepository.findByCategoryCode(dtoOptional.get().getMmMonth());
+            dtoOptional.get().setMmMonthDesc(dcMMMonth != null ? dcMMMonth.getCategoryDesc() : "");
+            //Extracting MM Day Group Description
+            DataCategory dcMMDayGroup = dataCategoryRepository.findByCategoryCode(dtoOptional.get().getMmDayGR());
+            dtoOptional.get().setMmDayGRDesc(dcMMDayGroup != null ? dcMMDayGroup.getCategoryDesc() : "");
+            //Extracting MM Day Description
+            DataCategory dcMMDay = dataCategoryRepository.findByCategoryCode(dtoOptional.get().getMmDay());
+            dtoOptional.get().setMmDayDesc(dcMMDay != null ? dcMMDay.getCategoryDesc() : "");
+        }
+        return dtoOptional;
     }
 
     @Override
