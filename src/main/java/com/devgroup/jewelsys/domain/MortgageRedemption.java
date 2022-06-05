@@ -1,6 +1,7 @@
 package com.devgroup.jewelsys.domain;
 
 import java.io.Serializable;
+import java.time.Instant;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -31,7 +32,7 @@ public class MortgageRedemption extends AbstractAuditingEntity implements Serial
 
     @NotNull
     @Column(name = "mr_date", nullable = false)
-    private String mrDate;
+    private Instant mrDate;
 
     @NotNull
     @Column(name = "mr_time", nullable = false)
@@ -48,6 +49,10 @@ public class MortgageRedemption extends AbstractAuditingEntity implements Serial
 
     @Column(name = "mr_MMDay")
     private String mrMMDay;
+
+    @NotNull
+    @Column(name = "del_flg")
+    private String delFlg;
 
     public Long getId() {
         return id;
@@ -73,11 +78,11 @@ public class MortgageRedemption extends AbstractAuditingEntity implements Serial
         this.interestAmount = interestAmount;
     }
 
-    public String getMrDate() {
+    public Instant getMrDate() {
         return mrDate;
     }
 
-    public void setMrDate(String mrDate) {
+    public void setMrDate(Instant mrDate) {
         this.mrDate = mrDate;
     }
 
@@ -119,5 +124,13 @@ public class MortgageRedemption extends AbstractAuditingEntity implements Serial
 
     public void setMrMMDay(String mrMMDay) {
         this.mrMMDay = mrMMDay;
+    }
+
+    public String getDelFlg() {
+        return delFlg;
+    }
+
+    public void setDelFlg(String delFlg) {
+        this.delFlg = delFlg;
     }
 }

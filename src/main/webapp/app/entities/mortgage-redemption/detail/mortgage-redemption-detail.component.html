@@ -1,0 +1,227 @@
+<div class="justify-content-center">
+  <h2 data-cy="mortgageRedemptionHeading"><span jhiTranslate="jewelsysApp.mortgageRedemption.home.title">Mortgage Redemption</span></h2>
+  <div class="col-12">
+    <jhi-alert-error></jhi-alert-error>
+    <jhi-alert></jhi-alert>
+    <div *ngIf="mortgageEntry">
+      <div class="row mb-3">
+        <div class="col-2">
+          <span style="font-weight: bold" jhiTranslate="global.field.id">ID</span>
+        </div>
+        <div class="col-4">
+          <span>{{ mortgageEntry.id }}</span>
+        </div>
+        <div class="col-2">
+          <span style="font-weight: bold" jhiTranslate="jewelsysApp.mortgageEntry.mStatus">Status</span>
+        </div>
+        <div class="col-4">
+          <span>{{ mortgageEntry.mortStatusDesc }}</span>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-2">
+          <span style="font-weight: bold" jhiTranslate="jewelsysApp.mortgageEntry.name">Name</span>
+        </div>
+        <div class="col-4">
+          <span>{{ mortgageEntry.name }}</span>
+        </div>
+        <div class="col-2">
+          <span style="font-weight: bold" jhiTranslate="jewelsysApp.mortgageEntry.startDate">Start Date</span>
+        </div>
+        <div class="col-4">
+          <span>{{ mortgageEntry.startDate ? mortgageEntry.startDate.format('DD-MM-YYYY') : '-' }}</span>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-2">
+          <span style="font-weight: bold" jhiTranslate="jewelsysApp.mortgageEntry.phone">Phone</span>
+        </div>
+        <div class="col-4">
+          {{ mortgageEntry.phone }}
+        </div>
+        <div class="col-2">
+          <span style="font-weight: bold" jhiTranslate="jewelsysApp.mortgageEntry.principalAmount">Principal Amount</span>
+        </div>
+        <div class="col-4">
+          {{ mortgageEntry.principalAmount }}
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-2">
+          <span style="font-weight: bold" jhiTranslate="jewelsysApp.mortgageEntry.groupCode">Group Code</span>
+        </div>
+        <div class="col-4">
+          <span jhiTranslate="{{ 'jewelsysApp.MortgageItemGroup.' + mortgageEntry.groupCode }}">{{ mortgageEntry.groupCode }}</span>
+        </div>
+        <div class="col-2">
+          <span style="font-weight: bold" jhiTranslate="jewelsysApp.mortgageEntry.interestRate">Interest Rate</span>
+        </div>
+        <div class="col-4">
+          {{ mortgageEntry.interestRate }}
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-2">
+          <span style="font-weight: bold" jhiTranslate="jewelsysApp.mortgageEntry.itemCode">Item</span>
+        </div>
+        <div class="col-4">
+          {{ mortgageEntry.itemName }}
+        </div>
+        <div class="col-2">
+          <span style="font-weight: bold" jhiTranslate="jewelsysApp.mortgageEntry.mmYear">Mm Year</span>
+        </div>
+        <div class="col-4">
+          {{ mortgageEntry.mmYearDesc }}
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-2">
+          <span style="font-weight: bold" jhiTranslate="jewelsysApp.mortgageEntry.damageType">Damage Type</span>
+        </div>
+        <div class="col-4">
+          <span jhiTranslate="{{ 'jewelsysApp.MortgageDamageType.' + mortgageEntry.damageType }}">{{ mortgageEntry.damageType }}</span>
+        </div>
+        <div class="col-2">
+          <span style="font-weight: bold" jhiTranslate="jewelsysApp.mortgageEntry.mmMonth">Mm Month</span>
+        </div>
+        <div class="col-4">
+          {{ mortgageEntry.mmMonthDesc }}
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-2">
+          <span style="font-weight: bold" jhiTranslate="jewelsysApp.mortgageEntry.weight">Weight</span>
+        </div>
+        <div class="col-4">
+          <div class="row col-12">
+            <div>
+              <span *ngIf="mortgageEntry.wInKyat"> {{ mortgageEntry.wInKyat }} &nbsp;-&nbsp;</span>
+            </div>
+            <div>
+              <span *ngIf="mortgageEntry.wInKyat" jhiTranslate="jewelsysApp.mortgageEntry.wInKyat">Kyat</span>
+            </div>
+            <div>
+              <span *ngIf="mortgageEntry.wInPae"> &nbsp; {{ mortgageEntry.wInPae }} &nbsp;-&nbsp;</span>
+            </div>
+            <div>
+              <span *ngIf="mortgageEntry.wInPae" jhiTranslate="jewelsysApp.mortgageEntry.wInPae">Pae</span>
+            </div>
+            <div>
+              <span *ngIf="mortgageEntry.wInYway"> &nbsp; {{ mortgageEntry.wInYway }} &nbsp;-&nbsp;</span>
+            </div>
+            <div>
+              <span *ngIf="mortgageEntry.wInYway" jhiTranslate="jewelsysApp.mortgageEntry.wInYway">Yway</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-2">
+          <span style="font-weight: bold" jhiTranslate="jewelsysApp.mortgageEntry.mmDay">Day</span>
+        </div>
+        <div class="col-4">
+          <div class="row">
+            <div class="col-6">{{ mortgageEntry.mmDayGRDesc }} {{ mortgageEntry.mmDayDesc }}</div>
+            <div class="col-6"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-2">
+          <span style="font-weight: bold" jhiTranslate="jewelsysApp.mortgageEntry.address">Address</span>
+        </div>
+        <div class="col-10">
+          <span>{{ mortgageEntry.address }}</span>
+        </div>
+      </div>
+    </div>
+
+    <h4 data-cy="mortgageRedemptionEntryHeading">
+      <span jhiTranslate="jewelsysApp.mortgageRedemption.home.entryTitle">Redemption Data</span>
+    </h4>
+    <hr />
+
+    <div *ngIf="mortgageRedemption">
+      <div class="row form-group">
+        <div class="col-2">
+          <label
+            style="font-weight: bold"
+            class="form-control-label"
+            jhiTranslate="jewelsysApp.mortgageRedemption.interestAmount"
+            for="field_interestAmount"
+            >Interest Amount</label
+          >
+        </div>
+        <div class="col-4">
+          <span> {{ mortgageRedemption.interestAmount }}</span>
+        </div>
+        <div class="col-2">
+          <label style="font-weight: bold" class="form-control-label" jhiTranslate="jewelsysApp.mortgageEntry.mmYear" for="field_mmYear"
+            >Mm Year</label
+          >
+        </div>
+        <div class="col-4">
+          <span> {{ mortgageRedemption.mrMMYear }}</span>
+        </div>
+      </div>
+
+      <div class="row form-group">
+        <div class="col-2">
+          <label
+            style="font-weight: bold"
+            class="form-control-label"
+            jhiTranslate="jewelsysApp.mortgageRedemption.mrDate"
+            for="field_mrDate"
+            >Date</label
+          >
+        </div>
+
+        <div class="col-4 input-group">
+          <span>{{ mortgageRedemption.mrDate ? mortgageRedemption.mrDate.format('DD-MM-YYYY') : '-' }}</span>
+        </div>
+        <div class="col-2">
+          <label style="font-weight: bold" class="form-control-label" jhiTranslate="jewelsysApp.mortgageEntry.mmMonth" for="field_mrMMMonth"
+            >Mm Month</label
+          >
+        </div>
+        <div class="col-4">
+          <span>{{ mortgageRedemption.mrMMMonth }}</span>
+        </div>
+      </div>
+
+      <div class="row form-group">
+        <div class="col-2">
+          <label
+            style="font-weight: bold"
+            class="form-control-label"
+            jhiTranslate="jewelsysApp.mortgageRedemption.mrTime"
+            for="field_mrTime"
+            >Time</label
+          >
+        </div>
+        <div class="col-4">
+          <span>{{ mortgageRedemption.mrTime }}</span>
+        </div>
+        <div class="col-2">
+          <label style="font-weight: bold" class="form-control-label" jhiTranslate="jewelsysApp.mortgageEntry.mmDay" for="field_mrMMDayGR"
+            >Mm Day</label
+          >
+        </div>
+        <div class="col-4">
+          <span>{{ mortgageRedemption.mrMMDayGR }} {{ mortgageRedemption.mrMMDay }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <button type="button" id="cancel-save" class="btn btn-primary btn-sm" (click)="previousState()">
+        <span jhiTranslate="entity.action.ok">OK</span>
+      </button>
+    </div>
+  </div>
+</div>

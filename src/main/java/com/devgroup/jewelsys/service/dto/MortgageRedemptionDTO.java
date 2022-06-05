@@ -27,6 +27,10 @@ public class MortgageRedemptionDTO {
 
     private String mrMMDay;
 
+    private String delFlg;
+
+    private MortgageEntryDTO entryDTO;
+
     public Long getId() {
         return id;
     }
@@ -99,6 +103,22 @@ public class MortgageRedemptionDTO {
         this.mrMMDay = mrMMDay;
     }
 
+    public String getDelFlg() {
+        return delFlg;
+    }
+
+    public void setDelFlg(String delFlg) {
+        this.delFlg = delFlg;
+    }
+
+    public MortgageEntryDTO getEntryDTO() {
+        return entryDTO;
+    }
+
+    public void setEntryDTO(MortgageEntryDTO entryDTO) {
+        this.entryDTO = entryDTO;
+    }
+
     @Override
     public int hashCode() {
         // TODO Auto-generated method stub
@@ -120,5 +140,40 @@ public class MortgageRedemptionDTO {
             return false;
         }
         return Objects.equals(this.id, mortgageRedemptionDTO.id);
+    }
+
+    @Override
+    public String toString() {
+        return (
+            "MortgageRedemptionDTO{" +
+            "id=" +
+            getId() +
+            "," +
+            "mortgageID=" +
+            getMortgageID() +
+            "," +
+            "interestAmount=" +
+            getInterestAmount() +
+            "," +
+            "mrDate=" +
+            getMrDate() +
+            "," +
+            "mrTime=" +
+            getMrTime() +
+            "," +
+            "mrMMYear=" +
+            getMrMMYear() +
+            "," +
+            "mrMMMonth=" +
+            getMrMMMonth() +
+            "," +
+            "mrMMDayGR=" +
+            getMrMMDayGR() +
+            "," +
+            "mrMMDay=" +
+            getMrMMDay() +
+            "," +
+            "}"
+        );
     }
 }

@@ -5,7 +5,6 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { finalize, map } from 'rxjs/operators';
 import * as dayjs from 'dayjs';
-import { MY_DATE_FORMAT } from 'app/config/input.constants';
 import { IMortgageEntry, MortgageEntry } from '../mortgage-entry.model';
 import { MortgageEntryService } from '../service/mortgage-entry.service';
 import { IMortgageItem } from 'app/entities/mortgage-item/mortgage-item.model';
@@ -19,7 +18,7 @@ import { IDataCategory } from 'app/entities/data-category/data-category.model';
 })
 export class MortgageEntryUpdateComponent implements OnInit {
   isSaving = false;
-  regExpDecimal:RegExp=new RegExp('^[0-9]+(\\.[0-9]{1,2}){0,1}$');
+  regExpDecimal: RegExp = new RegExp('^[0-9]+(\\.[0-9]{1,2}){0,1}$');
 
   orgMortgItemCollection: IMortgageItem[] = [];
   mortgageItemCollection: IMortgageItem[] = [];
@@ -43,7 +42,7 @@ export class MortgageEntryUpdateComponent implements OnInit {
     wInKyat: [],
     wInPae: [],
     wInYway: [],
-    principalAmount: [null, [Validators.required,Validators.pattern(this.regExpDecimal)]],
+    principalAmount: [null, [Validators.required, Validators.pattern(this.regExpDecimal)]],
     startDate: [null, [Validators.required]],
     interestRate: [],
     mmYear: [],

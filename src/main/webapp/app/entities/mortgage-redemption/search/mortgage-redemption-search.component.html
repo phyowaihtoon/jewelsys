@@ -1,0 +1,59 @@
+<div class="justify-content-center">
+  <h2 id="jhi-mortgage-entry-heading" data-cy="MortgageEntryCreateUpdateHeading" jhiTranslate="jewelsysApp.mortgageRedemption.home.title">
+    Mortgage Redemption
+  </h2>
+
+  <div class="col-12" style="padding-top: 10px">
+    <form name="searchForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="searchForm" autocomplete="off">
+      <div class="row form-group">
+        <div class="col-2">
+          <label class="form-control-label" jhiTranslate="jewelsysApp.mortgageRedemption.home.function" for="field_mortgageID"
+            >Function</label
+          >
+        </div>
+        <div class="col-4">
+          <select class="form-control" id="field_searchType" data-cy="searchType" name="searchType" formControlName="searchType">
+            <option [ngValue]="null"></option>
+            <option [ngValue]="1">Inquire</option>
+            <option [ngValue]="2">Add</option>
+          </select>
+        </div>
+        <div class="col-2"></div>
+        <div class="col-4"></div>
+      </div>
+
+      <div class="row form-group">
+        <div class="col-2">
+          <label class="form-control-label" jhiTranslate="jewelsysApp.mortgageRedemption.mortgageID" for="field_mortgageID"
+            >Mortgage ID</label
+          >
+        </div>
+        <div class="col-4">
+          <input
+            type="text"
+            class="form-control"
+            name="mortgageID"
+            id="field_mortgageID"
+            data-cy="mortgageID"
+            formControlName="mortgageID"
+          />
+        </div>
+        <div class="col-2"></div>
+        <div class="col-4"></div>
+      </div>
+      <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+        <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+      </button>
+
+      <button
+        type="submit"
+        id="search-entity"
+        data-cy="entitySearchButton"
+        [disabled]="searchForm.invalid || isSearching"
+        class="btn btn-primary"
+      >
+        <fa-icon icon="search"></fa-icon>&nbsp;<span jhiTranslate="entity.action.search">Search</span>
+      </button>
+    </form>
+  </div>
+</div>

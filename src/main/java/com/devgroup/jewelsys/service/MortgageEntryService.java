@@ -42,6 +42,14 @@ public interface MortgageEntryService {
     Optional<MortgageEntryDTO> findOne(Long id);
 
     /**
+     * Get MortgageEntry.
+     *
+     * @param mortgage ID.
+     * @return the entity.
+     */
+    Optional<MortgageEntryDTO> findOneByMortgageID(String id);
+
+    /**
      * Delete the "id" mortgageEntry.
      *
      * @param id the id of the entity.

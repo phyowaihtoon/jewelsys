@@ -1,0 +1,22 @@
+{
+  "jewelsysApp": {
+    "mortgageRedemption": {
+      "home": {
+        "title": "Mortgage Redemption",
+        "mortgageInfoTitle": "Mortgage Information",
+        "entryTitle": "Redemption Data",
+        "notFound": "No Mortgage Redemption found",
+        "function": "Function"
+      },
+      "id": "ID",
+      "mortgageID": "Mortgage ID",
+      "interestAmount": "Interest Amount",
+      "mrDate": "Date",
+      "mrTime": "Time",
+      "mrMMYear": "Myanmar Year",
+      "mrMMMonth": "Myanmar Month",
+      "mrMMDayGR": "Myanmar Day",
+      "mrMMDay": "-"
+    }
+  }
+}

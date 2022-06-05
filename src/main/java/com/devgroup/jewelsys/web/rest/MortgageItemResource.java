@@ -17,7 +17,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -58,7 +57,6 @@ public class MortgageItemResource {
     @PostMapping("/mortgage-items")
     public ResponseEntity<MortgageItemDTO> createMortgageItem(@Valid @RequestBody MortgageItemDTO mortgageItemDTO)
         throws URISyntaxException {
-        log.debug("REST request to save MortgageItem : {}", mortgageItemDTO);
         if (mortgageItemDTO.getId() != null) {
             throw new BadRequestAlertException("A new mortgageItem cannot already have an ID", ENTITY_NAME, "idexists");
         }

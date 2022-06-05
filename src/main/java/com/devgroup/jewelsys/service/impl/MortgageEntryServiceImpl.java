@@ -130,4 +130,31 @@ public class MortgageEntryServiceImpl implements MortgageEntryService {
         log.debug("Request to delete MortgageEntry : {}", id);
         mortgageEntryRepository.deleteById(id);
     }
+
+    @Override
+    public Optional<MortgageEntryDTO> findOneByMortgageID(String id) {
+        log.debug("Request to get MortgageEntry : {}", id);
+        Optional<MortgageEntryDTO> dtoOptional = mortgageEntryRepository.findById(Long.valueOf(id)).map(mortgageEntryMapper::toDto);
+        if (dtoOptional != null) {
+            //Extracting Mortgage Item Description
+            MortgageItem item = mortgageItemRepository.findByCode(dtoOptional.get().getItemCode());
+            dtoOptional.get().setItemName(item.getItemName());
+            //Extracting Mortgage Status Description
+            DataCategory dcMortStatus = dataCategoryRepository.findByCategoryCode(dtoOptional.get().getMortgageStatus());
+            dtoOptional.get().setMortStatusDesc(dcMortStatus.getCategoryDesc());
+            //Extracting MM Year Description
+            DataCategory dcMMYear = dataCategoryRepository.findByCategoryCode(dtoOptional.get().getMmYear());
+            dtoOptional.get().setMmYearDesc(dcMMYear != null ? dcMMYear.getCategoryDesc() : "");
+            //Extracting MM Month Description
+            DataCategory dcMMMonth = dataCategoryRepository.findByCategoryCode(dtoOptional.get().getMmMonth());
+            dtoOptional.get().setMmMonthDesc(dcMMMonth != null ? dcMMMonth.getCategoryDesc() : "");
+            //Extracting MM Day Group Description
+            DataCategory dcMMDayGroup = dataCategoryRepository.findByCategoryCode(dtoOptional.get().getMmDayGR());
+            dtoOptional.get().setMmDayGRDesc(dcMMDayGroup != null ? dcMMDayGroup.getCategoryDesc() : "");
+            //Extracting MM Day Description
+            DataCategory dcMMDay = dataCategoryRepository.findByCategoryCode(dtoOptional.get().getMmDay());
+            dtoOptional.get().setMmDayDesc(dcMMDay != null ? dcMMDay.getCategoryDesc() : "");
+        }
+        return dtoOptional;
+    }
 }
