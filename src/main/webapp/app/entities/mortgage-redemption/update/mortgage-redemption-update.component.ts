@@ -17,6 +17,7 @@ import { MortgageRedemptionService } from '../service/mortgage-redemption.servic
 })
 export class MortgageRedemptionUpdateComponent implements OnInit {
   isSaving = false;
+  meridian = true;
   mortgageRedemption: IMortgageRedemption | null = {};
   mortgageEntry: IMortgageEntry | undefined = {};
   mmCalendarCollection: IDataCategory[] = [];
@@ -25,10 +26,12 @@ export class MortgageRedemptionUpdateComponent implements OnInit {
   mmDayGroupCollection: IDataCategory[] = [];
   mmDayCollection: IDataCategory[] = [];
 
+  mrTime = { hour: 0, minute: 0 };
+
   redemptionForm = this.fb.group({
     interestAmount: [null, Validators.required],
     mrDate: [null],
-    mrTime: [null],
+    mrTime: [{ hour: '00', minute: '00' }],
     mrMMYear: [null],
     mrMMMonth: [null],
     mrMMDayGR: [null],

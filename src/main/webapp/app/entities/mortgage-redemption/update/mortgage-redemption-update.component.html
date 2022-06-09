@@ -269,7 +269,23 @@
           <label class="form-control-label" jhiTranslate="jewelsysApp.mortgageRedemption.mrTime" for="field_mrTime">Time</label>
         </div>
         <div class="col-4">
-          <input type="text" class="form-control" name="mrTime" id="field_mrTime" data-cy="mrTime" formControlName="mrTime" />
+          <ngb-timepicker [(ngModel)]="mrTime" [meridian]="meridian"> </ngb-timepicker>
+          <!--
+          <input type="text" class="form-control" 
+          name="mrTime" 
+          id="field_mrTime" 
+          data-cy="mrTime" 
+          formControlName="mrTime" 
+          ngbTimepicker
+          #ngbTime="ngbTimepicker"
+          />
+          <div class="input-group-append">
+            <button id="mrTimeButton" (click)="ngbTime.toggle()" type="button">
+              <fa-icon icon="calendar" [fixedWidth]="true"></fa-icon>
+            </button>
+          </div>
+-->
+
           <div
             *ngIf="redemptionForm.get('mrTime')!.invalid && (redemptionForm.get('mrTime')!.dirty || redemptionForm.get('mrTime')!.touched)"
           >
