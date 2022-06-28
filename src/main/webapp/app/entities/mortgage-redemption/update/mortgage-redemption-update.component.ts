@@ -18,6 +18,7 @@ import { MortgageRedemptionService } from '../service/mortgage-redemption.servic
 export class MortgageRedemptionUpdateComponent implements OnInit {
   isSaving = false;
   meridian = true;
+  spinners = false;
   mortgageRedemption: IMortgageRedemption | null = {};
   mortgageEntry: IMortgageEntry | undefined = {};
   mmCalendarCollection: IDataCategory[] = [];
@@ -26,12 +27,10 @@ export class MortgageRedemptionUpdateComponent implements OnInit {
   mmDayGroupCollection: IDataCategory[] = [];
   mmDayCollection: IDataCategory[] = [];
 
-  mrTime = { hour: 0, minute: 0 };
-
   redemptionForm = this.fb.group({
     interestAmount: [null, Validators.required],
     mrDate: [null],
-    mrTime: [{ hour: '00', minute: '00' }],
+    mrTime: [{hour:14,minute:0}],
     mrMMYear: [null],
     mrMMMonth: [null],
     mrMMDayGR: [null],
@@ -57,6 +56,8 @@ export class MortgageRedemptionUpdateComponent implements OnInit {
   }
 
   save(): void {
+
+   // console.log("Selected Time :",this.redemptionForm.get('mrTime')!.value);
     this.isSaving = true;
     const mortgageRedemptionData = this.createFromForm();
     this.subscribeToSaveResponse(this.mrService.create(mortgageRedemptionData));
@@ -113,12 +114,19 @@ export class MortgageRedemptionUpdateComponent implements OnInit {
   }
 
   protected createFromForm(): IMortgageRedemption {
+    const mrTimepicker=this.redemptionForm.get(['mrTime'])!.value;
+    let mrTimeString="";
+    if(mrTimepicker){
+      const mrHour=mrTimepicker.hour as string;
+      const mrMinute=mrTimepicker.minute as string;
+      mrTimeString=mrHour+":"+mrMinute;
+    }
     return {
       ...new MortgageRedemption(),
       mortgageID: this.mortgageEntry?.id,
       interestAmount: this.redemptionForm.get(['interestAmount'])!.value,
       mrDate: this.redemptionForm.get(['mrDate'])!.value,
-      mrTime: this.redemptionForm.get(['mrTime'])!.value,
+      mrTime: mrTimeString,
       mrMMYear: this.redemptionForm.get(['mrMMYear'])!.value,
       mrMMMonth: this.redemptionForm.get(['mrMMMonth'])!.value,
       mrMMDayGR: this.redemptionForm.get(['mrMMDayGR'])!.value,

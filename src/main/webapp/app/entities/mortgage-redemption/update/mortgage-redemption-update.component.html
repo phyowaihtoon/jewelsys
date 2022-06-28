@@ -269,7 +269,7 @@
           <label class="form-control-label" jhiTranslate="jewelsysApp.mortgageRedemption.mrTime" for="field_mrTime">Time</label>
         </div>
         <div class="col-4">
-          <ngb-timepicker [(ngModel)]="mrTime" [meridian]="meridian"> </ngb-timepicker>
+          <ngb-timepicker formControlName="mrTime" [meridian]="meridian" [spinners]="spinners"> </ngb-timepicker>
           <!--
           <input type="text" class="form-control" 
           name="mrTime" 

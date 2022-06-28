@@ -8,7 +8,7 @@ import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { TranslateModule, TranslateService, TranslateLoader, MissingTranslationHandler } from '@ngx-translate/core';
 import { NgxWebstorageModule } from 'ngx-webstorage';
 import * as dayjs from 'dayjs';
-import { NgbDateAdapter, NgbDateParserFormatter, NgbDatepickerConfig, NgbTimeAdapter } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateAdapter, NgbDateParserFormatter, NgbDatepickerConfig, NgbTimeAdapter, NgbTimepickerConfig } from '@ng-bootstrap/ng-bootstrap';
 import { SERVER_API_URL } from './app.constants';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import './config/dayjs';
@@ -71,6 +71,7 @@ export class AppModule {
   constructor(
     applicationConfigService: ApplicationConfigService,
     dpConfig: NgbDatepickerConfig,
+    tpConfig:NgbTimepickerConfig,
     translateService: TranslateService,
     faIconLibrary: FaIconLibrary
   ) {
@@ -78,6 +79,7 @@ export class AppModule {
     registerLocaleData(locale);
     faIconLibrary.addIcons(...fontAwesomeIcons);
     dpConfig.minDate = { year: dayjs().subtract(10, 'year').year(), month: 1, day: 1 };
+    tpConfig.size='small';
     translateService.setDefaultLang('en');
     translateService.use('en');
   }
